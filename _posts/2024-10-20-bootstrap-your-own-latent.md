@@ -1,7 +1,8 @@
 ---
 layout: post
-title: "Self-Supervised Learning Wihout Contrastive Learning"
+title: "Bootstrap Your Own Latent: Self-Supervised Learning Without 
+Contrastive Learning"
 categories: [Deep-Learning]
 tags: [Self-Supervised]
 ---
-Test 1
+Test 2
