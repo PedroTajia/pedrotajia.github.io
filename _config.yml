@@ -1,10 +1,10 @@
 title: Your awesome title
 author:
   name: Pedro Tajia
-  email: amavizcapedro@gmail.com
-minima: 
-  social_links:
-    - {platform: github, user_url: "https://github.com/PedroTajia"}
+  email: amavizcapedro@gmail.com 
+  minima:
+    social_links:
+      - {platform: github, user_url: "https://github.com/PedroTajia"}
 # The `>` after `description:` means to ignore line-breaks until next key.
 # If you want to omit the line-break after the end of text, use `>-` instead.
 description: >
