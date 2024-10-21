@@ -4,4 +4,9 @@
 
 @import
   "minima/skins/{{ site.minima.skin | default: 'classic' }}",
-  "minima/initialize";
+  "minima/initialize",
+  "minima";
+
+.post-content {
+  font-family: 'Times New Roman', Times, serif;
+}
