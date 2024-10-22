@@ -4,15 +4,6 @@ layout: base
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    {% if page.image %}
-      <div class="post-header-image">
-        <img src="{{ page.image | relative_url }}" alt="{{ page.title | escape }}">
-        {% if page.image_source %}
-          <p class="image-source">{{ page.image_source | markdownify }}</p>
-        {% endif %}
-      </div>
-    {% endif %}
-  
 
     <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
     <span>[
@@ -21,6 +12,15 @@ layout: base
           <a href="/tag/{{ tag_name }}"><code class="highligher-rouge"><nobr>{{ tag_name }}</nobr></code>&nbsp;</a>
         {% endfor %}
     ]</span>
+
+    {% if page.image %}
+      <div class="post-header-image">
+        <img src="{{ page.image | relative_url }}" alt="{{ page.title | escape }}">
+        {% if page.image_source %}
+          <p class="image-source">{{ page.image_source | markdownify }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
     <p class="post-meta">
       {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
       <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
