@@ -4,6 +4,16 @@ layout: base
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
+    {% if page.image %}
+      <div class="post-header-image">
+        <img src="{{ page.image | relative_url }}" alt="{{ page.title | escape }}">
+        {% if page.image_source %}
+          <p class="image-source">{{ page.image_source | markdownify }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+  
+
     <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
     <span>[
         {% for tag in page.tags %}
