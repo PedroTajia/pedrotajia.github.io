@@ -6,13 +6,3 @@
   "minima/skins/{{ site.minima.skin | default: 'classic' }}",
   "minima/initialize",
   "minima";
-
-body {
-    /* Your custom styles here */
-    background-color: #ffffff;
-    color: #333333;
-    font-family: 'Times New Roman', Times, serif;
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
-}
