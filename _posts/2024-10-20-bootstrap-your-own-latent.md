@@ -20,7 +20,9 @@ Self-Supervised learning gain popularity on the training of Large Language model
 ### Transfer Learning
 >Transfer learning is the process of using a model like CNNs trained on a large corpus of labeled data to gain a general structure and meaning of images and then use it to solve a more specific task. The use of large label data is to ensure the model learn a broad variety of images. Normal transfer learning is used when there is a limited amount of data, limited computational power or the improvement of performance. Even do it seems that transfer learning can solve the problem of using datasets with small label data still it do not. Since a key component of using transfer learning is when implemented, the data need to similar or close to the large corpus of data was used train the model.
 
-Since more research have been done on training CNNs with self-supervised, 
+Since more research have been done on training CNNs with self-supervised, there has been new approaches to make able CNN learn from unlabeled data. One of these approaches was introduced by the paper called [bootstrap your own latent](https://arxiv.org/pdf/2006.07733) where demonstrates that is not necessary of use contractive learning approach for a self-supervised setting.
+
+## Contrastive Learning 
 <!-- There are many ways of implementing transfer learning. First is **Fine-tuning** which retrain the model on the chosen layer for the selected dataset. -->
 
 
