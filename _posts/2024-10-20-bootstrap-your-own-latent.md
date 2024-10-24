@@ -22,7 +22,11 @@ Self-Supervised learning gain popularity on the training of Large Language model
 
 Since more research have been done on training CNNs with self-supervised, there has been new approaches to make able CNN learn from unlabeled data. One of these approaches was introduced by the paper called [bootstrap your own latent](https://arxiv.org/pdf/2006.07733) where demonstrates that is not necessary of use contractive learning approach for a self-supervised setting.
 
-## Contrastive Learning 
+## Contrastive Learning
+The idea of contrastive learning is to make a model learn an embedding space in which similar examples stay close to each other while different examples stay apart from each other. To archive this normally is use an anchor example (image as a reference), a positive example (image closely related to the anchor example) and a negative example (an image that is not related to the anchor example). The model have the task to generate vectors that represent its inputs into a lower dimension but also be used to estimate how related are two examples. 
+> Example: 
+> Imagine three images a dog, cat and a watermelon. 
+
 <!-- There are many ways of implementing transfer learning. First is **Fine-tuning** which retrain the model on the chosen layer for the selected dataset. -->
 
 
