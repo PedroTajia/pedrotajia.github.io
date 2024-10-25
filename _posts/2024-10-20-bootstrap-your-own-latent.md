@@ -23,9 +23,15 @@ Self-Supervised learning gain popularity on the training of Large Language model
 Since more research have been done on training CNNs with self-supervised, there has been new approaches to make able CNN learn from unlabeled data. One of these approaches was introduced by the paper called [bootstrap your own latent](https://arxiv.org/pdf/2006.07733) where demonstrates that is not necessary of use contractive learning approach for a self-supervised setting.
 
 ## Contrastive Learning
-The idea of contrastive learning is to make a model learn an embedding space in which similar examples stay close to each other while different examples stay apart from each other. To archive this normally is use an anchor example (image as a reference), a positive example (image closely related to the anchor example) and a negative example (an image that is not related to the anchor example). The model have the task to generate vectors that represent its inputs into a lower dimension but also be used to estimate how related are two examples. 
+The idea of contrastive learning is to make a model learn an embedding space that captures the essential information about its inputs including their structure and semantics. This is done by training the model to output vector representations that are close for similar examples and farther apart when there are different examples. 
+> Example:
+> The model $f_\Theta$ have an image input of 224 pixels by 224 pixels which have $[224*224] = 50,176 dimensions$. The model outputs a vector that represent the input of $1,000 dimensions$ which occupies 50 times less space than the image with almost the same information.
+
+To archive this normally is use an anchor example (image as a reference), a positive example (image closely related to the anchor example) and a negative example (an image that is not related to the anchor example).
 > Example: 
-> Imagine three images a dog, cat and a watermelon. 
+> Imagine three images a dog, cat and a watermelon. The **anchor example $x^a$**(dog), **positive example $x^+$** (cat) and the **negative example $x^-$** (watermelon). The task is to create a model that discriminate between animals and non-animals. 
+
+<!-- The model is train to generate **vector representation $z$** that have a compress and essential information about its input -->
 
 <!-- There are many ways of implementing transfer learning. First is **Fine-tuning** which retrain the model on the chosen layer for the selected dataset. -->
 
