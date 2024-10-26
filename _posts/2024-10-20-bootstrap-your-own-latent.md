@@ -40,7 +40,29 @@ And vice-versa when the negative example is inputted to the model the vector rep
 ### Loss Function
 **NT-Xent**
 
-$\ell_{i,j}=-\log \frac{\exp(\text{sim}(z_i,z_j)/ \tau)}{\sum_{k=1}^{2N} \mathbb{1}_{[k \neg i]} \exp(\text{sim}(z_i, z_k) / \tau)}$
+<script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax = {
+    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
+    displayMath: [['$$', '$$']],
+    options: {
+      scale: 1.5 // Adjust this for a larger display
+    }
+  };
+</script>
+
+<h2>NT-Xent Loss Function</h2>
+
+<div style="font-size: 1.5em;">
+$$
+\ell_{i,j} = -\log \frac{\exp(\text{sim}(z_i, z_j) / \tau)}{\sum_{k=1}^{2N} \mathbb{1}_{[k \neq i]} \exp(\text{sim}(z_i, z_k) / \tau)}
+$$
+</div>
+
+
+
+
+<!-- $\ell_{i,j}=-\log \frac{\exp(\text{sim}(z_i,z_j)/ \tau)}{\sum_{k=1}^{2N} \mathbb{1}_{[k \neg i]} \exp(\text{sim}(z_i, z_k) / \tau)}$ -->
 
 <!-- The model is train to generate **vector representation $z$** that have a compress and essential information about its input -->
 
