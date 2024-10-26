@@ -32,7 +32,7 @@ This is done by training the model to output vector representations that are clo
 > Example: 
 > Imagine the task to create a model that discriminate between animals and non-animals. The inputs for the model will be an image of a dog, cat and a watermelon. The **anchor example $x^a$**(dog), **positive example $x^+$** (cat) and the **negative example $x^-$** (watermelon). The model which have a CNN denoted as $f_\Theta$ (CNN are the one that gets the structure and meaning of the image) and a projection $g_\Theta$ (a projection head is applied to map the representations of $f_\Theta $ to its loss function).
 > When the image of a dog and a cat is imputed to the model it should outputs similar vector representations
-![Example of similar images](assets/bootstrap-your-own-latent/CL-Explication-positive.svg)
+![Example of similar images](/blog/assets/bootstrap-your-own-latent/CL-Explication-positive.svg)
 
 <!-- The model is train to generate **vector representation $z$** that have a compress and essential information about its input -->
 
