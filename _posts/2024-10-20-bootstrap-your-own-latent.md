@@ -23,13 +23,16 @@ Self-Supervised learning gain popularity on the training of Large Language model
 Since more research have been done on training CNNs with self-supervised, there has been new approaches to make able CNN learn from unlabeled data. One of these approaches was introduced by the paper called [bootstrap your own latent](https://arxiv.org/pdf/2006.07733) where demonstrates that is not necessary of use contractive learning approach for a self-supervised setting.
 
 ## Contrastive Learning
-The idea of contrastive learning is to make a model learn an embedding space that captures the essential information about its inputs including their structure and semantics. This is done by training the model to output vector representations that are close for similar examples and farther apart when there are different examples. 
+The idea of contrastive learning is to make a model learn an embedding space that captures the essential information about its inputs including their structure and semantics.  
 > Example:
-> The model $f_\Theta$ have an image input of 224 pixels by 224 pixels which have $[224*224] = 50,176 dimensions$. The model outputs a vector that represent the input of $1,000 dimensions$ which occupies 50 times less space than the image with almost the same information.
+> The model $f_\Theta$ w have an image input of 224 pixels by 224 pixels which have $[24*24] = 576$ dimensions. The model outputs a vector that represent the input of $16$ dimensions which occupies 36 times less space than the image with almost the same information.
 
-To archive this normally is use an anchor example (image as a reference), a positive example (image closely related to the anchor example) and a negative example (an image that is not related to the anchor example).
+This is done by training the model to output vector representations that are close for similar examples and farther apart when there are different examples. To training the model is used three types example, the anchor example (image as a reference), a positive example (image closely related to the anchor example) and a negative example (an image that is not related to the anchor example).
+
 > Example: 
-> Imagine three images a dog, cat and a watermelon. The **anchor example $x^a$**(dog), **positive example $x^+$** (cat) and the **negative example $x^-$** (watermelon). The task is to create a model that discriminate between animals and non-animals. 
+> Imagine the task to create a model that discriminate between animals and non-animals. The inputs for the model will be an image of a dog, cat and a watermelon. The **anchor example $x^a$**(dog), **positive example $x^+$** (cat) and the **negative example $x^-$** (watermelon). The model which have a CNN denoted as $f_\Theta$ (CNN are the one that gets the structure and meaning of the image) and a projection $g_\Theta$ (a projection head is applied to map the representations of $f_\Theta $ to its loss function).
+> When the image of a dog and a cat is imputed to the model it should outputs similar vector representations
+![Example of similar images](assets/bootstrap-your-own-latent/CL-Explication-positive.svg)
 
 <!-- The model is train to generate **vector representation $z$** that have a compress and essential information about its input -->
 
