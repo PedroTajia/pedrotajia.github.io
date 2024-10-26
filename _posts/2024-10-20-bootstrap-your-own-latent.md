@@ -24,16 +24,18 @@ Since more research have been done on training CNNs with self-supervised, there 
 
 ## Contrastive Learning
 The idea of contrastive learning is to make a model learn an embedding space that captures the essential information about its inputs including their structure and semantics.  
+
 **Example:**
 The model $f_\Theta$ w have an image input of 224 pixels by 224 pixels which have $[24*24] = 576$ dimensions. The model outputs a vector that represent the input of $16$ dimensions which occupies 36 times less space than the image with almost the same information.
 
 This is done by training the model to output vector representations that are close for similar examples and farther apart when there are different examples. To training the model is used three types example, the anchor example (image as a reference), a positive example (image closely related to the anchor example) and a negative example (an image that is not related to the anchor example).
 
 **Example:**
-Imagine the task to create a model that discriminate between animals and non-animals. The inputs for the model will be an image of a dog, cat and a watermelon. The **anchor example $x^a$**(dog), **positive example $x^+$** (cat) and the **negative example $x^-$** (watermelon). The model which have a CNN denoted as $f_\Theta$ (CNN are the one that gets the structure and meaning of the image) and a projection $g_\Theta$ (a projection head is applied to map the representations of $f_\Theta $ to its loss function).
-> When the image of a dog and a cat is imputed to the model it should outputs similar vector representations
-![Example of similar images](/assets/bootstrap-your-own-latent/CL-Explication-positive.svg)
+Imagine the task to create a model that discriminate between animals and non-animals. The inputs for the model will be an image of a dog, cat and a watermelon. The **anchor example $x^a$**(dog), **positive example $x^+$** (cat) and the **negative example $x^-$** (watermelon). The model which have a CNN denoted as $f_\Theta$ (CNN are the one that gets the structure and meaning of the image) and a projection $g_\Theta$ (a projection head is applied to map the representations of $f_\Theta $ to its loss function). When the image of a dog and a cat is imputed to the model it should outputs similar vector representations
+![Example of similar example](/assets/bootstrap-your-own-latent/CL-Explication-positive.svg)
 
+And vice-versa when the negative example is inputted to the model the vector representation is completely different and far from the representation of the anchor image.
+![Example of different example](/assets/bootstrap-your-own-latent/CL-Explication-negative.svg)
 <!-- The model is train to generate **vector representation $z$** that have a compress and essential information about its input -->
 
 <!-- There are many ways of implementing transfer learning. First is **Fine-tuning** which retrain the model on the chosen layer for the selected dataset. -->
