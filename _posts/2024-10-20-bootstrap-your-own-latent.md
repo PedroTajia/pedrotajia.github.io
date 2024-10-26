@@ -32,10 +32,12 @@ This is done by training the model to output vector representations that are clo
 
 **Example:**
 Imagine the task to create a model that discriminate between animals and non-animals. The inputs for the model will be an image of a dog, cat and a watermelon. The **anchor example $x^a$**(dog), **positive example $x^+$** (cat) and the **negative example $x^-$** (watermelon). The model which have a CNN denoted as $f_\Theta$ (CNN are the one that gets the structure and meaning of the image) and a projection $g_\Theta$ (a projection head is applied to map the representations of $f_\Theta $ to its loss function). When the image of a dog and a cat is imputed to the model it should outputs similar vector representations
-![Example of similar example](/assets/bootstrap-your-own-latent/CL-Explication-positive.svg)
+<!-- ![Example of similar example](/assets/bootstrap-your-own-latent/CL-Explication-positive.svg) -->
+<img src="/assets/bootstrap-your-own-latent/CL-Explication-positive.svg", alt="Example of similar example", width="100", height="50">
 
 And vice-versa when the negative example is inputted to the model the vector representation is completely different and far from the representation of the anchor image.
-![Example of different example](/assets/bootstrap-your-own-latent/CL-Explication-negative.svg)
+<!-- ![Example of different example](/assets/bootstrap-your-own-latent/CL-Explication-negative.svg) -->
+<img src="/assets/bootstrap-your-own-latent/CL-Explication-negative.svg", alt="Example of different example", width="100", height="50">
 <!-- The model is train to generate **vector representation $z$** that have a compress and essential information about its input -->
 
 <!-- There are many ways of implementing transfer learning. First is **Fine-tuning** which retrain the model on the chosen layer for the selected dataset. -->
