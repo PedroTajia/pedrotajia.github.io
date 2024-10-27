@@ -34,18 +34,23 @@ This is done by training the model to output vector representations that are clo
 Imagine the task to create a model that discriminate between animals and non-animals. The inputs for the model will be an image of a dog, cat and a watermelon. The **anchor example $x^a$**(dog), **positive example $x^+$** (cat) and the **negative example $x^-$** (watermelon). The model which have a CNN denoted as $f_\Theta$ (CNN are the one that gets the structure and meaning of the image) and a projection $g_\Theta$ (a projection head is applied to map the representations of $f_\Theta $ to its loss function). When the image of a dog and a cat is imputed to the model it should outputs similar vector representations
 ![Example of similar example](/assets/bootstrap-your-own-latent/CL-Explication-positive.svg)
 
+
 And vice-versa when the negative example is inputted to the model the vector representation is completely different and far from the representation of the anchor image.
 ![Example of different example](/assets/bootstrap-your-own-latent/CL-Explication-negative.svg)
 
-### Loss Function
-**NT-Xent**
+The paper [A Simple Framework for Contrastive Learning of Visual Representations](https://arxiv.org/pdf/2002.05709)(SimCLR) is the foundation on implementing contrastive methods for self-supervised learning. In the paper SimCLR was introduced a loss called **NT-Xent** which was originally inspired on the **InfoNCE** just having $\tau$ temperature variable as a modification.
 
-<span style="font-size: 1.5em;">$\ell_{i,j} = - \log \frac{\exp(\text{sim}(z_i, z_j)/\tau)}{\sum_{k=1}^{2N} \mathbf{1}_{[k \neq i]} \exp(\text{sim}(z_i, z_k)/\tau)}$</span>
+**InfoNCE**
+<span style="font-size: 2em;">$\ell_{i,j} = - \log \frac{\exp(\text{sim}(z_i, z_j)/\tau)}{\sum_{k=1}^{2N} \mathbf{1}_{[k \neq i]} \exp(\text{sim}(z_i, z_k)/\tau)}$</span>
 
+<!-- **NT-Xent**
+<span style="font-size: 2em;">$\ell_{i,j} = - \log \frac{\exp(\text{sim}(z_i, z_j)/\tau)}{\sum_{k=1}^{2N} \mathbf{1}_{[k \neq i]} \exp(\text{sim}(z_i, z_k)/\tau)}$</span> -->
+
+The InfoNCE loss will enforce $x^a$ and $x^+$ to be similar pairs and also enforce pairs that are different. The sim(.) function is a similarity metric which measure how similar is a vector against others. This metric is used to minimize the difference between positive pairs $(x^a, x^x)$ and maximize the distance between negative pairs $(x^a, x^-)$
+
+
+In summary, we can think a contrastive task as trying to generate similar representation for positive examples and different for negative examples.
 <!-- $\ell_{i,j}=-\log \frac{\exp(\text{sim}(z_i,z_j)/ \tau)}{\sum_{k=1}^{2N} \mathbb{1}_{[k \neg i]} \exp(\text{sim}(z_i, z_k) / \tau)}$ -->
 
-<!-- The model is train to generate **vector representation $z$** that have a compress and essential information about its input -->
-
-<!-- There are many ways of implementing transfer learning. First is **Fine-tuning** which retrain the model on the chosen layer for the selected dataset. -->
 
 
