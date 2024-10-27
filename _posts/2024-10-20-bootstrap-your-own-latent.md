@@ -40,7 +40,9 @@ And vice-versa when the negative example is inputted to the model the vector rep
 ### Loss Function
 **NT-Xent**
 
-$\ell_{i,j}=-\log \frac{\exp(\text{sim}(z_i,z_j)/ \tau)}{\sum_{k=1}^{2N} \mathbb{1}_{[k \neg i]} \exp(\text{sim}(z_i, z_k) / \tau)}$
+<span style="font-size: 1.5em;">$\ell_{i,j} = - \log \frac{\exp(\text{sim}(z_i, z_j)/\tau)}{\sum_{k=1}^{2N} \mathbf{1}_{[k \neq i]} \exp(\text{sim}(z_i, z_k)/\tau)}$</span>
+
+<!-- $\ell_{i,j}=-\log \frac{\exp(\text{sim}(z_i,z_j)/ \tau)}{\sum_{k=1}^{2N} \mathbb{1}_{[k \neg i]} \exp(\text{sim}(z_i, z_k) / \tau)}$ -->
 
 <!-- The model is train to generate **vector representation $z$** that have a compress and essential information about its input -->
 
