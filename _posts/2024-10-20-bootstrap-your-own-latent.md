@@ -37,8 +37,7 @@ Imagine the task to create a model that discriminate between animals and non-ani
 And vice-versa when the negative example is inputted to the model the vector representation is completely different and far from the representation of the anchor image.
 ![Example of different example](/assets/bootstrap-your-own-latent/CL-Explication-negative.svg)
 
-### Loss Function
-**NT-Xent**
+### Loss Function: NT-Xent
 
 <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script type="text/x-mathjax-config">
@@ -50,8 +49,6 @@ And vice-versa when the negative example is inputted to the model the vector rep
     }
   };
 </script>
-
-<h2>NT-Xent Loss Function</h2>
 
 <div style="font-size: 1.5em;">
 $$
