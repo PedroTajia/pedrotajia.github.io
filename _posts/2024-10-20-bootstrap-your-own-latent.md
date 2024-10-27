@@ -37,8 +37,7 @@ Imagine the task to create a model that discriminate between animals and non-ani
 And vice-versa when the negative example is inputted to the model the vector representation is completely different and far from the representation of the anchor image.
 ![Example of different example](/assets/bootstrap-your-own-latent/CL-Explication-negative.svg)
 
-### Loss Function
-**NT-Xent**
+### Loss Function: NT-Xent
 
 <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script type="text/x-mathjax-config">
@@ -50,9 +49,11 @@ And vice-versa when the negative example is inputted to the model the vector rep
     }
   };
 </script>
-    
-$\ell_{i,j}=-\log \frac{\exp(\text{sim}(z_i,z_j)/ \tau)}{\sum_{k=1}^{2N} \mathbb{1}_{[k \neg i]} \exp(\text{sim}(z_i, z_k) / \tau)}$
-
+<div style="font_size: 1.5em;">
+$$
+\ell_{i,j}=-\log \frac{\exp(\text{sim}(z_i,z_j)/ \tau)}{\sum_{k=1}^{2N} \mathbb{1}_{[k \neg i]} \exp(\text{sim}(z_i, z_k) / \tau)}
+$$
+</div>
 <!-- The model is train to generate **vector representation $z$** that have a compress and essential information about its input -->
 
 <!-- There are many ways of implementing transfer learning. First is **Fine-tuning** which retrain the model on the chosen layer for the selected dataset. -->
