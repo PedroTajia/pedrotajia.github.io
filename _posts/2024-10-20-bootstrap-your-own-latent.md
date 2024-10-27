@@ -51,9 +51,8 @@ And vice-versa when the negative example is inputted to the model the vector rep
 </script>
 
 <div style="font-size: 1.5em;">
-$$
-\ell_{i,j} = -\log \frac{\exp(\text{sim}(z_i, z_j) / \tau)}{\sum_{k=1}^{2N} \mathbb{1}_{[k \neq i]} \exp(\text{sim}(z_i, z_k) / \tau)}
-$$
+
+$\ell_{i,j} = -\log \frac{\exp(\text{sim}(z_i, z_j) / \tau)}{\sum_{k=1}^{2N} \mathbb{1}_{[k \neq i]} \exp(\text{sim}(z_i, z_k) / \tau)}$
 </div>
 
 
