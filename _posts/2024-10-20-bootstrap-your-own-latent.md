@@ -60,7 +60,7 @@ In order to make **BYOL** archive self-supervised learning without contrastive m
 BYOL have two neural networks, named as *online* and *target* networks that are able to interact to each other.
 The model is trained the online network to predict the target network representation with the same image using different augmented views.
 
-
+![First augmentation Example](/assets/bootstrap-your-own-latent/Augmentation_1.svg)
 
 
 
