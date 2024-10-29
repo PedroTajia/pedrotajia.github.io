@@ -23,7 +23,7 @@ Self-Supervised learning gain popularity on the training of Large Language model
 
 Since more research have been done on training CNNs with self-supervised, there has been new approaches to make able CNN learn from unlabeled data. One of these approaches was introduced by the paper called [bootstrap your own latent](https://arxiv.org/pdf/2006.07733) where demonstrates that is not necessary of use contractive learning approach for a self-supervised setting.
 
-## Contrastive Learning
+### Contrastive Learning
 The idea of contrastive learning is to make a model learn an embedding space that captures the essential information about its inputs including their structure and semantics.  
 
 **Example:**
@@ -42,16 +42,26 @@ And vice-versa when the negative example is inputted to the model the vector rep
 The paper [A Simple Framework for Contrastive Learning of Visual Representations](https://arxiv.org/pdf/2002.05709)(SimCLR) is the foundation on implementing contrastive methods for self-supervised learning. In the paper SimCLR was introduced a loss called **NT-Xent** which was originally inspired on the **InfoNCE** just having $\tau$ temperature variable as a modification.
 
 **InfoNCE**
-<span style="font-size: 2em;">$\ell_{i,j} = - \log \frac{\exp(\text{sim}(z_i, z_j)/\tau)}{\sum_{k=1}^{2N} \mathbf{1}_{[k \neq i]} \exp(\text{sim}(z_i, z_k)/\tau)}$</span>
+<span style="font-size: 1em;">$\ell_{i,j} = - \log \frac{\exp(\text{sim}(z_i, z_j)/\tau)}{\sum_{k=1}^{2N} \mathbf{1}_{[k \neq i]} \exp(\text{sim}(z_i, z_k)/\tau)}$</span>
 
 <!-- **NT-Xent**
 <span style="font-size: 2em;">$\ell_{i,j} = - \log \frac{\exp(\text{sim}(z_i, z_j)/\tau)}{\sum_{k=1}^{2N} \mathbf{1}_{[k \neq i]} \exp(\text{sim}(z_i, z_k)/\tau)}$</span> -->
 
 The InfoNCE loss will enforce $x^a$ and $x^+$ to be similar pairs and also enforce pairs that are different. The sim(.) function is a similarity metric which measure how similar is a vector against others. This metric is used to minimize the difference between positive pairs $(x^a, x^x)$ and maximize the distance between negative pairs $(x^a, x^-)$
 
-
 In summary, we can think a contrastive task as trying to generate similar representation for positive examples and different for negative examples.
-<!-- $\ell_{i,j}=-\log \frac{\exp(\text{sim}(z_i,z_j)/ \tau)}{\sum_{k=1}^{2N} \mathbb{1}_{[k \neg i]} \exp(\text{sim}(z_i, z_k) / \tau)}$ -->
+
+## Bootstrap Your Own Latent: BYOL
+In contractive learning positive example are easy to obtain, but negative examples are hard to get. Positive examples can be just a modified version of the anchor image. Negative is difficult to obtain because we to define what this is different to an anchor and have enough similarity to make a challenging to the model without human intervention.
+
+For this reason there is research of self-supervised learning without contrastive learning. This is difficult because there is a need for negative example, if not what can stop the model of generating the same vector representation for the anchor example and positive example which is called *collapse*. With negative examples the model is force to learn meaning representations for its inputs.
+
+In order to make **BYOL** archive self-supervised learning without contrastive methods it needs many innovative things.  
+BYOL have two neural networks, named as *online* and *target* networks that are able to interact to each other.
+The model is trained the online network to predict the target network representation with the same image using different augmented views.
 
 
 
+
+
+ 
