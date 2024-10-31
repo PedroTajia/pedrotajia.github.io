@@ -56,12 +56,22 @@ In contrastive learning positive examples are easy to obtain, but negative examp
 
 For this reason there is research of self-supervised learning without contrastive learning. This is difficult because there is a need for negative example, if not what can stop the model of generating the same vector representation in contrast to an anchor example and positive example which is called *collapse*. For negative examples the model is forced to learn meaning representations for its inputs.
 
-In order to make **BYOL** archive self-supervised learning without contrastive methods it needs many innovative things.  
+In order to understand how **BYOL** archive self-supervised learning without contrastive methods let's explore the main components of this self-supervised learning framework.
+
 BYOL have two neural networks, named as *online* and *target* networks that are able to interact to each other.
 The model is trained by the online network to predict the target network representation with the same image using different augmented views.
 
 ![First augmentation Example](/assets/bootstrap-your-own-latent/Augmentation_1.svg)
 
 
+To generate this augmented views, we create 2 distortionated copies form an input image, by applying two sets of data augmentation operations. The transformation includes 
+
+>* random cropping: a random patch of the image is selected, with an area uniformly sampled between 8% and 100% of that of the original image, and an aspect ratio logarithmically sampled between 3/4 and 4/3. This patch is then resized to the target size of 224 ×224 using bicubic interpolation;
+>* optional left-right flip;
+>* color jittering: the brightness, contrast, saturation and hue of the image are shifted by a uniformly random offset applied on all the pixels of the same image. The order in which these shifts are performed is randomly selected for each patch;
+>* color dropping: an optional conversion to grayscale. When applied, output intensity for a pixel (r,g,b) corresponds to its luma component, computed as 0.2989r+ 0.5870g+ 0.1140b;
+>* Gaussian blurring: for a 224 ×224 image, a square Gaussian kernel of size 23 ×23 is used, with a standarddeviation uniformly sampled over [0.1,2.0];
+>* solarization: an optional color transformation x→x·1{x<0.5}+ (1−x)·1{x≥0.5}for pixels with values in [0,1].
+*Credits: ![Bootstrap your own latent: A new approach to self-supervised Learning](https://arxiv.org/pdf/2006.07733)*
 
  
