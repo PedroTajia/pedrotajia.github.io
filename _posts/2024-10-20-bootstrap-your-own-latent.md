@@ -27,12 +27,12 @@ Since more research has been done on training CNNs with self-supervised learning
 The idea of contrastive learning is to make a model learn an embedding space that captures the essential information about its inputs including their structure and semantics.  
 
 **Example:**
-The model $f_\Theta$ w have an image input of 224 pixels by 224 pixels which have $[24*24] = 576$ dimensions. The model outputs a vector that represents the input of $16$ dimensions which occupies 36 times less space than the image with almost the same information.
+The model $f_\theta$ w have an image input of 224 pixels by 224 pixels which have $[24*24] = 576$ dimensions. The model outputs a vector that represents the input of $16$ dimensions which occupies 36 times less space than the image with almost the same information.
 
 This is done by training the model to output vector representations that are close for similar examples and farther apart when there are different examples. To train the model three type exampled we use: the anchor example (image as a reference), a positive example (image closely related to the anchor example) and a negative example (an image that is not related to the anchor example).
 
 **Example:**
-Imagine the task to create a model that discriminate between animals and non-animals. The inputs for the model will be an image of a dog, cat and a watermelon. The **anchor example $x^a$**(dog), **positive example $x^+$** (cat) and the **negative example $x^-$** (watermelon). The model which has a CNN denoted as $f_\Theta$ (CNN is the one that gets the structure and meaning of the image) and a projection $g_\Theta$ (a projection head is applied to map the representations of $f_\Theta $ to its loss function). When the image of a dog and a cat is imputed to the model it should output similar vector representations
+Imagine the task to create a model that discriminate between animals and non-animals. The inputs for the model will be an image of a dog, cat and a watermelon. The **anchor example $x^a$**(dog), **positive example $x^+$** (cat) and the **negative example $x^-$** (watermelon). The model which has a CNN denoted as $f_\theta$ (CNN is the one that gets the structure and meaning of the image) and a projection $g_\theta$ (a projection head is applied to map the representations of $f_\theta$ to its loss function). When the image of a dog and a cat is imputed to the model it should output similar vector representations
 ![Example of similar example](/assets/bootstrap-your-own-latent/CL-Explication-positive.svg)
 
 
@@ -63,7 +63,6 @@ The model is trained by the online network to predict the target network represe
 
 ![First augmentation Example](/assets/bootstrap-your-own-latent/Augmentation_1.svg)
 
-
 To generate this augmented views, we create 2 distortionated copies form an input image, by applying two sets of data augmentation operations. The transformation includes 
 
 >* random cropping: a random patch of the image is selected, with an area uniformly sampled between 8% and 100% of that of the original image, and an aspect ratio logarithmically sampled between 3/4 and 4/3. This patch is then resized to the target size of 224 × 224 using bicubic interpolation;
@@ -78,3 +77,13 @@ To generate this augmented views, we create 2 distortionated copies form an inpu
 
 These augmentations double the examples, if we have a batch of 32 images, we end up with 64 images per batch.  
 ![Second augmentation Example](/assets/bootstrap-your-own-latent/Augmentation_conbination.svg)
+
+Data augmentation is used to force the model to generate representations that have the meaning of the input independent of the distortions applied in the input.
+
+The online network have parameters $\theta$ updated by back propagation and is made from three components: an encoder $f_{\theta}$, projector $g_{\theta}$ and predictor $q_{\theta}$. The target network have an encoder $f_{\xi}$ and projector $g_{\xi}$. The parameters $\xi$ of the target network are not updated by back propagation, but instead the model is updated by exponential moving average of the online parameters $\theta$. The parameters of the target network can be seen a **smoothed version** of the online network.
+
+<span style="font-size: 1em;">${\xi}\leftarrowtail{\tau}{\Xi}+(1-\tau){\theta}$</span>
+ 
+> $\tau is the decay rate T[0, 1]$
+
+The representation head uses a ResNet-50 for $f_{\theta}$ and {$f_{\xi}$}. The ResNet-50 receives the augmented image of size (224, 224, 3) and output a vector representation or a vector embedding of 2048-dimensional for the online network $y_{\theta}$ and for the target network $y_{\xi}^{'}$. Then a projection head $g$ receives the vector $y$ and produces the final output for the target network $z_{\xi}^{'}$. The output $z_{\theta}$ of the projection head $g_{\theta}$ of the online network is inputted to the prediction head $q_{\theta}$ which produces the final output $q_{\theta}(z_{\theta})$ of the online network 
