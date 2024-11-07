@@ -82,8 +82,8 @@ Data augmentation is used to force the model to generate representations that ha
 
 The online network have parameters $\theta$ updated by back propagation and is made from three components: an encoder $f_{\theta}$, projector $g_{\theta}$ and predictor $q_{\theta}$. The target network have an encoder $f_{\xi}$ and projector $g_{\xi}$. The parameters $\xi$ of the target network are not updated by back propagation, but instead the model is updated by exponential moving average of the online parameters $\theta$. The parameters of the target network can be seen a **smoothed version** of the online network.
 
-<span style="font-size: 1em;">${\xi}\leftarrowtail{\tau}{\Xi}+(1-\tau){\theta}$</span>
+<span style="font-size: 1em;">${\xi}\leftarrowtail{\tau}{\xi}+(1-\tau){\theta}$</span>
  
-> $\tau is the decay rate T[0, 1]$
+> $\tau$ is the decay rate T[0, 1]
 
 The representation head uses a ResNet-50 for $f_{\theta}$ and {$f_{\xi}$}. The ResNet-50 receives the augmented image of size (224, 224, 3) and output a vector representation or a vector embedding of 2048-dimensional for the online network $y_{\theta}$ and for the target network $y_{\xi}^{'}$. Then a projection head $g$ receives the vector $y$ and produces the final output for the target network $z_{\xi}^{'}$. The output $z_{\theta}$ of the projection head $g_{\theta}$ of the online network is inputted to the prediction head $q_{\theta}$ which produces the final output $q_{\theta}(z_{\theta})$ of the online network 
