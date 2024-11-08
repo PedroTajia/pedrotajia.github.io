@@ -87,9 +87,12 @@ The online network have parameters $\theta$ updated by back propagation and is m
 > $\tau$ is the decay rate $T\in[0, 1]$
 
 The representation head uses a ResNet-50 for $f_{\theta}$ and {$f_{\xi}$}. The ResNet-50 receives the augmented image of size (224, 224, 3) and output a vector representation or a vector embedding of 2048-dimensional for the online network $y_{\theta}$ and for the target network $y_{\xi}^{'}$. Then a projection head $g$ receives the vector $y$ and produces the final output for the target network $sq(z_{\xi}^{'})$. $sg$ means stop gradient, which the parameters $\xi$ for the target network will not be updated by back-propagation. The output $z_{\theta}$ of the projection head $g_{\theta}$ of the online network is inputted to the prediction head $q_{\theta}$ which produces the final output $q_{\theta}(z_{\theta})$ of the online network. The projection and prediction head consist of a linear layer with an input shape of 2048-dimensions and output size of 4096 followed by **batch normalization**, a non-linear function (ReLU) and a final layer with output of dimension 256.
+![Image of the architecture of BYOL, image from the original paper](/assets/bootstrap-your-own-latent/BYOL-Architecture.png)
 
 BYOL is train to minimizes the similarity loss between $q_{\theta}(z_{\theta})$ and $sq(z_{\xi}^{'})$. The loss function is defined as:
 
-<span style="font-size: 1em;">$\mathcal{L}_{\theta, \xi} \triangleq \left\| q_{\theta}(z_0) - z'_{\xi} \right\|_2^2 = 2 - 2 \cdot \frac{\langle q_{\theta}(z_0), z'_{\xi} \rangle}{\| q_{\theta}(z_0) \|_2 \cdot \| z'_{\xi} \|_2}$</span>
+<span style="font-size: 1em">$\[
+\mathcal{L}_{\theta, \xi} \triangleq \left\| q_{\theta}(z_0) - z'_{\xi} \right\|_2^2 = 2 - 2 \cdot \frac{\langle q_{\theta}(z_0), z'_{\xi} \rangle}{\| q_{\theta}(z_0) \|_2 \cdot \| z'_{\xi} \|_2}
+\]$</span>
 
 
