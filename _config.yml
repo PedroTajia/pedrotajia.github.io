@@ -18,9 +18,10 @@ theme: minima
 # If you want to use the latest Minima version on GitHub Pages, use the following setting and 
 # add a line comment on "theme: minima" above.
 #remote_theme: jekyll/minima
-markdown: kramdown
 kramdown:
-  math_engine: mathjax
+  math_engine: katex
+
+
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
