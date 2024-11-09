@@ -92,6 +92,6 @@ The representation head uses a ResNet-50 for $f_{\theta}$ and $f_{\xi}$. The Res
 BYOL is train to minimizes the similarity loss between $q_{\theta}(z_{\theta})$ and $sq(z_{\xi}^{'})$. The loss function is defined as:
 ![BYOL loss](/assets/bootstrap-your-own-latent/BYOL_Loss.png)
 
-$q_{\theta}(z_{\theta})$ and $z_{\xi}^{'}$ are normalized to be unit vectors, $\hat{q}_{\theta}(z_{\theta}) \triangleq \frac{q_{\theta}(z_{\theta})}{||q_{\theta}(z_0)||_2} \quad \text{and} \quad \hat{z}_{\xi}^{'} \triangleq \frac{z^{'}_{\xi}}{||z_{\xi}^{'}||_2}$. Then is applied a mean squared error between the normalized outputs of the online and target networks.
+$q_{\theta}(z_{\theta})$ and $z_{\xi}^{'}$ are normalized to be unit vectors, ${\hat{q}_{\theta}(z_{\theta})} = {\frac{q_{\theta}(z_{\theta})}{\| q_{\theta}(z_0)\|_2}}$ and ${\hat{z}_{\xi}^{'}} = {\frac{z^{'}_{\xi}}{\| z_{\xi}^{'} \|_2}}$. Then is applied a mean squared error between the normalized outputs of the online and target networks.
 
 
