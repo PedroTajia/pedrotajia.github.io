@@ -105,7 +105,10 @@ $$
 
 $q_{\theta}(z_{\theta})$ and $z_{\xi}^{'}$ are normalized to be unit vectors, $\overline{q}_{\theta}(z_{\theta}) = \frac{q_{\theta}(z_{\theta})}{\| q_{\theta}(z_0)\|_2}$ and $\overline{z}_{\xi}^{'} = \frac{z^{'}_{\xi}}{\| z_{\xi}^{'} \|_2}$. Then is applied a mean squared error between the normalized outputs of the online and target networks.
 
-The loss $\mathcal{L}_{\theta,\xi}$ is computed from feeding $v$ to the online network and $v'$ to the target network. The loss need to symmetrize by calculating $\tilde{\mathcal{L}}_{\theta,\xi}$ by feeding $v'$ to the online network and $v$ to the target network. 
+The loss 
+$\mathcal{L}_{\theta,\xi}$
+is computed from feeding $v$ to the online network and $v'$ to the target network. The loss need to symmetrize by calculating $\tilde{\mathcal{L}}_{\theta,\xi}$ 
+by feeding $v'$ to the online network and $v$ to the target network. 
 <span style='font-size: 1.5em;'>
 $$
 \mathcal{L}^{BYOL}_{\theta, \xi} = \mathcal{L}_{\theta,\xi} + \tilde{\mathcal{L}}_{\theta,\xi}
