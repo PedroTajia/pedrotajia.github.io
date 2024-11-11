@@ -115,8 +115,13 @@ $$
 . Then is applied a mean squared error between the normalized outputs of the online and target networks.
 
 The loss 
-$\mathcal{L}_{\theta,\xi}$
-is computed from feeding $v$ to the online network and $v'$ to the target network. The loss need to symmetrize by calculating $\tilde{\mathcal{L}}_{\theta,\xi}$ 
+$$
+\mathcal{L}_{\theta,\xi}
+$$
+is computed from feeding $v$ to the online network and $v'$ to the target network. The loss need to symmetrize by calculating 
+$$
+\tilde{\mathcal{L}}_{\theta,\xi}
+$$ 
 by feeding $v'$ to the online network and $v$ to the target network. 
 <span style='font-size: 1.2em;'>
 $$
