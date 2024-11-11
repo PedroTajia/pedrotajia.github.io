@@ -104,7 +104,15 @@ $$
 $$
 </span>
 
-$q_{\theta}(z_{\theta})$ and $z_{\xi}^{'}$ are normalized to be unit vectors, $\overline{q}_{\theta}(z_{\theta}) = \frac{q_{\theta}(z_{\theta})}{\| q_{\theta}(z_0)\|_2}$ and $\overline{z}_{\xi}^{'} = \frac{z^{'}_{\xi}}{\| z_{\xi}^{'} \|_2}$. Then is applied a mean squared error between the normalized outputs of the online and target networks.
+$q_{\theta}(z_{\theta})$ and $z_{\xi}^{'}$ are normalized to be unit vectors, 
+$$
+\overline{q}_{\theta}(z_{\theta}) = \frac{q_{\theta}(z_{\theta})}{\| q_{\theta}(z_0)\|_2}
+$$ 
+and 
+$$
+\overline{z}_{\xi}^{'} = \frac{z^{'}_{\xi}}{\| z_{\xi}^{'} \|_2}
+$$
+. Then is applied a mean squared error between the normalized outputs of the online and target networks.
 
 The loss 
 $\mathcal{L}_{\theta,\xi}$
