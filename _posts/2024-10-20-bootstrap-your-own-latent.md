@@ -124,7 +124,11 @@ $$
 $$ 
 by feeding $v'$ to the online network and $v$ to the target network. 
 
-<span style='font-size: 1.2em;'>$\mathcal{L}^{BYOL}_{\theta, \xi} = \mathcal{L}_{\theta,\xi} + \tilde{\mathcal{L}}_{\theta,\xi}$</span>
+<span style='font-size: 1.2em;'>
+$$
+\mathcal{L}^{BYOL}_{\theta, \xi} = \mathcal{L}_{\theta,\xi} + \tilde{\mathcal{L}}_{\theta,\xi}
+$$
+</span>
 
 For each training step is performed a $optimatizer$ algorithm to minimize $\mathcal{L}^{BYOL}_{\theta, \xi}$ with respect only to $\theta$. After the training, the encoder of the online network $f_{\theta}$ is used to produce representations.
  
