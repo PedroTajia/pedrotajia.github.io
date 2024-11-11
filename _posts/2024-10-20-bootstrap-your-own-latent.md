@@ -84,7 +84,8 @@ These augmentations double the examples, if we have a batch of 32 images, we end
 Data augmentation is used to force the model to learn invariant representations which means that independently of the transformation imposed to an input the model will generate the same representations. 
 
 The online network have parameters $\theta$ updated by back propagation and is made from three components: an encoder $f_{\theta}$, projector $g_{\theta}$ and predictor $q_{\theta}$. The target network have an encoder $f_{\xi}$ and projector $g_{\xi}$. The parameters $\xi$ of the target network are not updated by back propagation, but instead the model is updated by *Exponential Moving Average* (EMA) of the online parameters $\theta$. The parameters of the target network can be seen a **smoothed version** of the online network. 
-<span style="font-size: 1.5em;">${\xi}\leftarrowtail{\tau}{\xi}+(1-\tau){\theta}$</span>
+
+<span style="font-size: 1.2em;">${\xi}\leftarrowtail{\tau}{\xi}+(1-\tau){\theta}$</span>
  
 > $\tau$ is the decay rate $T\in[0, 1]$
 
@@ -97,7 +98,7 @@ The representation head uses a ResNet-50 for $f_{\theta}$ and $f_{\xi}$. The Res
 
 
 BYOL is train to minimizes the similarity loss between $q_{\theta}(z_{\theta})$ and $sq(z_{\xi}^{'})$. The loss function is defined as:
-<span style="font-size: 1.5em;">
+<span style="font-size: 1.2em;">
 $$
 \mathcal{L}_{\theta, \xi} \triangleq \left\| \overline{q_{\theta}(z_0)} - \overline{z'_{\xi}} \right\|_2^2 = 2 - 2 \cdot \frac{\langle q_{\theta}(z_0), z'_{\xi} \rangle}{\| q_{\theta}(z_0) \|_2 \cdot \| z'_{\xi} \|_2}
 $$
@@ -122,11 +123,8 @@ $$
 \tilde{\mathcal{L}}_{\theta,\xi}
 $$ 
 by feeding $v'$ to the online network and $v$ to the target network. 
-<span style='font-size: 1.5em;'>
-$$
-\mathcal{L}^{BYOL}_{\theta, \xi} = \mathcal{L}_{\theta,\xi} + \tilde{\mathcal{L}}_{\theta,\xi}
-$$
-</span>
+
+<span style='font-size: 1.2em;'>$\mathcal{L}^{BYOL}_{\theta, \xi} = \mathcal{L}_{\theta,\xi} + \tilde{\mathcal{L}}_{\theta,\xi}$</span>
 
 For each training step is performed a $optimatizer$ algorithm to minimize $\mathcal{L}^{BYOL}_{\theta, \xi}$ with respect only to $\theta$. After the training, the encoder of the online network $f_{\theta}$ is used to produce representations.
  
