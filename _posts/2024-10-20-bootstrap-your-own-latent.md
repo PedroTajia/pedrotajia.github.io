@@ -122,7 +122,8 @@ is computed from feeding $v$ to the online network and $v'$ to the target networ
 $$
 \tilde{\mathcal{L}}_{\theta,\xi}
 $$ 
-by feeding $v'$ to the online network and $v$ to the target network. 
+by feeding $v'$ to the online network and $v$ to the target network.
+<br />
 <span style='font-size: 1.2em;'>
 $$
 \mathcal{L}^{BYOL}_{\theta, \xi} = \mathcal{L}_{\theta,\xi} + \tilde{\mathcal{L}}_{\theta,\xi}
@@ -148,9 +149,14 @@ The BYOL framework archive higher performance than the state-of-the-art contrast
 *Credits: [Bootstrap your own latent: A new approach to self-supervised Learning](https://arxiv.org/pdf/2006.07733)*
 
 
-BYOL is evaluated in both **linear evaluation** and **semi-supervised** setups. The linear evaluation consists in training a linear classifier on the frozen representations outputted by the encoder $f_\theta$ (BYOL is not trained in this evaluation is only used the output representations from the encoder $f_\theta$). The semi-supervised evaluation consist on initialize $f_\theta$ parameters with the pre-trained representation, and **fine-tune** with of other datasets.
+BYOL is evaluated in both **linear evaluation** and **fine-tuning evaluation**. The linear evaluation consists on training a multinomial logistic regression on top of the frozen representations outputted by the encoder $f_\theta$ (The encoder weights are not trained in this evaluation.). 
+![An example of linear model](/assets/bootstrap-your-own-latent/Linear_evaluation.svg)
 
-In this table BYOL was trained of ImageNet then used for other classification tasks.
+To fine-tune evaluation consist on initialize $f_\theta$ parameters with the pre-trained representation, and retrain the encoder alongside a classifier on labeled dataset.
+![An example of fine-tune a model](/assets/bootstrap-your-own-latent/Fine-tuning.svg)
+>Note: For fine-tune there are many other types of architecture that can be used to fine tune this model.
+
+BYOL was pre-trained on ImageNet by 300 epochs. After pre-trained, the model is evaluated on many downstream tasks by using linear and fine-tune evaluations.
 ![Table 3: Transfer learning results from ImageNet (IN) with the standard ResNet-50 architecture.](/assets/bootstrap-your-own-latent/Table_3_result.png)
 *Credits: [Bootstrap your own latent: A new approach to self-supervised Learning](https://arxiv.org/pdf/2006.07733)*
 This result show competitive results to the Supervised training of RestNet-50 in ImageNet and surpass the performance of contrastive learning models.
@@ -164,7 +170,14 @@ In these tables shows the robustness of BYOL against batch size compared to SimC
 
 BYOL gives another solution to the traditional use of contrastive loss for self-supervised frameworks. Giving more research on this non-contrastive framework opens the door for more powerful models. Also taking out the need of negative examples gives more freedom to the model to understand the data and give richer representations. 
 
+In the original BYOL paper have many other interesting topics:
+* Result on linear and semi-supervised evaluation on ImageNet.
+* A more detail information about the setup of BYOL.
+* Details on the relation to contrastive methods.
+* Pseudo-code in JAX to implement BYOL.
+  
 I encourage you to look the papers from the reference section. This will give you a broader perspective on the [Bootstrap your own latent: A new approach to self-supervised Learning](https://arxiv.org/pdf/2006.07733) paper.
+
 
 Thank you for reading!
 
