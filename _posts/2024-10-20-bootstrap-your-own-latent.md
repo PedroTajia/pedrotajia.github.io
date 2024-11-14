@@ -85,7 +85,7 @@ Data augmentation is used to force the model to learn invariant representations 
 
 The online network have parameters $\theta$ updated by back propagation and is made from three components: an encoder $f_{\theta}$, projector $g_{\theta}$ and predictor $q_{\theta}$. The target network have an encoder $f_{\xi}$ and projector $g_{\xi}$. The parameters $\xi$ of the target network are not updated by back propagation, but instead the model is updated by *Exponential Moving Average* (EMA) of the online parameters $\theta$. The parameters of the target network can be seen a **smoothed version** of the online network. 
 
-<span style="font-size: 1.2em;">${\xi}\leftarrowtail{\tau}{\xi}+(1-\tau){\theta}$</span>
+<span style="font-size: 1.2em;">${\xi}\longleftarrow{\tau}{\xi}+(1-\tau){\theta}$</span>
  
 > $\tau$ is the decay rate $T\in[0, 1]$
 
@@ -96,7 +96,7 @@ The representation head uses a ResNet-50 for $f_{\theta}$ and $f_{\xi}$. The Res
 ![Image of the architecture of BYOL, image from the original paper](/assets/bootstrap-your-own-latent/BYOL-Architecture.png)
 *Credits: [Bootstrap your own latent: A new approach to self-supervised Learning](https://arxiv.org/pdf/2006.07733)*
 
-
+### Training
 BYOL is train to minimizes the similarity loss between $q_{\theta}(z_{\theta})$ and $sq(z_{\xi}^{'})$. The loss function is defined as:
 <span style="font-size: 1.2em;">
 $$
@@ -118,7 +118,7 @@ The loss
 $$
 \mathcal{L}_{\theta,\xi}
 $$
-is computed from feeding $v$ to the online network and $v'$ to the target network. The loss need to symmetrize by calculating 
+is computed from feeding $v$ to the online network and $v'$ to the target network. The loss is symmetrized by calculating 
 $$
 \tilde{\mathcal{L}}_{\theta,\xi}
 $$ 
@@ -130,8 +130,24 @@ $$
 $$
 </span>
 
-For each training step is performed a $optimatizer$ algorithm to minimize $\mathcal{L}^{BYOL}_{\theta, \xi}$ with respect only to $\theta$. After the training, the encoder of the online network $f_{\theta}$ is used to produce representations.
- 
+The symmetrization of the loss makes each network, online and target have the same data to learn from. Since both networks share the same data it ensures that will have an equal contribution to the total loss. This promotes more robust and generalized features, since the model captures a wider range of data variations.
+![An illustration about symmetrization of the loss](/assets/bootstrap-your-own-latent/Symmetrize_loss.svg)
+
+
+For each training step is performed a $optimatizer$ algorithm to minimize $\mathcal{L}^{BYOL}_{\theta, \xi}$ with respect only to $\theta$.
+<span>
+$$
+{\theta}\longleftarrow\text{optimizer}(\theta, \nabla_{\theta}{\tilde{\mathcal{L}}_{\theta,\xi}}, {\eta})
+$$
+$$
+{\xi}\longleftarrow{\tau}{\xi}+(1-\tau){\theta}
+$$
+</span>
+> $\eta$ is the learning rate
+
+In the framework BYOL the [**LARS *optimizer***](https://arxiv.org/pdf/1708.03888v3) is used update $\theta$, with a cosine decay learning rate schedule, more information on the [BYOL paper](https://arxiv.org/pdf/2006.07733). After the training, the encoder of the online network $f_{\theta}$ is used to produce representations.
+
+
 ## Why BYOL do not collapse
 These are the two main reasons why BYOL do not collapse.
 
