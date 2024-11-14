@@ -131,7 +131,7 @@ $$
 </span>
 
 The symmetrization of the loss makes each network, online and target have the same data to learn from. Since both networks share the same data it ensures that will have an equal contribution to the total loss. This promotes more robust and generalized features, since the model captures a wider range of data variations.
-![An illustration about symmetrization of the loss](/assets/bootstrap-your-own-latent/Symmetrize_loss.svg)
+![An illustration about symmetrization of the loss](/assets/bootstrap-your-own-latent/Symmetry_loss.svg)
 
 
 For each training step is performed a $optimatizer$ algorithm to minimize $\mathcal{L}^{BYOL}_{\theta, \xi}$ with respect only to $\theta$.
