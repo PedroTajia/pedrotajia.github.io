@@ -35,7 +35,7 @@ Note: The latent representation is just a point in the latent space, the job of 
 The **code** and the **random noise** can be view as the latent space. Since the **code** and the **random noise** comes from a normal distribution is possible to sample a point from normal distribution and inputted in the decoder for the VAE and the generator for the GAN to generate an image. The only part that is going to use to generate the explications is the **decoder** for the VAE and the **generator** for the GAN.
 
 In order to generate explication is use a generator (a network that generate natural images) and the discriminator (the classifier of interest). The image $\mathcal{I}$ is inputted in the discriminator network $D$ to produce 
-$\mathcal{y}_{true}$, the class label of interest will be denoted as $\mathcal{y}_{probe}$. With this we can formulate the question of *Why did $D$ produce label $\mathcal{y}_{true}$ and not label $\mathcal{y}_{probe}$ for the input $\mathcal{I}$?*.
+$\mathcal{y}_{true}$, the class label of interest will be denoted as $\mathcal{y}_{probe}$. With this we can formulate the question of "Why did $D$ produce label $\mathcal{y}_{true}$ and not label $\mathcal{y}_{probe}$ for the input $\mathcal{I}$?".
 
 To generate explanation:
 ![Algorithm_1-Algorithm_2](/assets/contrastive-deep-explanations/Generate_explanation.png)
