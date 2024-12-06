@@ -54,8 +54,16 @@ To find $z_e$:
 After having a $z_e$ that have the minimum l2 squared distance with respect to $z$ between $z$ and $z_0$, and is in between the constraints is performed the difference between $G(z_0) - G(z_e)$
 
 ![proposed_method](/assets/contrastive-deep-explanations/Proposed_approach.svg)
+**Figure 3** This is a different way to the working the algorithm 1 and 2.
 
 
+
+### Different approach
+The methods suggested work good on the MNIST dataset showing the transformation need for *Image A* classified as the *Number 8* to be classified as the *Number 3*. In the experiment is show different pair of number and the transformation need to be classified into different class.
+![Figure2_mnist_experiment](/assets/contrastive-deep-explanations/Figure2_mnist_experiment.png)
+
+For my approach instead of representing the transformation as red or blue for regions that should be added and regions that should be removed respectively, the transformations are represented as a timeline of all the transformation that have past the *Image 9* to converted into *Image 3*.
+![New proposed_method](/assets/contrastive-deep-explanations/New-approach.svg)
 
 
 
