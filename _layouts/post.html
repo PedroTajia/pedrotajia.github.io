@@ -21,7 +21,7 @@ layout: base
         {% endif %}
       </div>
     {% endif %}
-    <p class="post-meta", style="font-size: 1em;">
+    <p class="post-meta", style="font-size: 1.5em;">
       {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
       <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
         {{ page.date | date: date_format }}

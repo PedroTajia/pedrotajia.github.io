@@ -18,6 +18,7 @@ Note: I will interchangeably use model or a neural network with the same meaning
 In this article I will explain the paper [CDeepEx: Contrastive Deep Explanations](https://rlair.cs.ucr.edu/papers/docs/cdeepex.pdf) where proposed a method capable of answer the question of *Why did you not choose answer B over A*. This paper provided an overview of the concepts captured by a network.
 
 ![Contrastive Example](/assets/contrastive-deep-explanations/Contrastive_example.svg)
+
 **Figure 1**: This is an example of a classifier trained on the MNIST dataset, to predict the digit that appears in the image. The input of the model is an image that have a number **3**, the model predict with a confidence of *72%*. In the paper solve the question of *Why the classifier predicts the number **3** instead of the number **9*** by showing how the image 3 can be change in order to make the classifier predict the number 9.
 
 # 2. CDeepEx: Contrastive Deep Explanations
@@ -26,13 +27,15 @@ To archive the question of *Why did you not choose answer B over A*, the propose
 Note: There is a big variety of GAN the specific one used is this paper is wasserstein GAN (WGAN) that give a more stability when training and yields better generated images than a vanilla GAN. I will use interchangeably GAN and WGAN
 
 ![GAN-VAE](/assets/contrastive-deep-explanations/GAN-VAE.svg)
+
 **Figure 2**: These are two generative models (a) is a variational autoencoder (VAE), an image is inputted on the encoder and with the **code** generates a latent representation where the input (image) is transformed into a lower dimension that have equivalent information of the input. The decoder use this latent representation to do a reconstruction that is similar to the input. (b) uses a random noise to do generations of images that look similar to the data. The discrimination predict how real an image it is.
 
 Note: The latent representation is just a point in the latent space, the job of a GAN or VAE create this latent space which contains the information the model learn from the data.
 
 The **code** and the **random noise** can be view as the latent space. Since the **code** and the **random noise** comes from a normal distribution is possible to sample a point from normal distribution and inputted in the decoder for the VAE and the generator for the GAN to generate an image. The only part that is going to use to generate the explications is the **decoder** for the VAE and the **generator** for the GAN.
 
-In order to generate explication is use a generator (a network that generate natural images) and the discriminator (the classifier of interest). The image $\mathcal{I}$ is inputted in the discriminator network $D$ to produce $\mathcal{y}_{true}$, the class label of interest will be denoted as $\mathcal{y}_{probe}$. With this we can formulate the question of *Why did $D$ produce label $\mathcal{y}_{true}$ and not label $\mathcal{y}_{probe}$ for the input $\mathcal{I}$?*.
+In order to generate explication is use a generator (a network that generate natural images) and the discriminator (the classifier of interest). The image $\mathcal{I}$ is inputted in the discriminator network $D$ to produce 
+$\mathcal{y}_{true}$, the class label of interest will be denoted as $\mathcal{y}_{probe}$. With this we can formulate the question of *Why did $D$ produce label $\mathcal{y}_{true}$ and not label $\mathcal{y}_{probe}$ for the input $\mathcal{I}$?*.
 
 To generate explanation:
 ![Algorithm_1-Algorithm_2](/assets/contrastive-deep-explanations/Generate_explanation.png)
