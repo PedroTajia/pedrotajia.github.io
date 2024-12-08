@@ -63,7 +63,7 @@ The methods suggested work good on the MNIST dataset showing the transformation 
 ![Figure2_mnist_experiment](/assets/contrastive-deep-explanations/Figure2_mnist_experiment.png)
 
 For my approach instead of representing the transformation as red or blue for regions that should be added and regions that should be removed respectively, the transformations are represented as a timeline of all the transformation that have past the *Image 9* to converted into *Image 3*.
-![New proposed_method](/assets/contrastive-deep-explanations/New-approach.svg)
+![New proposed_method](/assets/contrastive-deep-explanations/New_Approach.svg)
 
 
 
