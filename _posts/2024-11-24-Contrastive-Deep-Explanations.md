@@ -3,7 +3,7 @@ layout: post
 title: "Contrastive Deep Explanations (In Progress)"
 author: Pedro Tajia
 tags: [Explainable AI, Deep Learning]
-image: /assets/contrastive-deep-explanations/Preview.png
+image: /assets/contrastive-deep-explanations/Preview.svg
 ---
 <script type="text/javascript" async
      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
