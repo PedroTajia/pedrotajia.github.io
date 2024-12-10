@@ -54,7 +54,7 @@ To find $z_e$:
 After having a $z_e$ that have the minimum l2 squared distance with respect to $z$ between $z$ and $z_0$, and is in between the constraints is performed the difference between $G(z_0) - G(z_e)$
 
 ![proposed_method](/assets/contrastive-deep-explanations/Proposed_approach.svg)
-**Figure 3** This is a different way to the working the algorithm 1 and 2.
+**Figure 3**: This is a different way to the working the algorithm 1 and 2.
 
 
 
@@ -64,6 +64,96 @@ The methods suggested work good on the MNIST dataset showing the transformation 
 
 For my approach instead of representing the transformation as red or blue for regions that should be added and regions that should be removed respectively, the transformations are represented as a timeline of all the transformation that have past the *Image 9* to converted into *Image 3*.
 ![New proposed_method](/assets/contrastive-deep-explanations/New_Approach.svg)
+**Figure 4**: The framework to solve the problem with a different view. (a) Use a VAE (Decoder) or GAN (Generator) to generate images, use a *image 9* from the dataset MNISt, the latent vector z is updates to be close to this image, having $z_0$. (b) The updated latent vector $z_0$ as an image is classified as *class 9*, the latent vector $z_0$ is updated again to get $z_e$ which its generated image is predicted by the classifier as the *class 3* in the process to update $z_0$ from *Image 9* to *Image 3* is where is got these sequence of transformations. 
+
+**Figure 4**: Part A
+```python
+def learn_z0(G, I, lr, loss_fn, epochs, z0):
+    # G is the generator
+    # I is the image from a dataset
+    # lr: Learning rate for the optimizer (default: 0.0005)
+    # z0 the random initialized latent vector
+    # set the optimizer "Adam" to optimize the loss with respect to the latent variable z0
+    optimizer = optim.Adam([z0], lr=lr)
+    
+    # Iterate over epochs
+    for _ in range(epochs):
+
+        # set the calculation of the gradients for z0 
+        z0.requires_grad = True
+
+        # generate the image from z0
+        G_z0 = G(z0) 
+
+        # Calculate the loss (the loss is the norm l2 squared)
+        loss = loss_fn(G_z0, I) 
+
+        # backpropagate the error and get the gradients
+        loss.backward()
+
+        # update z0
+        optimizer.step()
+    return z0, 
+```
+**Figure 4**: Part B
+```python
+def learn_ze(G, D, epochs, z, y, lr=5e-4, some_pixel_threshold=5):
+    # G: Generator model
+    # D: Discriminator model
+    # epochs: Number of training iterations
+    # z: Latent vector (input noise for the generator)
+    # y: Target labels for the discriminator's output
+    # lr: Learning rate for the optimizer (default: 0.0005)
+
+    # some_pixel_threshold: Threshold for pixel difference to store generated images (default: 5)
+
+    # Ensure the latent vector requires gradient computation
+    z.requires_grad = True
+
+    # Initialize the Adam optimizer to update the latent vector z
+    optimizer = optim.Adam([z], lr=lr)
+
+    # List to store generated images that meet the pixel difference criterion
+    grid_images = []
+
+    # Variable to store the previously generated image for comparison
+    prev_stored_image = None
+
+    # Training loop over the specified number of epochs
+    for _ in range(epochs):
+        # Generate an image from the latent vector z and pass it through the discriminator
+        D_z, G_z_resize = discriminator_gen(G, D, z)
+
+        # Compute the cross-entropy loss between the discriminator's output and the target labels
+        loss = F.cross_entropy(D_z, y)
+
+        # Backpropagate the loss to compute gradients
+        loss.backward()
+
+        # Update the latent vector z using the optimizer
+        optimizer.step()
+
+        # Check if there's a previously stored image to compare with
+        if prev_stored_image is not None:
+            # Calculate the pixel-wise difference between the current and previous images
+            pixel_diff = torch.norm(G_z_resize - prev_stored_image).item()
+            # If the difference exceeds the threshold, store the current image
+            if pixel_diff > some_pixel_threshold:
+                grid_images.append(G_z_resize[0].detach().cpu().permute(1, 2, 0))
+                # Update the previous stored image to the current one
+                prev_stored_image = G_z_resize.clone().detach()
+        else:
+            # If no previous image exists, store the current image
+            grid_images.append(G_z_resize[0].detach().cpu().permute(1, 2, 0))
+            # Set the previous stored image to the current one
+            prev_stored_image = G_z_resize.clone().detach()
+
+    # Return the optimized latent vector and the list of stored images
+    return z, grid_images
+```
+
+
+I believe this approach is useful to understand how the network classifier goes through the latent space to find the image the outputs the correct label. Instead of depending on two variables to change an *image A* to an *image B*, is shown a sequence of transformation applied to *image A* to become *image B*.
 
 
 

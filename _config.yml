@@ -10,6 +10,7 @@ description: >
   This blog have the goal of explaning deep learning papers.
 
 # Build settings
+highlighter: rouge
 
 # If you clone the Minima repo and build locally, use this setting.
 theme: minima
