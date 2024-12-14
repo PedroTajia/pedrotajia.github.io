@@ -59,11 +59,11 @@ After having a $z_e$ that have the minimum l2 squared distance with respect to $
 
 
 
-### Different approach
+### Another way to see it
 The methods suggested work good on the MNIST dataset showing the transformation need for *Image A* classified as the *Number 8* to be classified as the *Number 3*. In the experiment is show different pair of number and the transformation need to be classified into different class.
 ![Figure2_mnist_experiment](/assets/contrastive-deep-explanations/Figure2_mnist_experiment.png)
 
-For my approach instead of representing the transformation as red or blue for regions that should be added and regions that should be removed respectively, the transformations are represented as a timeline of all the transformation that have past the *Image 9* to converted into *Image 3*.
+Instead of representing the transformation as red or blue for regions that should be added and regions that should be removed respectively, the transformations are represented as a timeline of all the transformation that have past the *Image 9* to converted into *Image 3*.
 ![New proposed_method](/assets/contrastive-deep-explanations/New_Approach.svg)
 **Figure 4**: The framework to solve the problem with a different view. (a) Use a VAE (Decoder) or GAN (Generator) to generate images, use a *image 9* from the dataset MNISt, the latent vector z is updates to be close to this image, having $z_0$. (b) The updated latent vector $z_0$ as an image is classified as *class 9*, the latent vector $z_0$ is updated again to get $z_e$ which its generated image is predicted by the classifier as the *class 3* in the process to update $z_0$ from *Image 9* to *Image 3* is where is got these sequence of transformations. 
 
@@ -154,7 +154,7 @@ def learn_ze(G, D, epochs, z, y, lr=5e-4, some_pixel_threshold=5):
     return z, grid_images
 ```
 
-I believe this approach is useful to understand how the network classifier goes through the latent space to find the image the outputs the correct label. Instead of depending on two variables to change an *image A* to an *image B*, is shown a sequence of transformation applied to *image A* to become *image B*.
+I believe this view of the problem will be useful to understand how the network classifier goes through the latent space to find the image the outputs the correct label. Instead of depending on two variables to change an *image A* to an *image B*, is shown a sequence of transformation applied to *image A* to become *image B*.
 
 
 
