@@ -48,10 +48,11 @@ On these algorithms, the first step is to train a generator $G$ that giving a la
 <!-- The gradient $\nabla_z$ is calculated $loss$ with respect to $z_0$, the loss can be obtained from l2 distance or binary cross entropy for images. $z_0$ is subtracted by the gradient $\nabla_z$ multiplied by a learning rate $\eta$ to get the new $z_0$.  -->
 After finding the right latent representation that $G(z_0)$ will generate a similar image of $\mathcal{I}$, we get $\Delta_{z0}$ as the difference between $G$ and $\mathcal{I}$.
 
+
 To find $z_e$:
 ![Getting_Ze](/assets/contrastive-deep-explanations/Getting_Ze.png)
 
-After having a $z_e$ that have the minimum l2 squared distance with respect to $z$ between $z$ and $z_0$, and is in between the constraints is performed the difference between $G(z_0) - G(z_e)$
+After having a $z_e$ that have the minimum l2 squared distance with respect to $z$ between $z$ and $z_0$, and is in between the constraints is performed the difference between $G(z_0) - G(z_e)$. This is done because, we want to find latent vector $z_e$ that the resultant image have a similar style than the generated image from $z_0$ but also $z_e$ be classified as our label of interest. In order when taking the difference between $G(z_0) - G(z_e)$, the overlapping parts are not change 
 
 ![proposed_method](/assets/contrastive-deep-explanations/Proposed_approach.svg)
 **Figure 3**: This is a different way to the working the algorithm 1 and 2.
@@ -66,7 +67,7 @@ For my approach instead of representing the transformation as red or blue for re
 ![New proposed_method](/assets/contrastive-deep-explanations/New_Approach.svg)
 **Figure 4**: The framework to solve the problem with a different view. (a) Use a VAE (Decoder) or GAN (Generator) to generate images, use a *image 9* from the dataset MNISt, the latent vector z is updates to be close to this image, having $z_0$. (b) The updated latent vector $z_0$ as an image is classified as *class 9*, the latent vector $z_0$ is updated again to get $z_e$ which its generated image is predicted by the classifier as the *class 3* in the process to update $z_0$ from *Image 9* to *Image 3* is where is got these sequence of transformations. 
 
-**Figure 4**: Part A
+**Figure 4**: Part (a)
 ```python
 def learn_z0(G, I, lr, loss_fn, epochs, z0):
     # G is the generator
@@ -95,7 +96,8 @@ def learn_z0(G, I, lr, loss_fn, epochs, z0):
         optimizer.step()
     return z0, 
 ```
-**Figure 4**: Part B
+
+**Figure 4**: Part (b)
 ```python
 def learn_ze(G, D, epochs, z, y, lr=5e-4, some_pixel_threshold=5):
     # G: Generator model
@@ -151,7 +153,6 @@ def learn_ze(G, D, epochs, z, y, lr=5e-4, some_pixel_threshold=5):
     # Return the optimized latent vector and the list of stored images
     return z, grid_images
 ```
-
 
 I believe this approach is useful to understand how the network classifier goes through the latent space to find the image the outputs the correct label. Instead of depending on two variables to change an *image A* to an *image B*, is shown a sequence of transformation applied to *image A* to become *image B*.
 
