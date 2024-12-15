@@ -10,62 +10,60 @@ image: /assets/contrastive-deep-explanations/Preview.svg
 </script>
 
 # 1. Introduction 
+As the creation of large deep learning models has advanced, researchers have become curious about what happens inside these models. Even though many people use these models in their daily basis like grammar checking, self-driving cars, weather prediction, or more specialized areas such as cancer detection or predicting a protein's 3D structure from its amino acid sequence, etc., nobody really knows how these models work internally. In cases where deep learning is used on medicine or self-driving cars, it is particularly important to know the reasoning behind the model’s decisions—for example, understanding why did not the model chose prediction **B** over the prediction **A**. 
 
-Since the creation Deep Learning researches have the curiosity of knowing what happen inside these deep learning model that in everyday we use. Even do many people use deep learning in their daily basis like grammar checker, self-driving cars, weather prediction or in more niche topic like cancer detection or prediction of protein's 3D structure from amino acid sequence, etc., nobody really knows how these models work internally. In cases where deep learning is use on medicine or in self-driving cars is important to know the reasons of model decision, for example knowing why did not the model chose prediction **B** over the prediction **A**. 
+Note: I will interchangeably use model or a neural network.
 
-Note: I will interchangeably use model or a neural network with the same meaning.
-
-In this article I will explain the paper [CDeepEx: Contrastive Deep Explanations](https://rlair.cs.ucr.edu/papers/docs/cdeepex.pdf) where proposed a method capable of answer the question of *Why did you not choose answer B over A*. This paper provided an overview of the concepts captured by a network.
+In this article, I will explain the paper [CDeepEx: Contrastive Deep Explanations](https://rlair.cs.ucr.edu/papers/docs/cdeepex.pdf), which introduces a method capable of answer the question of *Why did you not choose answer B over A* and  provided an overview of the concepts that a network learn.
 
 ![Contrastive Example](/assets/contrastive-deep-explanations/Contrastive_example.svg)
 
-**Figure 1**: This is an example of a classifier trained on the MNIST dataset, to predict the digit that appears in the image. The input of the model is an image that have a number **3**, the model predict with a confidence of *72%*. In the paper solve the question of *Why the classifier predicts the number **3** instead of the number **9*** by showing how the image 3 can be change in order to make the classifier predict the number 9.
+**Figure 1**: This is an example of a classifier trained on the MNIST dataset. Its input is an image of a handwritten digit, for example the number **3** and the model predicts this number with a confidence of *72%*. The paper address the question of *Why the classifier predicts the number **3** instead of the number **9*** by showing how the image 3 can be transformed to make the classifier predict this new image as the number **9**.
 
 # 2. CDeepEx: Contrastive Deep Explanations
-To archive the question of *Why did you not choose answer B over A*, the proposed  method in this paper uses generative latent-space model. These are just Generative Adversarial Networks (GAN) or autoencoder (in this paper are the Variational autoencoder), where learns the latent-space to generate data. The latent-space can view as the compress or the essential information that compose the data. In this paper [CDeepEx: Contrastive Deep Explanations](https://rlair.cs.ucr.edu/papers/docs/cdeepex.pdf) the latent-space is view as a bridge between the network and human understanding of the data. The idea is to use a GAN or variational autoencoder (VAE) to create a latent-space for later be used to generate images that can explain the reasoning of a model, like a classifier of numbers or faces. 
-
-Note: There is a big variety of GAN the specific one used is this paper is wasserstein GAN (WGAN) that give a more stability when training and yields better generated images than a vanilla GAN. I will use interchangeably GAN and WGAN
+To archive contrastive explanation i.e., to answer *Why did you not choose answer B over A*, the proposed method uses a generative latent-space model. This involves using a Wasserstein Generative Adversarial Networks (WGAN) or Variational AutoEncoder (VAE). The models learn a latent-space of the data, where is captures the fundamental information that compose the data. The latent-space can be viewed as a bridge between the network and human understanding of the data. The idea is to use a WGAN or VAE to learn this latent-space for later than be used to generate images that can explain a model's reasoning process.
 
 ![GAN-VAE](/assets/contrastive-deep-explanations/GAN-VAE.svg)
 
-**Figure 2**: These are two generative models (a) is a variational autoencoder (VAE), an image is inputted on the encoder and with the **code** generates a latent representation where the input (image) is transformed into a lower dimension that have equivalent information of the input. The decoder use this latent representation to do a reconstruction that is similar to the input. (b) uses a random noise to do generations of images that look similar to the data. The discrimination predict how real an image it is.
+**Figure 2**: These are two generative models. (a) is a variational Autoencoder (VAE), where an image is inputted on the encoder, and using a **code**, it generates a latent representation where the input (image) is transformed into a lower- dimension that preserves the essential information of the input. The decoder uses this latent representation to reconstruct an image that is similar to the input. (b) Is a Wasserstein GAN (WGAN) where **random noise** is used to generate images that look similar from the data, and a discrimination is used to predict how real an image it is.
 
-Note: The latent representation is just a point in the latent space, the job of a GAN or VAE create this latent space which contains the information the model learn from the data.
+Note: The latent representation is simply a point in the latent space. Remember that the goal of the WGAN or VAE is to create this latent space which contains the information the model learn from the data.
 
-The **code** and the **random noise** can be view as the latent space. Since the **code** and the **random noise** comes from a normal distribution is possible to sample a point from normal distribution and inputted in the decoder for the VAE and the generator for the GAN to generate an image. The only part that is going to use to generate the explications is the **decoder** for the VAE and the **generator** for the GAN.
+The **code** (for VAE) and the **random noise** (for WGAN) can be viewed as the latent space. Since both the code and the random noise comes from a normal distribution is possible to sample a point from normal distribution and inputted in the decoder (for the VAE) and the generator (for the WGAN) to generate an image. The only component used to generate the explications is the **decoder** in the VAE and the **generator** in the WGAN.
 
-In order to generate explication is use a generator (a network that generate natural images) and the discriminator (the classifier of interest). The image $\mathcal{I}$ is inputted in the discriminator network $D$ to produce 
-$y_{true}$, 
-the class label of interest will be denoted as 
+To generate explication is use a generator (a network that generate natural images) and the discriminator (the classifier of interest). The image $\mathcal{I}$ is inputted into the discriminator network $D$ to produce 
+$y_{true}$.
+The class label of interest will be denoted as 
 $y_{probe}$. 
-With this we can formulate the question of 
+Thus, we can formulate the question of 
 *Why did $D$ produce label $y_{true}$ and not label $y_{probe}$ for the input $\mathcal{I}$?*.
 
 To generate explanation:
 ![Algorithm_1-Algorithm_2](/assets/contrastive-deep-explanations/Generate_explanation.png)
 
-On these algorithms, the first step is to train a generator $G$ that giving a latent representation with real-values of size $k$ outputs an image with size $n$. After the generator is trained, we need to find a representation $z_0$ that inputted to $G$ generates a similar image of $\mathcal{I}$. $z_0$ is sampled from a normal distribution $\mathcal{N}(0,1)$ with mean 0 with variance of 1. There will be loop until the generated image $G(z)$ is close to the image $\mathcal{I}$. Inside the loop, $z_0$ is updated by gradient decent. 
-<!-- The gradient $\nabla_z$ is calculated $loss$ with respect to $z_0$, the loss can be obtained from l2 distance or binary cross entropy for images. $z_0$ is subtracted by the gradient $\nabla_z$ multiplied by a learning rate $\eta$ to get the new $z_0$.  -->
-After finding the right latent representation that $G(z_0)$ will generate a similar image of $\mathcal{I}$, we get $\Delta_{z0}$ as the difference between $G$ and $\mathcal{I}$.
+In these algorithms, the first step is to train a generator $G$ that, given a latent representation of real values of size $k$, outputs an image of size $n$. After training the generator, we need to find a representation $z_0$ that, when inputted to $G$ generates an image similar to $\mathcal{I}$. Initially, $z_0$ is sampled from a normal distribution $\mathcal{N}(0,1)$ with mean 0 with variance of 1. We then iterate until the generated image $G(z)$ is close to $\mathcal{I}$. Inside the loop, $z_0$ is updated by gradient decent. 
+
+After finding the correct latent representation $G(z_0)$ such that generates an image similar to $\mathcal{I}$, we get $\Delta_{z0}$ as the difference between $G$ and $\mathcal{I}$.
 
 
 To find $z_e$:
 ![Getting_Ze](/assets/contrastive-deep-explanations/Getting_Ze.png)
 
-After having a $z_e$ that have the minimum l2 squared distance with respect to $z$ between $z$ and $z_0$, and is in between the constraints is performed the difference between $G(z_0) - G(z_e)$. This is done because, we want to find latent vector $z_e$ that the resultant image have a similar style than the generated image from $z_0$ but also $z_e$ be classified as our label of interest. In order when taking the difference between $G(z_0) - G(z_e)$, the overlapping parts are not change 
+After finding $z_e$ that minimizes L2 distance between $z$ and $z_0$, and that is in between the constraints, we compute the difference between $G(z_0) - G(z_e)$. This is done because we want to find a latent vector $z_e$ such that the resultant image has a similar style to the generated image from $z_0$, but is classified as our label of interest. By taking the difference between $G(z_0) - G(z_e)$, the overlapping parts are unchanged and parts that are different stands out.
 
 ![proposed_method](/assets/contrastive-deep-explanations/Proposed_approach.svg)
-**Figure 3**: This is a different way to the working the algorithm 1 and 2.
+**Figure 3**: An alternative way to the working the algorithm 1 and 2.
 
 
 
-### Another way to see it
-The methods suggested work good on the MNIST dataset showing the transformation need for *Image A* classified as the *Number 8* to be classified as the *Number 3*. In the experiment is show different pair of number and the transformation need to be classified into different class.
+## 2.1. Another way to see it
+The suggested methods work well on the MNIST dataset, showing the transformation needed for *Image A* classified as the *Number 8* to be classified as the *Number 3*. In the experiment is show different pair of number and the transformation need to be classified into different class.
 ![Figure2_mnist_experiment](/assets/contrastive-deep-explanations/Figure2_mnist_experiment.png)
 
-Instead of representing the transformation as red or blue for regions that should be added and regions that should be removed respectively, the transformations are represented as a timeline of all the transformation that have past the *Image 9* to converted into *Image 3*.
+Instead of representing the transformation as red or blue for regions that should be added or removed, the transformations are represented as a timeline that shows the sequence of transformation needed to covert *Image 9* to converted into *Image 3*.
+
 ![New proposed_method](/assets/contrastive-deep-explanations/New_Approach.svg)
-**Figure 4**: The framework to solve the problem with a different view. (a) Use a VAE (Decoder) or GAN (Generator) to generate images, use a *image 9* from the dataset MNISt, the latent vector z is updates to be close to this image, having $z_0$. (b) The updated latent vector $z_0$ as an image is classified as *class 9*, the latent vector $z_0$ is updated again to get $z_e$ which its generated image is predicted by the classifier as the *class 3* in the process to update $z_0$ from *Image 9* to *Image 3* is where is got these sequence of transformations. 
+**Figure 4**: The framework to view the problem differently. (a) Use a VAE (Decoder) or WGAN (Generator) to generate images. Start with an *image 9* from the MNIST dataset and update the latent vector $z$ to be close to this image, obtaining $z_0$. (b) The updated latent vector $z_0$ generates an image classified as *class 9*. We update the latent vector $z_0$ to get $z_e$ which, when generated, is predicted by the classifier as the *class 3*. During the process to update $z_0$ from *Image 9* to *Image 3*, we got these sequence of transformations. 
 
 **Figure 4**: Part (a)
 ```python
@@ -148,7 +146,7 @@ def learn_ze(G, D, epochs, z, y, lr=5e-4, some_pixel_threshold=5):
             # If no previous image exists, store the current image
             grid_images.append(G_z_resize[0].detach().cpu().permute(1, 2, 0))
             # Set the previous stored image to the current one
-            prev_stored_image = G_z_resize.clone().detach()
+            prev_stored_image = G_z_resize.clone().detach()      
 
     # Return the optimized latent vector and the list of stored images
     return z, grid_images
@@ -157,18 +155,40 @@ def learn_ze(G, D, epochs, z, y, lr=5e-4, some_pixel_threshold=5):
 I believe this view of the problem will be useful to understand how the network classifier goes through the latent space to find the image the outputs the correct label. Instead of depending on two variables to change an *image A* to an *image B*, is shown a sequence of transformation applied to *image A* to become *image B*.
 
 
+# 3. Related Work
+Several methods are made to interpret deep learning models. These methods can be segmented based on their approach to understanding model decisions:
+
+### 3.1. Network Visualizers
+This method has the goal to understand the knowledge of a network by looking at individual neuron or group of neurons. By analyzing each neuron in a network we want to find features, like edges or textures that influence the predictions of a network. However, is uncommon to find features that have a dedicated neuron to it, instead we analyze a group of neurons, which give a more understandable insight of a network.
+
+### 3.2. Input Space Visualizers
+Input space visualizers focus on explaining which parts of an image have the largest impact in a network decision. These methods are archived by modifying the input and observing how the output changes. Methods like xGEMs uses a GAN to find a contrastive example where tries to find a *why not* explication, however, in this method there is no formulation of a constrained optimization that give a more coherent explanation between *Image A* (original image) and *Image B* (Desired image).
+
+### 3.3. Justification-Based Methods
+These methods generates human-like like textual or visual to justify a network classification. While this methods give an easy way to understand a network decision, they do not always reflect the classification made by a network. Instead, it gives what humans expect to hear.
 
 
-<!-- $\mathcal{I}_{z,z_0}$ = $G(z)+\Delta_{z_0}$ and $llh(f, y)$ is the log-likelihodd of class $y$ for the output $f$. The first constraint  -->
+The main advantage of **CDeepEx** is that do not rely on of modifying the network or using heuristics. Instead, we use generative latent-space models, were by using the latent-space as a bridge between network understanding and human understanding we produce explanation in the form of natural-looking images.
+
+
+# 4. Remarks
+The original CDeepEx paper is shown interesting results. This includes:
+
+* A detail analysis on the MNIST dataset.
+* The selection of the generator model, where is shown the impact in the performance with different datasets with respect of using a VAE or WGAN.
+* An analysis of biased MNIST, were is tested if the method can provide clear explanations for a bias classifier. 
+* Also, this method is tested on the CelebA dataset (a dataset with celebrities faces) and Fashion MNIST, which shows how robust the method is for more complex datasets.
+  
+I encourage you to read the paper for more details.
+
+Thanks for reading!
 
 
 
 
 
-<!-- 1. Learn a function $G$: $\R^{k} \rightarrow \R^{n}$
-1. Find a latent representation for input $\mathcal{I}$
-   1. **procedure** Learn $\mathcal{z}_0 (G, \mathcal{I}, \eta, loss(.))$
-     $z_0 \sim \ni$ -->
+
+
    
 
      
