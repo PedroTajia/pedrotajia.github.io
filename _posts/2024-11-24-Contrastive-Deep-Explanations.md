@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Contrastive Deep Explanations (In Progress)"
+title: "Contrastive Deep Explanations"
 author: Pedro Tajia
 tags: [Explainable AI, Deep Learning]
 image: /assets/contrastive-deep-explanations/Preview.svg
@@ -9,7 +9,7 @@ image: /assets/contrastive-deep-explanations/Preview.svg
      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
 </script>
 
-# 1. Introduction 
+## 1. Introduction 
 As the creation of large deep learning models has advanced, researchers have become curious about what happens inside these models. Even though many people use these models in their daily basis like grammar checking, self-driving cars, weather prediction, or more specialized areas such as cancer detection or predicting a protein's 3D structure from its amino acid sequence, etc., nobody really knows how these models work internally. In cases where deep learning is used on medicine or self-driving cars, it is particularly important to know the reasoning behind the model’s decisions—for example, understanding why did not the model chose prediction **B** over the prediction **A**. 
 
 Note: I will interchangeably use model or a neural network.
@@ -20,7 +20,7 @@ In this article, I will explain the paper [CDeepEx: Contrastive Deep Explanation
 
 **Figure 1**: This is an example of a classifier trained on the MNIST dataset. Its input is an image of a handwritten digit, for example the number **3** and the model predicts this number with a confidence of *72%*. The paper address the question of *Why the classifier predicts the number **3** instead of the number **9*** by showing how the image 3 can be transformed to make the classifier predict this new image as the number **9**.
 
-# 2. CDeepEx: Contrastive Deep Explanations
+## 2. CDeepEx: Contrastive Deep Explanations
 To archive contrastive explanation i.e., to answer *Why did you not choose answer B over A*, the proposed method uses a generative latent-space model. This involves using a Wasserstein Generative Adversarial Networks (WGAN) or Variational AutoEncoder (VAE). The models learn a latent-space of the data, where is captures the fundamental information that compose the data. The latent-space can be viewed as a bridge between the network and human understanding of the data. The idea is to use a WGAN or VAE to learn this latent-space for later than be used to generate images that can explain a model's reasoning process.
 
 ![GAN-VAE](/assets/contrastive-deep-explanations/GAN-VAE.svg)
@@ -56,7 +56,7 @@ After finding $z_e$ that minimizes L2 distance between $z$ and $z_0$, and that i
 
 
 
-## 2.1. Another way to see it
+### 2.1. Another way to see it
 The suggested methods work well on the MNIST dataset, showing the transformation needed for *Image A* classified as the *Number 8* to be classified as the *Number 3*. In the experiment is show different pair of number and the transformation need to be classified into different class.
 ![Figure2_mnist_experiment](/assets/contrastive-deep-explanations/Figure2_mnist_experiment.png)
 
@@ -155,7 +155,7 @@ def learn_ze(G, D, epochs, z, y, lr=5e-4, some_pixel_threshold=5):
 I believe this view of the problem will be useful to understand how the network classifier goes through the latent space to find the image the outputs the correct label. Instead of depending on two variables to change an *image A* to an *image B*, is shown a sequence of transformation applied to *image A* to become *image B*.
 
 
-# 3. Related Work
+## 3. Related Work
 Several methods are made to interpret deep learning models. These methods can be segmented based on their approach to understanding model decisions:
 
 ### 3.1. Network Visualizers
@@ -171,11 +171,11 @@ These methods generates human-like like textual or visual to justify a network c
 The main advantage of **CDeepEx** is that do not rely on of modifying the network or using heuristics. Instead, we use generative latent-space models, were by using the latent-space as a bridge between network understanding and human understanding we produce explanation in the form of natural-looking images.
 
 
-# 4. Remarks
-The original CDeepEx paper is shown interesting results. This includes:
+## 4. Remarks
+In the paper CDeepEx provides a method for generating contrastive explanation, which can be used to understand why a model predicts the *class A* over *class B* for the *image A*. Also in the paper is shown interesting results. This includes:
 
 * A detail analysis on the MNIST dataset.
-* The selection of the generator model, where is shown the impact in the performance with different datasets with respect of using a VAE or WGAN.
+* The **selection of the generator model**, where is shown the impact in the performance with different datasets with respect of using a VAE or WGAN.
 * An analysis of biased MNIST, were is tested if the method can provide clear explanations for a bias classifier. 
 * Also, this method is tested on the CelebA dataset (a dataset with celebrities faces) and Fashion MNIST, which shows how robust the method is for more complex datasets.
   
@@ -183,13 +183,23 @@ I encourage you to read the paper for more details.
 
 Thanks for reading!
 
+Cite as:
+```
+@article{
+  tajia2024contrastive,
+  title={Contrastive Deep Explanations},
+  author={Tajia, Pedro},
+  year={2024},
+  howpublished={\url{https://pedrotajia.com/2024/11/24/Contrastive-Deep-Explanations.html}}
+}
+```
 
+### Reference
+1. Feghahati, A., Shelton, C. R., Pazzani, M. J., & Tang, K. (2021). CDeepEx: Contrastive Deep Explanations. ECAI 2020. [PDF](https://rlair.cs.ucr.edu/papers/docs/cdeepex.pdf)
 
+2. Gulrajani, I., Ahmed, F., Arjovsky, M., Dumoulin, V., & Courville, A. (2017). Improved training of wasserstein GANs. ICML, 30, 5769–5779. [PDF](https://arxiv.org/pdf/1701.07875)
 
-
-
-
-   
+3. Kingma, D. P., & Welling, M. (2014). Auto-Encoding Variational Bayes. ICLR. [PDF](https://arxiv.org/pdf/1312.6114)
 
      
 

@@ -197,6 +197,16 @@ I encourage you to look the papers from the reference section. This will give yo
 
 Thank you for reading!
 
+Cite as:
+@article{
+  tajia2024bootstrap,
+  title={Bootstrap Your Own Latent},
+  author={Tajia, Pedro},
+  year={2024},
+  howpublished={\url{https://pedrotajia.com/2024/10/20/bootstrap-your-own-latent.html}}
+}
+
+
 ## References
 
 1. Jean-Bastien Grill et al., ["Bootstrap Your Own Latent: A New Approach to Self-Supervised Learning"](https://arxiv.org/pdf/2006.07733), arXiv, 2020.
