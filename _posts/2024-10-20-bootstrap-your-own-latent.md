@@ -198,6 +198,7 @@ I encourage you to look the papers from the reference section. This will give yo
 Thank you for reading!
 
 Cite as:
+```
 @article{
   tajia2024bootstrap,
   title={Bootstrap Your Own Latent},
@@ -205,7 +206,7 @@ Cite as:
   year={2024},
   howpublished={\url{https://pedrotajia.com/2024/10/20/bootstrap-your-own-latent.html}}
 }
-
+```
 
 ## References
 
