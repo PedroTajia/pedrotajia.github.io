@@ -1,84 +1,97 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://pedrotajia.com/feed.xml" rel="self" type="application/atom+xml"/><link href="https://pedrotajia.com/" rel="alternate" type="text/html" hreflang="en"/><updated>2025-12-28T02:22:40+00:00</updated><id>https://pedrotajia.com/feed.xml</id><title type="html">blank</title><subtitle>A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design. </subtitle><entry><title type="html">a post with plotly.js</title><link href="https://pedrotajia.com/blog/2025/plotly/" rel="alternate" type="text/html" title="a post with plotly.js"/><published>2025-03-26T14:24:00+00:00</published><updated>2025-03-26T14:24:00+00:00</updated><id>https://pedrotajia.com/blog/2025/plotly</id><content type="html" xml:base="https://pedrotajia.com/blog/2025/plotly/"><![CDATA[<p>This is an example post with some <a href="https://plotly.com/javascript/">plotly</a> code.</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">plotly
-</span><span class="sb">{
-  "data": [
-    {
-      "x": [1, 2, 3, 4],
-      "y": [10, 15, 13, 17],
-      "type": "scatter"
-    },
-    {
-      "x": [1, 2, 3, 4],
-      "y": [16, 5, 11, 9],
-      "type": "scatter"
-    }
-  ]
-}</span>
-<span class="p">```</span>
-</code></pre></div></div> <p>Which generates:</p> <pre><code class="language-plotly">{
-  "data": [
-    {
-      "x": [1, 2, 3, 4],
-      "y": [10, 15, 13, 17],
-      "type": "scatter"
-    },
-    {
-      "x": [1, 2, 3, 4],
-      "y": [16, 5, 11, 9],
-      "type": "scatter"
-    }
-  ]
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://pedrotajia.com/feed.xml" rel="self" type="application/atom+xml"/><link href="https://pedrotajia.com/" rel="alternate" type="text/html" hreflang="en"/><updated>2025-12-28T02:35:05+00:00</updated><id>https://pedrotajia.com/feed.xml</id><title type="html">blank</title><subtitle>A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design. </subtitle><entry><title type="html">Contrastive Deep Explanations</title><link href="https://pedrotajia.com/blog/2024/Contrastive-Deep-Explanations/" rel="alternate" type="text/html" title="Contrastive Deep Explanations"/><published>2024-11-24T00:00:00+00:00</published><updated>2024-11-24T00:00:00+00:00</updated><id>https://pedrotajia.com/blog/2024/Contrastive-Deep-Explanations</id><content type="html" xml:base="https://pedrotajia.com/blog/2024/Contrastive-Deep-Explanations/"><![CDATA[<script type="text/javascript" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"> </script> <h2 id="1-introduction">1. Introduction</h2> <p>As the creation of large deep learning models has advanced, researchers have become curious about what happens inside these models. Even though many people use these models in their daily basis like grammar checking, self-driving cars, weather prediction, or more specialized areas such as cancer detection or predicting a protein’s 3D structure from its amino acid sequence, etc., nobody really knows how these models work internally. In cases where deep learning is used on medicine or self-driving cars, it is particularly important to know the reasoning behind the model’s decisions—for example, understanding why did not the model chose prediction <strong>B</strong> over the prediction <strong>A</strong>.</p> <p>Note: I will interchangeably use model or a neural network.</p> <p>In this article, I will explain the paper <a href="https://rlair.cs.ucr.edu/papers/docs/cdeepex.pdf">CDeepEx: Contrastive Deep Explanations</a>, which introduces a method capable of answer the question of <em>Why did you not choose answer B over A</em> and provided an overview of the concepts that a network learn.</p> <p><img src="/assets/contrastive-deep-explanations/Contrastive_example.svg" alt="Contrastive Example"/></p> <p><strong>Figure 1</strong>: This is an example of a classifier trained on the MNIST dataset. Its input is an image of a handwritten digit, for example the number <strong>3</strong> and the model predicts this number with a confidence of <em>72%</em>. The paper address the question of <em>Why the classifier predicts the number <strong>3</strong> instead of the number <strong>9</strong></em> by showing how the image 3 can be transformed to make the classifier predict this new image as the number <strong>9</strong>.</p> <h2 id="2-cdeepex-contrastive-deep-explanations">2. CDeepEx: Contrastive Deep Explanations</h2> <p>To archive contrastive explanation i.e., to answer <em>Why did you not choose answer B over A</em>, the proposed method uses a generative latent-space model. This involves using a Wasserstein Generative Adversarial Networks (WGAN) or Variational AutoEncoder (VAE). The models learn a latent-space of the data, where is captures the fundamental information that compose the data. The latent-space can be viewed as a bridge between the network and human understanding of the data. The idea is to use a WGAN or VAE to learn this latent-space for later than be used to generate images that can explain a model’s reasoning process.</p> <p><img src="/assets/contrastive-deep-explanations/GAN-VAE.svg" alt="GAN-VAE"/></p> <p><strong>Figure 2</strong>: These are two generative models. (a) is a variational Autoencoder (VAE), where an image is inputted on the encoder, and using a <strong>code</strong>, it generates a latent representation where the input (image) is transformed into a lower- dimension that preserves the essential information of the input. The decoder uses this latent representation to reconstruct an image that is similar to the input. (b) Is a Wasserstein GAN (WGAN) where <strong>random noise</strong> is used to generate images that look similar from the data, and a discrimination is used to predict how real an image it is.</p> <p>Note: The latent representation is simply a point in the latent space. Remember that the goal of the WGAN or VAE is to create this latent space which contains the information the model learn from the data.</p> <p>The <strong>code</strong> (for VAE) and the <strong>random noise</strong> (for WGAN) can be viewed as the latent space. Since both the code and the random noise comes from a normal distribution is possible to sample a point from normal distribution and inputted in the decoder (for the VAE) and the generator (for the WGAN) to generate an image. The only component used to generate the explications is the <strong>decoder</strong> in the VAE and the <strong>generator</strong> in the WGAN.</p> <p>To generate explication is use a generator (a network that generate natural images) and the discriminator (the classifier of interest). The image $\mathcal{I}$ is inputted into the discriminator network $D$ to produce $y_{true}$. The class label of interest will be denoted as $y_{probe}$. Thus, we can formulate the question of <em>Why did $D$ produce label $y_{true}$ and not label $y_{probe}$ for the input $\mathcal{I}$?</em>.</p> <p>To generate explanation: <img src="/assets/contrastive-deep-explanations/Generate_explanation.png" alt="Algorithm_1-Algorithm_2"/></p> <p>In these algorithms, the first step is to train a generator $G$ that, given a latent representation of real values of size $k$, outputs an image of size $n$. After training the generator, we need to find a representation $z_0$ that, when inputted to $G$ generates an image similar to $\mathcal{I}$. Initially, $z_0$ is sampled from a normal distribution $\mathcal{N}(0,1)$ with mean 0 with variance of 1. We then iterate until the generated image $G(z)$ is close to $\mathcal{I}$. Inside the loop, $z_0$ is updated by gradient decent.</p> <p>After finding the correct latent representation $G(z_0)$ such that generates an image similar to $\mathcal{I}$, we get $\Delta_{z0}$ as the difference between $G$ and $\mathcal{I}$.</p> <p>To find $z_e$: <img src="/assets/contrastive-deep-explanations/Getting_Ze.png" alt="Getting_Ze"/></p> <p>After finding $z_e$ that minimizes L2 distance between $z$ and $z_0$, and that is in between the constraints, we compute the difference between $G(z_0) - G(z_e)$. This is done because we want to find a latent vector $z_e$ such that the resultant image has a similar style to the generated image from $z_0$, but is classified as our label of interest. By taking the difference between $G(z_0) - G(z_e)$, the overlapping parts are unchanged and parts that are different stands out.</p> <p><img src="/assets/contrastive-deep-explanations/Proposed_approach.svg" alt="proposed_method"/> <strong>Figure 3</strong>: An alternative way to the working the algorithm 1 and 2.</p> <h3 id="21-another-way-to-see-it">2.1. Another way to see it</h3> <p>The suggested methods work well on the MNIST dataset, showing the transformation needed for <em>Image A</em> classified as the <em>Number 8</em> to be classified as the <em>Number 3</em>. In the experiment is show different pair of number and the transformation need to be classified into different class. <img src="/assets/contrastive-deep-explanations/Figure2_mnist_experiment.png" alt="Figure2_mnist_experiment"/></p> <p>Instead of representing the transformation as red or blue for regions that should be added or removed, the transformations are represented as a timeline that shows the sequence of transformation needed to covert <em>Image 9</em> to converted into <em>Image 3</em>.</p> <p><img src="/assets/contrastive-deep-explanations/New_Approach.svg" alt="New proposed_method"/> <strong>Figure 4</strong>: The framework to view the problem differently. (a) Use a VAE (Decoder) or WGAN (Generator) to generate images. Start with an <em>image 9</em> from the MNIST dataset and update the latent vector $z$ to be close to this image, obtaining $z_0$. (b) The updated latent vector $z_0$ generates an image classified as <em>class 9</em>. We update the latent vector $z_0$ to get $z_e$ which, when generated, is predicted by the classifier as the <em>class 3</em>. During the process to update $z_0$ from <em>Image 9</em> to <em>Image 3</em>, we got these sequence of transformations.</p> <p><strong>Figure 4</strong>: Part (a)</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">learn_z0</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">lr</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span> <span class="n">z0</span><span class="p">):</span>
+    <span class="c1"># G is the generator
+</span>    <span class="c1"># I is the image from a dataset
+</span>    <span class="c1"># lr: Learning rate for the optimizer (default: 0.0005)
+</span>    <span class="c1"># z0 the random initialized latent vector
+</span>    <span class="c1"># set the optimizer "Adam" to optimize the loss with respect to the latent variable z0
+</span>    <span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="p">.</span><span class="nc">Adam</span><span class="p">([</span><span class="n">z0</span><span class="p">],</span> <span class="n">lr</span><span class="o">=</span><span class="n">lr</span><span class="p">)</span>
+    
+    <span class="c1"># Iterate over epochs
+</span>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+
+        <span class="c1"># set the calculation of the gradients for z0 
+</span>        <span class="n">z0</span><span class="p">.</span><span class="n">requires_grad</span> <span class="o">=</span> <span class="bp">True</span>
+
+        <span class="c1"># generate the image from z0
+</span>        <span class="n">G_z0</span> <span class="o">=</span> <span class="nc">G</span><span class="p">(</span><span class="n">z0</span><span class="p">)</span> 
+
+        <span class="c1"># Calculate the loss (the loss is the norm l2 squared)
+</span>        <span class="n">loss</span> <span class="o">=</span> <span class="nf">loss_fn</span><span class="p">(</span><span class="n">G_z0</span><span class="p">,</span> <span class="n">I</span><span class="p">)</span> 
+
+        <span class="c1"># backpropagate the error and get the gradients
+</span>        <span class="n">loss</span><span class="p">.</span><span class="nf">backward</span><span class="p">()</span>
+
+        <span class="c1"># update z0
+</span>        <span class="n">optimizer</span><span class="p">.</span><span class="nf">step</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">z0</span><span class="p">,</span> 
+</code></pre></div></div> <p><strong>Figure 4</strong>: Part (b)</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">learn_ze</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">5e-4</span><span class="p">,</span> <span class="n">some_pixel_threshold</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="c1"># G: Generator model
+</span>    <span class="c1"># D: Discriminator model
+</span>    <span class="c1"># epochs: Number of training iterations
+</span>    <span class="c1"># z: Latent vector (input noise for the generator)
+</span>    <span class="c1"># y: Target labels for the discriminator's output
+</span>    <span class="c1"># lr: Learning rate for the optimizer (default: 0.0005)
+</span>
+    <span class="c1"># some_pixel_threshold: Threshold for pixel difference to store generated images (default: 5)
+</span>
+    <span class="c1"># Ensure the latent vector requires gradient computation
+</span>    <span class="n">z</span><span class="p">.</span><span class="n">requires_grad</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="c1"># Initialize the Adam optimizer to update the latent vector z
+</span>    <span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="p">.</span><span class="nc">Adam</span><span class="p">([</span><span class="n">z</span><span class="p">],</span> <span class="n">lr</span><span class="o">=</span><span class="n">lr</span><span class="p">)</span>
+
+    <span class="c1"># List to store generated images that meet the pixel difference criterion
+</span>    <span class="n">grid_images</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Variable to store the previously generated image for comparison
+</span>    <span class="n">prev_stored_image</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="c1"># Training loop over the specified number of epochs
+</span>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+        <span class="c1"># Generate an image from the latent vector z and pass it through the discriminator
+</span>        <span class="n">D_z</span><span class="p">,</span> <span class="n">G_z_resize</span> <span class="o">=</span> <span class="nf">discriminator_gen</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+
+        <span class="c1"># Compute the cross-entropy loss between the discriminator's output and the target labels
+</span>        <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="nf">cross_entropy</span><span class="p">(</span><span class="n">D_z</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+        <span class="c1"># Backpropagate the loss to compute gradients
+</span>        <span class="n">loss</span><span class="p">.</span><span class="nf">backward</span><span class="p">()</span>
+
+        <span class="c1"># Update the latent vector z using the optimizer
+</span>        <span class="n">optimizer</span><span class="p">.</span><span class="nf">step</span><span class="p">()</span>
+
+        <span class="c1"># Check if there's a previously stored image to compare with
+</span>        <span class="k">if</span> <span class="n">prev_stored_image</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="c1"># Calculate the pixel-wise difference between the current and previous images
+</span>            <span class="n">pixel_diff</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">norm</span><span class="p">(</span><span class="n">G_z_resize</span> <span class="o">-</span> <span class="n">prev_stored_image</span><span class="p">).</span><span class="nf">item</span><span class="p">()</span>
+            <span class="c1"># If the difference exceeds the threshold, store the current image
+</span>            <span class="k">if</span> <span class="n">pixel_diff</span> <span class="o">&gt;</span> <span class="n">some_pixel_threshold</span><span class="p">:</span>
+                <span class="n">grid_images</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">G_z_resize</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">detach</span><span class="p">().</span><span class="nf">cpu</span><span class="p">().</span><span class="nf">permute</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+                <span class="c1"># Update the previous stored image to the current one
+</span>                <span class="n">prev_stored_image</span> <span class="o">=</span> <span class="n">G_z_resize</span><span class="p">.</span><span class="nf">clone</span><span class="p">().</span><span class="nf">detach</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># If no previous image exists, store the current image
+</span>            <span class="n">grid_images</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">G_z_resize</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">detach</span><span class="p">().</span><span class="nf">cpu</span><span class="p">().</span><span class="nf">permute</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+            <span class="c1"># Set the previous stored image to the current one
+</span>            <span class="n">prev_stored_image</span> <span class="o">=</span> <span class="n">G_z_resize</span><span class="p">.</span><span class="nf">clone</span><span class="p">().</span><span class="nf">detach</span><span class="p">()</span>      
+
+    <span class="c1"># Return the optimized latent vector and the list of stored images
+</span>    <span class="k">return</span> <span class="n">z</span><span class="p">,</span> <span class="n">grid_images</span>
+</code></pre></div></div> <p>I believe this view of the problem will be useful to understand how the network classifier goes through the latent space to find the image the outputs the correct label. Instead of depending on two variables to change an <em>image A</em> to an <em>image B</em>, is shown a sequence of transformation applied to <em>image A</em> to become <em>image B</em>.</p> <h2 id="3-related-work">3. Related Work</h2> <p>Several methods are made to interpret deep learning models. These methods can be segmented based on their approach to understanding model decisions:</p> <h3 id="31-network-visualizers">3.1. Network Visualizers</h3> <p>This method has the goal to understand the knowledge of a network by looking at individual neuron or group of neurons. By analyzing each neuron in a network we want to find features, like edges or textures that influence the predictions of a network. However, is uncommon to find features that have a dedicated neuron to it, instead we analyze a group of neurons, which give a more understandable insight of a network.</p> <h3 id="32-input-space-visualizers">3.2. Input Space Visualizers</h3> <p>Input space visualizers focus on explaining which parts of an image have the largest impact in a network decision. These methods are archived by modifying the input and observing how the output changes. Methods like xGEMs uses a GAN to find a contrastive example where tries to find a <em>why not</em> explication, however, in this method there is no formulation of a constrained optimization that give a more coherent explanation between <em>Image A</em> (original image) and <em>Image B</em> (Desired image).</p> <h3 id="33-justification-based-methods">3.3. Justification-Based Methods</h3> <p>These methods generates human-like like textual or visual to justify a network classification. While this methods give an easy way to understand a network decision, they do not always reflect the classification made by a network. Instead, it gives what humans expect to hear.</p> <p>The main advantage of <strong>CDeepEx</strong> is that do not rely on of modifying the network or using heuristics. Instead, we use generative latent-space models, were by using the latent-space as a bridge between network understanding and human understanding we produce explanation in the form of natural-looking images.</p> <h2 id="4-remarks">4. Remarks</h2> <p>In the paper CDeepEx provides a method for generating contrastive explanation, which can be used to understand why a model predicts the <em>class A</em> over <em>class B</em> for the <em>image A</em>. Also in the paper is shown interesting results. This includes:</p> <ul> <li>A detail analysis on the MNIST dataset.</li> <li>The <strong>selection of the generator model</strong>, where is shown the impact in the performance with different datasets with respect of using a VAE or WGAN.</li> <li>An analysis of biased MNIST, were is tested if the method can provide clear explanations for a bias classifier.</li> <li>Also, this method is tested on the CelebA dataset (a dataset with celebrities faces) and Fashion MNIST, which shows how robust the method is for more complex datasets.</li> </ul> <p>I encourage you to read the paper for more details.</p> <p>Thanks for reading!</p> <p>Cite as:</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@article{
+  tajia2024contrastive,
+  title={Contrastive Deep Explanations},
+  author={Tajia, Pedro},
+  year={2024},
+  howpublished={\url{https://pedrotajia.com/2024/11/24/Contrastive-Deep-Explanations.html}}
 }
-</code></pre> <p>Also another example chart.</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">plotly
-</span><span class="sb">{
-  "data": [
-    {
-      "x": [1, 2, 3, 4],
-      "y": [10, 15, 13, 17],
-      "mode": "markers"
-    },
-    {
-      "x": [2, 3, 4, 5],
-      "y": [16, 5, 11, 9],
-      "mode": "lines"
-    },
-    {
-      "x": [1, 2, 3, 4],
-      "y": [12, 9, 15, 12],
-      "mode": "lines+markers"
-    }
-  ],
-  "layout": {
-    "title": {
-      "text": "Line and Scatter Plot"
-    }
-  }
-}</span>
-<span class="p">```</span>
-</code></pre></div></div> <p>This is how it looks like:</p> <pre><code class="language-plotly">{
-  "data": [
-    {
-      "x": [1, 2, 3, 4],
-      "y": [10, 15, 13, 17],
-      "mode": "markers"
-    },
-    {
-      "x": [2, 3, 4, 5],
-      "y": [16, 5, 11, 9],
-      "mode": "lines"
-    },
-    {
-      "x": [1, 2, 3, 4],
-      "y": [12, 9, 15, 12],
-      "mode": "lines+markers"
-    }
-  ],
-  "layout": {
-    "title": {
-      "text": "Line and Scatter Plot"
-    }
-  }
+</code></pre></div></div> <h3 id="reference">Reference</h3> <ol> <li> <p>Feghahati, A., Shelton, C. R., Pazzani, M. J., &amp; Tang, K. (2021). CDeepEx: Contrastive Deep Explanations. ECAI 2020. <a href="https://rlair.cs.ucr.edu/papers/docs/cdeepex.pdf">PDF</a></p> </li> <li> <p>Gulrajani, I., Ahmed, F., Arjovsky, M., Dumoulin, V., &amp; Courville, A. (2017). Improved training of wasserstein GANs. ICML, 30, 5769–5779. <a href="https://arxiv.org/pdf/1701.07875">PDF</a></p> </li> <li> <p>Kingma, D. P., &amp; Welling, M. (2014). Auto-Encoding Variational Bayes. ICLR. <a href="https://arxiv.org/pdf/1312.6114">PDF</a></p> </li> </ol>]]></content><author><name>Pedro Tajia</name></author><category term="Explainable AI"/><category term="Deep Learning"/><summary type="html"><![CDATA[]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://pedrotajia.com/assets/contrastive-deep-explanations/Preview.svg"/><media:content medium="image" url="https://pedrotajia.com/assets/contrastive-deep-explanations/Preview.svg" xmlns:media="http://search.yahoo.com/mrss/"/></entry><entry><title type="html">Bootstrap Your Own Latent: Self-Supervised Learning Without Contrastive Learning</title><link href="https://pedrotajia.com/blog/2024/bootstrap-your-own-latent/" rel="alternate" type="text/html" title="Bootstrap Your Own Latent: Self-Supervised Learning Without Contrastive Learning"/><published>2024-10-20T00:00:00+00:00</published><updated>2024-10-20T00:00:00+00:00</updated><id>https://pedrotajia.com/blog/2024/bootstrap-your-own-latent</id><content type="html" xml:base="https://pedrotajia.com/blog/2024/bootstrap-your-own-latent/"><![CDATA[<script type="text/javascript" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"> </script> <h1 id="introduction">Introduction</h1> <p>Supervised Learning is the top solution to train Convolutional Neural Network (CNN), which is the model made to solve computer vision like self-driving car, security, automatization, etc. As these computer vision tasks increase, the need to improve these systems also emerges.</p> <p>One of the main ways to improve these systems is through having more data and bigger models, but unfortunately by using supervised learning these solutions need labeled data (information that has been classified by humans), <strong>which makes them expensive and difficult to get</strong>.</p> <p>The bottleneck that limits the process of training is the process itself. Since supervised learning is dependent on label data which limits the amount of information the model are trained on. This represents a big limitation on the training of these models and a waste of unlabeled data. Current research on Self-Supervised Learning is able to <strong>train model without label data and take out the need of using Contrastive Learning</strong> which is the most common way to train model with Self-Supervised Learning.</p> <h1 id="self-supervised-learning">Self-Supervised Learning</h1> <p>Self-Supervised learning gained popularity on the training of Large Language models, by having the model learn from many unlabeled data which make the model learn the general structure of the words and their meaning. With that general knowledge then these pre-trained models are use for transfer learning to solve more specific take.</p> <h3 id="transfer-learning">Transfer Learning</h3> <blockquote> <p>Transfer learning is the process of using a model like CNNs trained on a large corpus of labeled data to gain a general structure and meaning of images and then use it to solve a more specific tasks. The use of large label data is to ensure the model learns a broad variety of images. Normally transfer learning is used when there is a limited amount of data, limited computational power or the improvement of performance. Even do it seems that transfer learning can solve the problem of using datasets with small label data still it does not. Since a key component of using transfer learning is its implementation, the data needs to be similar or close to the large corpus of data that was used to train the model.</p> </blockquote> <p>Since more research has been done on training CNNs with self-supervised learning, there has been new approaches to make able CNN learn from unlabeled data. One of these approaches was introduced by the paper called <a href="https://arxiv.org/pdf/2006.07733">bootstrap your own latent</a> where demonstrates that is not necessary of use contrastive learning approach for a self-supervised setting.</p> <h3 id="contrastive-learning">Contrastive Learning</h3> <p>The idea of contrastive learning is to make a model learn an embedding space that captures the essential information about its inputs including their structure and semantics.</p> <p><strong>Example:</strong> The model $f_\theta$ w have an image input of 224 pixels by 224 pixels which have $[24*24] = 576$ dimensions. The model outputs a vector that represents the input of $16$ dimensions which occupies 36 times less space than the image with almost the same information.</p> <p>This is done by training the model to output vector representations that are close for similar examples and farther apart when there are different examples. To train the model three type exampled we use: the anchor example (image as a reference), a positive example (image closely related to the anchor example) and a negative example (an image that is not related to the anchor example).</p> <p><strong>Example:</strong> Imagine the task to create a model that discriminate between animals and non-animals. The inputs for the model will be an image of a dog, cat and a watermelon. The <strong>anchor example $x^a$</strong>(dog), <strong>positive example $x^+$</strong> (cat) and the <strong>negative example $x^-$</strong> (watermelon). The model which has a CNN denoted as $f_\theta$ (CNN is the one that gets the structure and meaning of the image) and a projection $g_\theta$ (a projection head is applied to map the representations of $f_\theta$ to its loss function). When the image of a dog and a cat is imputed to the model it should output similar vector representations <img src="/assets/bootstrap-your-own-latent/CL-Explication-positive.svg" alt="Example of similar example"/></p> <p>And vice-versa when the negative example is inputted to the model the vector representation is completely different and far from the representation of the anchor image. <img src="/assets/bootstrap-your-own-latent/CL-Explication-negative.svg" alt="Example of different example"/></p> <p>The paper <a href="https://arxiv.org/pdf/2002.05709">A Simple Framework for Contrastive Learning of Visual Representations</a>(SimCLR) is the foundation on implementing contrastive methods for self-supervised learning. In the paper SimCLR was introduced a loss called <strong>NT-Xent</strong> which was originally inspired on the <strong>InfoNCE</strong> just having $\tau$ temperature variable as a modification.</p> <p><strong>InfoNCE</strong> <span style="font-size: 1.5em;">$\ell_{i,j} = - \log \frac{\exp(\text{sim}(z_i, z_j)/\tau)}{\sum_{k=1}^{2N} \mathbf{1}_{[k \neq i]} \exp(\text{sim}(z_i, z_k)/\tau)}$</span></p> <p>The InfoNCE loss will enforce $x^a$ and $x^+$ to be similar pairs and also enforce pairs that are different. The sim(.) function is a similarity metric which measures how a vector is similar against others. This metric is used to minimize the difference between positive pairs $(x^a, x^x)$ and maximize the distance between negative pairs $(x^a, x^-)$</p> <p>In summary, we can think of contrastive tasks as trying to generate similar representation for positive examples and different for negative examples.</p> <h1 id="bootstrap-your-own-latent-byol">Bootstrap Your Own Latent: BYOL</h1> <p>In contrastive learning positive examples are easy to obtain, but negative examples are difficult to get. Positive examples can be just a modified version of the anchor image. Negative examples can be difficult to get because we to define what this is different to an anchor and have enough similarity to make a challenging to the model without human intervention.</p> <p>For this reason there is research of self-supervised learning without contrastive learning. This is difficult because there is a need for negative example, if not what can stop the model of generating the same vector representation in contrast to an anchor example and positive example which is called <em>collapse</em>. For negative examples the model is forced to learn meaning representations for its inputs.</p> <p>In order to understand how <strong>BYOL</strong> archive self-supervised learning without contrastive methods let’s explore the main components of this self-supervised learning framework.</p> <p>BYOL have two neural networks, named as <em>online</em> and <em>target</em> networks that are able to interact to each other. The model is trained by the online network to predict the target network representation with the same image using different augmented views.</p> <p><img src="/assets/bootstrap-your-own-latent/Augmentation_1.svg" alt="First augmentation Example"/></p> <p>To generate this augmented views, we create 2 distortionated copies form an input image, by applying two sets of data augmentation operations. The transformation includes</p> <blockquote> <ul> <li>random cropping: a random patch of the image is selected, with an area uniformly sampled between 8% and 100% of that of the original image, and an aspect ratio logarithmically sampled between 3/4 and 4/3. This patch is then resized to the target size of 224 × 224 using bicubic interpolation;</li> <li>Random horizontal flip: optional left-right flip;</li> <li>color jittering: the brightness, contrast, saturation and hue of the image are shifted by a uniformly random offset applied on all the pixels of the same image. The order in which these shifts are performed is randomly selected for each patch;</li> <li>color dropping: an optional conversion to grayscale. When applied, output intensity for a pixel (r,g,b) corresponds to its luma component, computed as $0.2989r+ 0.5870g+ 0.1140b$;</li> <li>Gaussian blurring: for a 224 × 224 image, a square Gaussian kernel of size 23 ×23 is used, with a standard deviation uniformly sampled over $[0.1,2.0]$;</li> <li>solarization: an optional color transformation $x→x·1{x&lt;0.5}+ (1−x)·1{x≥0.5}$ for pixels with values in $[0,1]$.</li> </ul> </blockquote> <p><em>Credits: <a href="https://arxiv.org/pdf/2006.07733">Bootstrap your own latent: A new approach to self-supervised Learning</a></em></p> <p>These augmentations double the examples, if we have a batch of 32 images, we end up with 64 images per batch.<br/> <img src="/assets/bootstrap-your-own-latent/Augmentation_conbination.jpg" alt="Second augmentation Example"/></p> <p>Data augmentation is used to force the model to learn invariant representations which means that independently of the transformation imposed to an input the model will generate the same representations.</p> <p>The online network have parameters $\theta$ updated by back propagation and is made from three components: an encoder $f_{\theta}$, projector $g_{\theta}$ and predictor $q_{\theta}$. The target network have an encoder $f_{\xi}$ and projector $g_{\xi}$. The parameters $\xi$ of the target network are not updated by back propagation, but instead the model is updated by <em>Exponential Moving Average</em> (EMA) of the online parameters $\theta$. The parameters of the target network can be seen a <strong>smoothed version</strong> of the online network.</p> <p><span style="font-size: 1.2em;">${\xi}\longleftarrow{\tau}{\xi}+(1-\tau){\theta}$</span></p> <blockquote> <p>$\tau$ is the decay rate $T\in[0, 1]$</p> </blockquote> <p>The representation head uses a ResNet-50 for $f_{\theta}$ and $f_{\xi}$. The ResNet-50 receives the augmented image of size (224, 224, 3) and output a vector representation or a vector embedding of 2048-dimensional for the online network $y_{\theta}$ and for the target network $y_{\xi}^{‘}$. Then a projection head $g$ receives the vector $y$ and produces the final output for the target network $sq(z_{\xi}^{‘})$. $sg$ means stop gradient, which the parameters $\xi$ for the target network will not be updated by back-propagation. The output $z_{\theta}$ of the projection head $g_{\theta}$ of the online network is inputted to the prediction head $q_{\theta}$ which produces the final output $q_{\theta}(z_{\theta})$ of the online network. The projection and prediction heads consist of a linear layer with an input shape of 2048-dimensions and output size of 4096 followed by <strong>batch normalization</strong>, a non-linear function (ReLU) and a final layer with output of dimension 256.</p> <blockquote> <p>The projection and predictions heads are <em>multi-layer perceptron</em> (MLP)</p> </blockquote> <p><img src="/assets/bootstrap-your-own-latent/BYOL-Architecture.png" alt="Image of the architecture of BYOL, image from the original paper"/> <em>Credits: <a href="https://arxiv.org/pdf/2006.07733">Bootstrap your own latent: A new approach to self-supervised Learning</a></em></p> <h3 id="training">Training</h3> <p>BYOL is train to minimizes the similarity loss between $q_{\theta}(z_{\theta})$ and $sq(z_{\xi}^{‘})$. The loss function is defined as: <span style="font-size: 1.2em;"> \(\mathcal{L}_{\theta, \xi} \triangleq \left\| \overline{q_{\theta}(z_0)} - \overline{z'_{\xi}} \right\|_2^2 = 2 - 2 \cdot \frac{\langle q_{\theta}(z_0), z'_{\xi} \rangle}{\| q_{\theta}(z_0) \|_2 \cdot \| z'_{\xi} \|_2}\) </span></p> <p>$q_{\theta}(z_{\theta})$ and $z_{\xi}^{‘}$ are normalized to be unit vectors, \(\overline{q}_{\theta}(z_{\theta}) = \frac{q_{\theta}(z_{\theta})}{\| q_{\theta}(z_0)\|_2}\) and \(\overline{z}_{\xi}^{'} = \frac{z^{'}_{\xi}}{\| z_{\xi}^{'} \|_2}\) . Then is applied a mean squared error between the normalized outputs of the online and target networks.</p> <p>The loss \(\mathcal{L}_{\theta,\xi}\) is computed from feeding $v$ to the online network and $v’$ to the target network. The loss is symmetrized by calculating \(\tilde{\mathcal{L}}_{\theta,\xi}\) by feeding $v’$ to the online network and $v$ to the target network. <br/> <span style="font-size: 1.2em;"> \(\mathcal{L}^{BYOL}_{\theta, \xi} = \mathcal{L}_{\theta,\xi} + \tilde{\mathcal{L}}_{\theta,\xi}\) </span></p> <p>The symmetrization of the loss makes each network, online and target have the same data to learn from. Since both networks share the same data it ensures that will have an equal contribution to the total loss. This promotes more robust and generalized features, since the model captures a wider range of data variations. <img src="/assets/bootstrap-your-own-latent/Symmetry_loss.svg" alt="An illustration about symmetrization of the loss"/></p> <p>For each training step is performed a $optimatizer$ algorithm to minimize $\mathcal{L}^{BYOL}_{\theta, \xi}$ with respect only to $\theta$. <span> \({\theta}\longleftarrow\text{optimizer}(\theta, \nabla_{\theta}{\tilde{\mathcal{L}}_{\theta,\xi}}, {\eta})\) \({\xi}\longleftarrow{\tau}{\xi}+(1-\tau){\theta}\) </span></p> <blockquote> <p>$\eta$ is the learning rate</p> </blockquote> <p>In the framework BYOL the <a href="https://arxiv.org/pdf/1708.03888v3"><strong>LARS <em>optimizer</em></strong></a> is used update $\theta$, with a cosine decay learning rate schedule, more information on the <a href="https://arxiv.org/pdf/2006.07733">BYOL paper</a>. After the training, the encoder of the online network $f_{\theta}$ is used to produce representations.</p> <h2 id="why-byol-do-not-collapse">Why BYOL do not collapse</h2> <p>These are the two main reasons why BYOL do not collapse.</p> <p>In the paper <a href="https://arxiv.org/abs/2204.00613">On the Importance of Asymmetry for Siamese Representation Learning</a> explained the importance of the <strong>asymmetry designs</strong> (BYOL) in self-supervised frameworks. The representations outputted by the model improves when the <strong>source encoder</strong> in this case the online encoder it updated via gradient decent and the <strong>target encoder</strong> is updated by the source encoder weights. The outputs of target act as a judge of the quality of the output source. Also in the paper was proven in some level that <em>keeping a relatively lower variance in target encodings than source can help representation learning</em>. BYOL archive this low variance by updating the weight of the target network using EMA.</p> <p><img src="/assets/bootstrap-your-own-latent/Asymmetry_for_siamese.png" alt="Showing the importance of the variance between source and target encoders"/> <em>Credits: <a href="https://arxiv.org/abs/2204.00613">On the Importance of Asymmetry for Siamese Representation Learning</a></em></p> <p>In the post <a href="https://imbue.com/research/2020-08-24-understanding-self-supervised-contrastive-learning/">Understanding self-supervised and contrastive learning with “Bootstrap Your Own Latent” (BYOL)</a> is explained the importance of <strong>Batch Normalization</strong> in the prevention of <em>collapse</em>. They notice that if batch norm was not in the MLP the model will perform poorly. Batch norm standardize the activations in the network based on the batch’s mean and variance, which can vary between batches. Since the online and target network have different parameters in the batch norm layer, the output representation of the online and target network will also differ. These slightly differences in the outputs force the model to generate rich representations. However, is also highlighted that is worth avoiding batch normalization and use other alternatives like <strong>layer normalization</strong> or <strong>weight standardization with group normalization</strong>.</p> <h2 id="results">Results</h2> <p>The BYOL framework archive higher performance than the state-of-the-art contrastive methods in the ImageNet dataset. <img src="/assets/bootstrap-your-own-latent/Performance-of-BYOL-on-ImageNet.png" alt="Performance of BYOL on the ImageNet (linear evaluation)"/> <em>Credits: <a href="https://arxiv.org/pdf/2006.07733">Bootstrap your own latent: A new approach to self-supervised Learning</a></em></p> <p>BYOL is evaluated in both <strong>linear evaluation</strong> and <strong>fine-tuning evaluation</strong>. The linear evaluation consists on training a multinomial logistic regression on top of the frozen representations outputted by the encoder $f_\theta$ (The encoder weights are not trained in this evaluation.). <img src="/assets/bootstrap-your-own-latent/Linear_evaluation.svg" alt="An example of linear model"/></p> <p>To fine-tune evaluation consist on initialize $f_\theta$ parameters with the pre-trained representation, and retrain the encoder alongside a classifier on labeled dataset. <img src="/assets/bootstrap-your-own-latent/Fine-tuning.svg" alt="An example of fine-tune a model"/></p> <blockquote> <p>Note: For fine-tune there are many other types of architecture that can be used to fine tune this model.</p> </blockquote> <p>BYOL was pre-trained on ImageNet by 300 epochs. After pre-trained, the model is evaluated on many downstream tasks by using linear and fine-tune evaluations. <img src="/assets/bootstrap-your-own-latent/Table_3_result.png" alt="Table 3: Transfer learning results from ImageNet (IN) with the standard ResNet-50 architecture."/> <em>Credits: <a href="https://arxiv.org/pdf/2006.07733">Bootstrap your own latent: A new approach to self-supervised Learning</a></em> This result show competitive results to the Supervised training of RestNet-50 in ImageNet and surpass the performance of contrastive learning models.</p> <p>In these tables shows the robustness of BYOL against batch size compared to SimCLR. Also show the robustness for data augmentations showing that is not that sensitive to the choice of image augmentation like SimCLR. <img src="/assets/bootstrap-your-own-latent/Figure_2.png" alt="Figure 3: Decrease in top-1 accuracy (in % points) of BYOL and our own reproduction of SimCLR at 300 epochs, under linear evaluation on ImageNet."/> <em>Credits: <a href="https://arxiv.org/pdf/2006.07733">Bootstrap your own latent: A new approach to self-supervised Learning</a></em></p> <h2 id="remarks">Remarks</h2> <p>BYOL gives another solution to the traditional use of contrastive loss for self-supervised frameworks. Giving more research on this non-contrastive framework opens the door for more powerful models. Also taking out the need of negative examples gives more freedom to the model to understand the data and give richer representations.</p> <p>In the original BYOL paper have many other interesting topics:</p> <ul> <li>Result on linear and semi-supervised evaluation on ImageNet.</li> <li>A more detail information about the setup of BYOL.</li> <li>Details on the relation to contrastive methods.</li> <li>Pseudo-code in JAX to implement BYOL.</li> </ul> <p>I encourage you to look the papers from the reference section. This will give you a broader perspective on the <a href="https://arxiv.org/pdf/2006.07733">Bootstrap your own latent: A new approach to self-supervised Learning</a> paper.</p> <p>Thank you for reading!</p> <p>Cite as:</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@article{
+  tajia2024bootstrap,
+  title={Bootstrap Your Own Latent},
+  author={Tajia, Pedro},
+  year={2024},
+  howpublished={\url{https://pedrotajia.com/2024/10/20/bootstrap-your-own-latent.html}}
 }
-</code></pre>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="charts"/><summary type="html"><![CDATA[this is what included plotly.js code could look like]]></summary></entry><entry><title type="html">a post with image galleries</title><link href="https://pedrotajia.com/blog/2024/photo-gallery/" rel="alternate" type="text/html" title="a post with image galleries"/><published>2024-12-04T01:59:00+00:00</published><updated>2024-12-04T01:59:00+00:00</updated><id>https://pedrotajia.com/blog/2024/photo-gallery</id><content type="html" xml:base="https://pedrotajia.com/blog/2024/photo-gallery/"><![CDATA[<p>The images in this post are all zoomable, arranged into different mini-galleries using different libraries.</p> <h2 id="lightbox2"><a href="https://lokeshdhakar.com/projects/lightbox2/">Lightbox2</a></h2> <p><a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-2500.jpg" data-lightbox="roadtrip"><img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200.jpg"/></a> <a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg" data-lightbox="roadtrip"><img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg"/></a> <a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg" data-lightbox="roadtrip"><img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg"/></a></p> <hr/> <h2 id="photoswipe"><a href="https://photoswipe.com/">PhotoSwipe</a></h2> <div class="pswp-gallery pswp-gallery--single-column" id="gallery--getting-started"> <a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg" data-pswp-width="1669" data-pswp-height="2500" target="_blank"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg" alt=""/> </a> <a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/7/img-2500.jpg" data-pswp-width="1875" data-pswp-height="2500" data-cropped="true" target="_blank"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/7/img-200.jpg" alt=""/> </a> <a href="https://unsplash.com" data-pswp-src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg" data-pswp-width="2500" data-pswp-height="1666" target="_blank"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg" alt=""/> </a> <div> <a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/6/img-2500.jpg" data-pswp-width="2500" data-pswp-height="1667" target="_blank"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/6/img-200.jpg" alt=""/> </a> </div> </div> <hr/> <h2 id="spotlight-js"><a href="https://nextapps-de.github.io/spotlight/">Spotlight JS</a></h2> <div class="spotlight-group"> <a class="spotlight" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-2500.jpg"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200.jpg"/> </a> <a class="spotlight" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg"/> </a> <a class="spotlight" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg"/> </a> </div> <div class="spotlight-group"> <a class="spotlight" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-2500.jpg"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-200.jpg"/> </a> <a class="spotlight" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/5/img-2500.jpg"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/5/img-200.jpg"/> </a> <a class="spotlight" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/6/img-2500.jpg"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/6/img-200.jpg"/> </a> </div> <hr/> <h2 id="venobox"><a href="https://veno.es/venobox/">Venobox</a></h2> <p><a class="venobox" data-gall="myGallery" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-2500.jpg"><img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200.jpg"/></a> <a class="venobox" data-gall="myGallery" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg"><img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg"/></a> <a class="venobox" data-gall="myGallery" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg"><img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg"/></a></p>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="images"/><summary type="html"><![CDATA[this is what included image galleries could look like]]></summary></entry><entry><title type="html">Google Gemini updates: Flash 1.5, Gemma 2 and Project Astra</title><link href="https://pedrotajia.com/blog/2024/google-gemini-updates-flash-15-gemma-2-and-project-astra/" rel="alternate" type="text/html" title="Google Gemini updates: Flash 1.5, Gemma 2 and Project Astra"/><published>2024-05-14T00:00:00+00:00</published><updated>2024-05-14T00:00:00+00:00</updated><id>https://pedrotajia.com/blog/2024/google-gemini-updates-flash-15-gemma-2-and-project-astra</id><content type="html" xml:base="https://pedrotajia.com/blog/2024/google-gemini-updates-flash-15-gemma-2-and-project-astra/"><![CDATA[<p>May 14, 2024 We’re introducing a series of updates across the Gemini family of models, including the new 1.5 Flash, our lightweight model for speed and efficiency, and Project Astra, our vision for the future of AI assistants. In December, we launched our first natively multimodal model Gemini 1.0 in three sizes: Ultra, Pro and Nano. Just a few months later we released 1.5 Pro, with enhanced performance and a breakthrough long context window of 1 million tokens.Developers and enterprise customers have been putting 1.5 Pro to use in incredible ways and finding its long context window, multimodal reasoning capabilities and impressive overall performance incredibly useful.We know from user feedback that some applications need lower latency and a lower cost to serve. This inspired us to keep innovating, so today, we’re introducing Gemini 1.5 Flash: a model that’s lighter-weight than 1.5 Pro, and designed to be fast and efficient to serve at scale.Both 1.5 Pro and 1.5 Flash are available in public preview with a 1 million token context window in Google AI Studio and Vertex AI. And now, 1.5 Pro is also available with a 2 million token context window via waitlist to developers using the API and to Google Cloud customers.We’re also introducing updates across the Gemini family of models, announcing our next generation of open models, Gemma 2, and sharing progress on the future of AI assistants, with Project Astra.Context lengths of leading foundation models compared with Gemini 1.5’s 2 million token capability1.5 Flash is the newest addition to the Gemini model family and the fastest Gemini model served in the API. It’s optimized for high-volume, high-frequency tasks at scale, is more cost-efficient to serve and features our breakthrough long context window.While it’s a lighter weight model than 1.5 Pro, it’s highly capable of multimodal reasoning across vast amounts of information and delivers impressive quality for its size.The new Gemini 1.5 Flash model is optimized for speed and efficiency, is highly capable of multimodal reasoning and features our breakthrough long context window.1.5 Flash excels at summarization, chat applications, image and video captioning, data extraction from long documents and tables, and more. This is because it’s been trained by 1.5 Pro through a process called “distillation,” where the most essential knowledge and skills from a larger model are transferred to a smaller, more efficient model.Read more about 1.5 Flash in our updated Gemini 1.5 technical report, on the Gemini technology page, and learn about 1.5 Flash’s availability and pricing.Over the last few months, we’ve significantly improved 1.5 Pro, our best model for general performance across a wide range of tasks.Beyond extending its context window to 2 million tokens, we’ve enhanced its code generation, logical reasoning and planning, multi-turn conversation, and audio and image understanding through data and algorithmic advances. We see strong improvements on public and internal benchmarks for each of these tasks.1.5 Pro can now follow increasingly complex and nuanced instructions, including ones that specify product-level behavior involving role, format and style. We’ve improved control over the model’s responses for specific use cases, like crafting the persona and response style of a chat agent or automating workflows through multiple function calls. And we’ve enabled users to steer model behavior by setting system instructions.We added audio understanding in the Gemini API and Google AI Studio, so 1.5 Pro can now reason across image and audio for videos uploaded in Google AI Studio. And we’re now integrating 1.5 Pro into Google products, including Gemini Advanced and in Workspace apps.Read more about 1.5 Pro in our updated Gemini 1.5 technical report and on the Gemini technology page.Gemini Nano is expanding beyond text-only inputs to include images as well. Starting with Pixel, applications using Gemini Nano with Multimodality will be able to understand the world the way people do — not just through text, but also through sight, sound and spoken language.Read more about Gemini 1.0 Nano on Android.Today, we’re also sharing a series of updates to Gemma, our family of open models built from the same research and technology used to create the Gemini models.We’re announcing Gemma 2, our next generation of open models for responsible AI innovation. Gemma 2 has a new architecture designed for breakthrough performance and efficiency, and will be available in new sizes.The Gemma family is also expanding with PaliGemma, our first vision-language model inspired by PaLI-3. And we’ve upgraded our Responsible Generative AI Toolkit with LLM Comparator for evaluating the quality of model responses.Read more on the Developer blog.As part of Google DeepMind’s mission to build AI responsibly to benefit humanity, we’ve always wanted to develop universal AI agents that can be helpful in everyday life. That’s why today, we’re sharing our progress in building the future of AI assistants with Project Astra (advanced seeing and talking responsive agent).To be truly useful, an agent needs to understand and respond to the complex and dynamic world just like people do — and take in and remember what it sees and hears to understand context and take action. It also needs to be proactive, teachable and personal, so users can talk to it naturally and without lag or delay.While we’ve made incredible progress developing AI systems that can understand multimodal information, getting response time down to something conversational is a difficult engineering challenge. Over the past few years, we’ve been working to improve how our models perceive, reason and converse to make the pace and quality of interaction feel more natural.Building on Gemini, we’ve developed prototype agents that can process information faster by continuously encoding video frames, combining the video and speech input into a timeline of events, and caching this information for efficient recall.By leveraging our leading speech models, we also enhanced how they sound, giving the agents a wider range of intonations. These agents can better understand the context they’re being used in, and respond quickly, in conversation.With technology like this, it’s easy to envision a future where people could have an expert AI assistant by their side, through a phone or glasses. And some of these capabilities are coming to Google products, like the Gemini app and web experience, later this year.We’ve made incredible progress so far with our family of Gemini models, and we’re always striving to advance the state-of-the-art even further. By investing in a relentless production line of innovation, we’re able to explore new ideas at the frontier, while also unlocking the possibility of new and exciting Gemini use cases.Learn more about Gemini and its capabilities. Your information will be used in accordance with Google’s privacy policy.</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      Done. Just one step more.
+</code></pre></div></div> <h2 id="references">References</h2> <ol> <li>Jean-Bastien Grill et al., <a href="https://arxiv.org/pdf/2006.07733">“Bootstrap Your Own Latent: A New Approach to Self-Supervised Learning”</a>, arXiv, 2020.</li> <li>Ting Chen et al., <a href="https://arxiv.org/pdf/2002.05709">“A Simple Framework for Contrastive Learning of Visual Representations (SimCLR)”</a>, arXiv, 2020.</li> <li>Xinlei Chen and Kaiming He, <a href="https://arxiv.org/pdf/2204.00613">“On the Importance of Asymmetry for Siamese Representation Learning”</a>, arXiv, 2022.</li> <li>Imbue Research, <a href="https://imbue.com/research/2020-08-24-understanding-self-supervised-contrastive-learning/">“Understanding Self-Supervised and Contrastive Learning with ‘Bootstrap Your Own Latent’ (BYOL)”</a>, Blog post.</li> <li>Thalles Silva, <a href="https://sthalles.github.io/simple-self-supervised-learning/">“Exploring SimCLR: A Simple Framework for Contrastive Learning of Visual Representations”</a>, Blog post.</li> </ol>]]></content><author><name>Pedro Tajia</name></author><category term="Self Supervised"/><category term="Deep Learning"/><summary type="html"><![CDATA[]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://pedrotajia.com/assets/bootstrap-your-own-latent/BYOL-Architecture.png"/><media:content medium="image" url="https://pedrotajia.com/assets/bootstrap-your-own-latent/BYOL-Architecture.png" xmlns:media="http://search.yahoo.com/mrss/"/></entry><entry><title type="html">Google Gemini updates: Flash 1.5, Gemma 2 and Project Astra</title><link href="https://pedrotajia.com/blog/2024/google-gemini-updates-flash-15-gemma-2-and-project-astra/" rel="alternate" type="text/html" title="Google Gemini updates: Flash 1.5, Gemma 2 and Project Astra"/><published>2024-05-14T00:00:00+00:00</published><updated>2024-05-14T00:00:00+00:00</updated><id>https://pedrotajia.com/blog/2024/google-gemini-updates-flash-15-gemma-2-and-project-astra</id><content type="html" xml:base="https://pedrotajia.com/blog/2024/google-gemini-updates-flash-15-gemma-2-and-project-astra/"><![CDATA[<p>May 14, 2024 We’re introducing a series of updates across the Gemini family of models, including the new 1.5 Flash, our lightweight model for speed and efficiency, and Project Astra, our vision for the future of AI assistants. In December, we launched our first natively multimodal model Gemini 1.0 in three sizes: Ultra, Pro and Nano. Just a few months later we released 1.5 Pro, with enhanced performance and a breakthrough long context window of 1 million tokens.Developers and enterprise customers have been putting 1.5 Pro to use in incredible ways and finding its long context window, multimodal reasoning capabilities and impressive overall performance incredibly useful.We know from user feedback that some applications need lower latency and a lower cost to serve. This inspired us to keep innovating, so today, we’re introducing Gemini 1.5 Flash: a model that’s lighter-weight than 1.5 Pro, and designed to be fast and efficient to serve at scale.Both 1.5 Pro and 1.5 Flash are available in public preview with a 1 million token context window in Google AI Studio and Vertex AI. And now, 1.5 Pro is also available with a 2 million token context window via waitlist to developers using the API and to Google Cloud customers.We’re also introducing updates across the Gemini family of models, announcing our next generation of open models, Gemma 2, and sharing progress on the future of AI assistants, with Project Astra.Context lengths of leading foundation models compared with Gemini 1.5’s 2 million token capability1.5 Flash is the newest addition to the Gemini model family and the fastest Gemini model served in the API. It’s optimized for high-volume, high-frequency tasks at scale, is more cost-efficient to serve and features our breakthrough long context window.While it’s a lighter weight model than 1.5 Pro, it’s highly capable of multimodal reasoning across vast amounts of information and delivers impressive quality for its size.The new Gemini 1.5 Flash model is optimized for speed and efficiency, is highly capable of multimodal reasoning and features our breakthrough long context window.1.5 Flash excels at summarization, chat applications, image and video captioning, data extraction from long documents and tables, and more. This is because it’s been trained by 1.5 Pro through a process called “distillation,” where the most essential knowledge and skills from a larger model are transferred to a smaller, more efficient model.Read more about 1.5 Flash in our updated Gemini 1.5 technical report, on the Gemini technology page, and learn about 1.5 Flash’s availability and pricing.Over the last few months, we’ve significantly improved 1.5 Pro, our best model for general performance across a wide range of tasks.Beyond extending its context window to 2 million tokens, we’ve enhanced its code generation, logical reasoning and planning, multi-turn conversation, and audio and image understanding through data and algorithmic advances. We see strong improvements on public and internal benchmarks for each of these tasks.1.5 Pro can now follow increasingly complex and nuanced instructions, including ones that specify product-level behavior involving role, format and style. We’ve improved control over the model’s responses for specific use cases, like crafting the persona and response style of a chat agent or automating workflows through multiple function calls. And we’ve enabled users to steer model behavior by setting system instructions.We added audio understanding in the Gemini API and Google AI Studio, so 1.5 Pro can now reason across image and audio for videos uploaded in Google AI Studio. And we’re now integrating 1.5 Pro into Google products, including Gemini Advanced and in Workspace apps.Read more about 1.5 Pro in our updated Gemini 1.5 technical report and on the Gemini technology page.Gemini Nano is expanding beyond text-only inputs to include images as well. Starting with Pixel, applications using Gemini Nano with Multimodality will be able to understand the world the way people do — not just through text, but also through sight, sound and spoken language.Read more about Gemini 1.0 Nano on Android.Today, we’re also sharing a series of updates to Gemma, our family of open models built from the same research and technology used to create the Gemini models.We’re announcing Gemma 2, our next generation of open models for responsible AI innovation. Gemma 2 has a new architecture designed for breakthrough performance and efficiency, and will be available in new sizes.The Gemma family is also expanding with PaliGemma, our first vision-language model inspired by PaLI-3. And we’ve upgraded our Responsible Generative AI Toolkit with LLM Comparator for evaluating the quality of model responses.Read more on the Developer blog.As part of Google DeepMind’s mission to build AI responsibly to benefit humanity, we’ve always wanted to develop universal AI agents that can be helpful in everyday life. That’s why today, we’re sharing our progress in building the future of AI assistants with Project Astra (advanced seeing and talking responsive agent).To be truly useful, an agent needs to understand and respond to the complex and dynamic world just like people do — and take in and remember what it sees and hears to understand context and take action. It also needs to be proactive, teachable and personal, so users can talk to it naturally and without lag or delay.While we’ve made incredible progress developing AI systems that can understand multimodal information, getting response time down to something conversational is a difficult engineering challenge. Over the past few years, we’ve been working to improve how our models perceive, reason and converse to make the pace and quality of interaction feel more natural.Building on Gemini, we’ve developed prototype agents that can process information faster by continuously encoding video frames, combining the video and speech input into a timeline of events, and caching this information for efficient recall.By leveraging our leading speech models, we also enhanced how they sound, giving the agents a wider range of intonations. These agents can better understand the context they’re being used in, and respond quickly, in conversation.With technology like this, it’s easy to envision a future where people could have an expert AI assistant by their side, through a phone or glasses. And some of these capabilities are coming to Google products, like the Gemini app and web experience, later this year.We’ve made incredible progress so far with our family of Gemini models, and we’re always striving to advance the state-of-the-art even further. By investing in a relentless production line of innovation, we’re able to explore new ideas at the frontier, while also unlocking the possibility of new and exciting Gemini use cases.Learn more about Gemini and its capabilities. Your information will be used in accordance with Google’s privacy policy.</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      Done. Just one step more.
     
       Check your inbox to confirm your subscription.
     You are already subscribed to our newsletter.
@@ -89,660 +102,4 @@
     
   Let’s stay in touch. Get the latest news from Google in your inbox.
           Follow Us
-</code></pre></div></div>]]></content><author><name></name></author><summary type="html"><![CDATA[We’re sharing updates across our Gemini family of models and a glimpse of Project Astra, our vision for the future of AI assistants.]]></summary></entry><entry><title type="html">a post with tabs</title><link href="https://pedrotajia.com/blog/2024/tabs/" rel="alternate" type="text/html" title="a post with tabs"/><published>2024-05-01T00:32:13+00:00</published><updated>2024-05-01T00:32:13+00:00</updated><id>https://pedrotajia.com/blog/2024/tabs</id><content type="html" xml:base="https://pedrotajia.com/blog/2024/tabs/"><![CDATA[<p>This is how a post with <a href="https://github.com/Ovski4/jekyll-tabs">tabs</a> looks like. Note that the tabs could be used for different purposes, not only for code.</p> <h2 id="first-tabs">First tabs</h2> <p>To add tabs, use the following syntax:</p> <div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{%</span><span class="w"> </span><span class="nt">tabs</span><span class="w"> </span><span class="nv">group-name</span><span class="w"> </span><span class="cp">%}</span>
-
-<span class="cp">{%</span><span class="w"> </span><span class="nt">tab</span><span class="w"> </span><span class="nv">group-name</span><span class="w"> </span><span class="nv">tab-name-1</span><span class="w"> </span><span class="cp">%}</span>
-
-Content 1
-
-<span class="cp">{%</span><span class="w"> </span><span class="nt">endtab</span><span class="w"> </span><span class="cp">%}</span>
-
-<span class="cp">{%</span><span class="w"> </span><span class="nt">tab</span><span class="w"> </span><span class="nv">group-name</span><span class="w"> </span><span class="nv">tab-name-2</span><span class="w"> </span><span class="cp">%}</span>
-
-Content 2
-
-<span class="cp">{%</span><span class="w"> </span><span class="nt">endtab</span><span class="w"> </span><span class="cp">%}</span>
-
-<span class="cp">{%</span><span class="w"> </span><span class="nt">endtabs</span><span class="w"> </span><span class="cp">%}</span>
-</code></pre></div></div> <p>With this you can generate visualizations like:</p> <ul id="log" class="tab" data-tab="e03ef736-c1e3-4d0b-918c-1ed059faf2a9" data-name="log"> <li class="active" id="log-php"> <a href="#">php </a> </li> <li id="log-js"> <a href="#">js </a> </li> <li id="log-ruby"> <a href="#">ruby </a> </li> </ul> <ul class="tab-content" id="e03ef736-c1e3-4d0b-918c-1ed059faf2a9" data-name="log"> <li class="active"> <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">var_dump</span><span class="p">(</span><span class="s1">'hello'</span><span class="p">);</span>
-</code></pre></div></div> </li> <li> <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">hello</span><span class="dl">"</span><span class="p">);</span>
-</code></pre></div></div> </li> <li> <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">pputs</span> <span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span>
-</code></pre></div></div> </li> </ul> <h2 id="another-example">Another example</h2> <ul id="data-struct" class="tab" data-tab="62ca35f7-25da-4329-962a-ee5049176ce2" data-name="data-struct"> <li class="active" id="data-struct-yaml"> <a href="#">yaml </a> </li> <li id="data-struct-json"> <a href="#">json </a> </li> </ul> <ul class="tab-content" id="62ca35f7-25da-4329-962a-ee5049176ce2" data-name="data-struct"> <li class="active"> <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">hello</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="s2">"</span><span class="s">whatsup"</span>
-  <span class="pi">-</span> <span class="s2">"</span><span class="s">hi"</span>
-</code></pre></div></div> </li> <li> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"hello"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"whatsup"</span><span class="p">,</span><span class="w"> </span><span class="s2">"hi"</span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div></div> </li> </ul> <h2 id="tabs-for-something-else">Tabs for something else</h2> <ul id="something-else" class="tab" data-tab="f29ec951-9264-4e59-ab19-1197a3082110" data-name="something-else"> <li class="active" id="something-else-text"> <a href="#">text </a> </li> <li id="something-else-quote"> <a href="#">quote </a> </li> <li id="something-else-list"> <a href="#">list </a> </li> </ul> <ul class="tab-content" id="f29ec951-9264-4e59-ab19-1197a3082110" data-name="something-else"> <li class="active"> <p>Regular text</p> </li> <li> <blockquote> <p>A quote</p> </blockquote> </li> <li> <p>Hipster list</p> <ul> <li>brunch</li> <li>fixie</li> <li>raybans</li> <li>messenger bag</li> </ul> </li> </ul>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="code"/><summary type="html"><![CDATA[this is what included tabs in a post could look like]]></summary></entry><entry><title type="html">a post with typograms</title><link href="https://pedrotajia.com/blog/2024/typograms/" rel="alternate" type="text/html" title="a post with typograms"/><published>2024-04-29T23:36:10+00:00</published><updated>2024-04-29T23:36:10+00:00</updated><id>https://pedrotajia.com/blog/2024/typograms</id><content type="html" xml:base="https://pedrotajia.com/blog/2024/typograms/"><![CDATA[<p>This is an example post with some <a href="https://github.com/google/typograms/">typograms</a> code.</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">typograms
-</span><span class="sb">+----+
-|    |---&gt; My first diagram!
-+----+</span>
-<span class="p">```</span>
-</code></pre></div></div> <p>Which generates:</p> <pre><code class="language-typograms">+----+
-|    |---&gt; My first diagram!
-+----+
-</code></pre> <p>Another example:</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">typograms
-</span><span class="sb">.------------------------.
-|.----------------------.|
-||"https://example.com" ||
-|'----------------------'|
-| ______________________ |
-||                      ||
-||   Welcome!           ||
-||                      ||
-||                      ||
-||  .----------------.  ||
-||  | username       |  ||
-||  '----------------'  ||
-||  .----------------.  ||
-||  |"*******"       |  ||
-||  '----------------'  ||
-||                      ||
-||  .----------------.  ||
-||  |   "Sign-up"    |  ||
-||  '----------------'  ||
-||                      ||
-|+----------------------+|
-.------------------------.</span>
-<span class="p">```</span>
-</code></pre></div></div> <p>which generates:</p> <pre><code class="language-typograms">.------------------------.
-|.----------------------.|
-||"https://example.com" ||
-|'----------------------'|
-| ______________________ |
-||                      ||
-||   Welcome!           ||
-||                      ||
-||                      ||
-||  .----------------.  ||
-||  | username       |  ||
-||  '----------------'  ||
-||  .----------------.  ||
-||  |"*******"       |  ||
-||  '----------------'  ||
-||                      ||
-||  .----------------.  ||
-||  |   "Sign-up"    |  ||
-||  '----------------'  ||
-||                      ||
-|+----------------------+|
-.------------------------.
-</code></pre> <p>For more examples, check out the <a href="https://google.github.io/typograms/#examples">typograms documentation</a>.</p>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="diagrams"/><summary type="html"><![CDATA[this is what included typograms code could look like]]></summary></entry><entry><title type="html">a post that can be cited</title><link href="https://pedrotajia.com/blog/2024/post-citation/" rel="alternate" type="text/html" title="a post that can be cited"/><published>2024-04-28T15:06:00+00:00</published><updated>2024-04-28T15:06:00+00:00</updated><id>https://pedrotajia.com/blog/2024/post-citation</id><content type="html" xml:base="https://pedrotajia.com/blog/2024/post-citation/"><![CDATA[<p>This is an example post that can be cited. The content of the post ends here, while the citation information is automatically provided below. The only thing needed is for you to set the <code class="language-plaintext highlighter-rouge">citation</code> key in the front matter to <code class="language-plaintext highlighter-rouge">true</code>.</p>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="citation"/><summary type="html"><![CDATA[this is what a post that can be cited looks like]]></summary></entry><entry><title type="html">a post with pseudo code</title><link href="https://pedrotajia.com/blog/2024/pseudocode/" rel="alternate" type="text/html" title="a post with pseudo code"/><published>2024-04-15T00:01:00+00:00</published><updated>2024-04-15T00:01:00+00:00</updated><id>https://pedrotajia.com/blog/2024/pseudocode</id><content type="html" xml:base="https://pedrotajia.com/blog/2024/pseudocode/"><![CDATA[<p>This is an example post with some pseudo code rendered by <a href="https://github.com/SaswatPadhi/pseudocode.js">pseudocode</a>. The example presented here is the same as the one in the <a href="https://saswat.padhi.me/pseudocode.js/">pseudocode.js</a> documentation, with only one simple but important change: everytime you would use <code class="language-plaintext highlighter-rouge">$</code>, you should use <code class="language-plaintext highlighter-rouge">$$</code> instead. Also, note that the <code class="language-plaintext highlighter-rouge">pseudocode</code> key in the front matter is set to <code class="language-plaintext highlighter-rouge">true</code> to enable the rendering of pseudo code. As an example, using this code:</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">pseudocode
-</span><span class="sb">% This quicksort algorithm is extracted from Chapter 7, Introduction to Algorithms (3rd edition)
-\begin{algorithm}
-\caption{Quicksort}
-\begin{algorithmic}
-\PROCEDURE{Quicksort}{$$A, p, r$$}
-    \IF{$$p &lt; r$$}
-        \STATE $$q = $$ \CALL{Partition}{$$A, p, r$$}
-        \STATE \CALL{Quicksort}{$$A, p, q - 1$$}
-        \STATE \CALL{Quicksort}{$$A, q + 1, r$$}
-    \ENDIF
-\ENDPROCEDURE
-\PROCEDURE{Partition}{$$A, p, r$$}
-    \STATE $$x = A[r]$$
-    \STATE $$i = p - 1$$
-    \FOR{$$j = p$$ \TO $$r - 1$$}
-        \IF{$$A[j] &lt; x$$}
-            \STATE $$i = i + 1$$
-            \STATE exchange
-            $$A[i]$$ with $$A[j]$$
-        \ENDIF
-        \STATE exchange $$A[i]$$ with $$A[r]$$
-    \ENDFOR
-\ENDPROCEDURE
-\end{algorithmic}
-\end{algorithm}</span>
-<span class="p">```</span>
-</code></pre></div></div> <p>Generates:</p> <pre><code class="language-pseudocode">% This quicksort algorithm is extracted from Chapter 7, Introduction to Algorithms (3rd edition)
-\begin{algorithm}
-\caption{Quicksort}
-\begin{algorithmic}
-\PROCEDURE{Quicksort}{$$A, p, r$$}
-    \IF{$$p &lt; r$$}
-        \STATE $$q = $$ \CALL{Partition}{$$A, p, r$$}
-        \STATE \CALL{Quicksort}{$$A, p, q - 1$$}
-        \STATE \CALL{Quicksort}{$$A, q + 1, r$$}
-    \ENDIF
-\ENDPROCEDURE
-\PROCEDURE{Partition}{$$A, p, r$$}
-    \STATE $$x = A[r]$$
-    \STATE $$i = p - 1$$
-    \FOR{$$j = p$$ \TO $$r - 1$$}
-        \IF{$$A[j] &lt; x$$}
-            \STATE $$i = i + 1$$
-            \STATE exchange
-            $$A[i]$$ with $$A[j]$$
-        \ENDIF
-        \STATE exchange $$A[i]$$ with $$A[r]$$
-    \ENDFOR
-\ENDPROCEDURE
-\end{algorithmic}
-\end{algorithm}
-</code></pre>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="code"/><summary type="html"><![CDATA[this is what included pseudo code could look like]]></summary></entry><entry><title type="html">a post with code diff</title><link href="https://pedrotajia.com/blog/2024/code-diff/" rel="alternate" type="text/html" title="a post with code diff"/><published>2024-01-27T19:22:00+00:00</published><updated>2024-01-27T19:22:00+00:00</updated><id>https://pedrotajia.com/blog/2024/code-diff</id><content type="html" xml:base="https://pedrotajia.com/blog/2024/code-diff/"><![CDATA[<p>You can display diff code by using the regular markdown syntax:</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">diff
-</span><span class="gh">diff --git a/sample.js b/sample.js
-index 0000001..0ddf2ba
-</span><span class="gd">--- a/sample.js
-</span><span class="gi">+++ b/sample.js
-</span><span class="p">@@ -1 +1 @@</span>
-<span class="gd">-console.log("Hello World!")
-</span><span class="gi">+console.log("Hello from Diff2Html!")</span>
-<span class="p">```</span>
-</code></pre></div></div> <p>Which generates:</p> <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/sample.js b/sample.js
-index 0000001..0ddf2ba
-</span><span class="gd">--- a/sample.js
-</span><span class="gi">+++ b/sample.js
-</span><span class="p">@@ -1 +1 @@</span>
-<span class="gd">-console.log("Hello World!")
-</span><span class="gi">+console.log("Hello from Diff2Html!")
-</span></code></pre></div></div> <p>But this is difficult to read, specially if you have a large diff. You can use <a href="https://diff2html.xyz/">diff2html</a> to display a more readable version of the diff. For this, just use <code class="language-plaintext highlighter-rouge">diff2html</code> instead of <code class="language-plaintext highlighter-rouge">diff</code> for the code block language:</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">diff2html
-</span><span class="sb">diff --git a/sample.js b/sample.js
-index 0000001..0ddf2ba
---- a/sample.js
-+++ b/sample.js
-@@ -1 +1 @@
--console.log("Hello World!")
-+console.log("Hello from Diff2Html!")</span>
-<span class="p">```</span>
-</code></pre></div></div> <p>If we use a longer example, for example <a href="https://github.com/rtfpessoa/diff2html/commit/c2c253d3e3f8b8b267f551e659f72b44ca2ac927">this commit from diff2html</a>, it will generate the following output:</p> <pre><code class="language-diff2html">From 2aaae31cc2a37bfff83430c2c914b140bee59b6a Mon Sep 17 00:00:00 2001
-From: Rodrigo Fernandes &lt;rtfrodrigo@gmail.com&gt;
-Date: Sun, 9 Oct 2016 16:41:54 +0100
-Subject: [PATCH 1/2] Initial template override support
-
----
- scripts/hulk.js                    |  4 ++--
- src/diff2html.js                   |  3 +--
- src/file-list-printer.js           | 11 ++++++++---
- src/hoganjs-utils.js               | 29 +++++++++++++++++------------
- src/html-printer.js                |  6 ++++++
- src/line-by-line-printer.js        |  6 +++++-
- src/side-by-side-printer.js        |  6 +++++-
- test/file-list-printer-tests.js    |  2 +-
- test/hogan-cache-tests.js          | 18 +++++++++++++++---
- test/line-by-line-tests.js         |  3 +--
- test/side-by-side-printer-tests.js |  3 +--
- 11 files changed, 62 insertions(+), 29 deletions(-)
-
-diff --git a/scripts/hulk.js b/scripts/hulk.js
-index 5a793c18..a4b1a4d5 100755
---- a/scripts/hulk.js
-+++ b/scripts/hulk.js
-@@ -173,11 +173,11 @@ function namespace(name) {
- // write a template foreach file that matches template extension
- templates = extractFiles(options.argv.remain)
-   .map(function(file) {
--    var openedFile = fs.readFileSync(file, 'utf-8');
-+    var openedFile = fs.readFileSync(file, 'utf-8').trim();
-     var name;
-     if (!openedFile) return;
-     name = namespace(path.basename(file).replace(/\..*$/, ''));
--    openedFile = removeByteOrderMark(openedFile.trim());
-+    openedFile = removeByteOrderMark(openedFile);
-     openedFile = wrap(file, name, openedFile);
-     if (!options.outputdir) return openedFile;
-     fs.writeFileSync(path.join(options.outputdir, name + '.js')
-diff --git a/src/diff2html.js b/src/diff2html.js
-index 21b0119e..64e138f5 100644
---- a/src/diff2html.js
-+++ b/src/diff2html.js
-@@ -7,7 +7,6 @@
-
- (function() {
-   var diffParser = require('./diff-parser.js').DiffParser;
--  var fileLister = require('./file-list-printer.js').FileListPrinter;
-   var htmlPrinter = require('./html-printer.js').HtmlPrinter;
-
-   function Diff2Html() {
-@@ -43,7 +42,7 @@
-
-     var fileList = '';
-     if (configOrEmpty.showFiles === true) {
--      fileList = fileLister.generateFileList(diffJson, configOrEmpty);
-+      fileList = htmlPrinter.generateFileListSummary(diffJson, configOrEmpty);
-     }
-
-     var diffOutput = '';
-diff --git a/src/file-list-printer.js b/src/file-list-printer.js
-index e408d9b2..1e0a2c61 100644
---- a/src/file-list-printer.js
-+++ b/src/file-list-printer.js
-@@ -8,11 +8,16 @@
- (function() {
-   var printerUtils = require('./printer-utils.js').PrinterUtils;
-
--  var hoganUtils = require('./hoganjs-utils.js').HoganJsUtils;
-+  var hoganUtils;
-+
-   var baseTemplatesPath = 'file-summary';
-   var iconsBaseTemplatesPath = 'icon';
-
--  function FileListPrinter() {
-+  function FileListPrinter(config) {
-+    this.config = config;
-+
-+    var HoganJsUtils = require('./hoganjs-utils.js').HoganJsUtils;
-+    hoganUtils = new HoganJsUtils(config);
-   }
-
-   FileListPrinter.prototype.generateFileList = function(diffFiles) {
-@@ -38,5 +43,5 @@
-     });
-   };
-
--  module.exports.FileListPrinter = new FileListPrinter();
-+  module.exports.FileListPrinter = FileListPrinter;
- })();
-diff --git a/src/hoganjs-utils.js b/src/hoganjs-utils.js
-index 9949e5fa..0dda08d7 100644
---- a/src/hoganjs-utils.js
-+++ b/src/hoganjs-utils.js
-@@ -8,18 +8,19 @@
- (function() {
-   var fs = require('fs');
-   var path = require('path');
--
-   var hogan = require('hogan.js');
-
-   var hoganTemplates = require('./templates/diff2html-templates.js');
-
--  var templatesPath = path.resolve(__dirname, 'templates');
-+  var extraTemplates;
-
--  function HoganJsUtils() {
-+  function HoganJsUtils(configuration) {
-+    this.config = configuration || {};
-+    extraTemplates = this.config.templates || {};
-   }
-
--  HoganJsUtils.prototype.render = function(namespace, view, params, configuration) {
--    var template = this.template(namespace, view, configuration);
-+  HoganJsUtils.prototype.render = function(namespace, view, params) {
-+    var template = this.template(namespace, view);
-     if (template) {
-       return template.render(params);
-     }
-@@ -27,17 +28,16 @@
-     return null;
-   };
-
--  HoganJsUtils.prototype.template = function(namespace, view, configuration) {
--    var config = configuration || {};
-+  HoganJsUtils.prototype.template = function(namespace, view) {
-     var templateKey = this._templateKey(namespace, view);
-
--    return this._getTemplate(templateKey, config);
-+    return this._getTemplate(templateKey);
-   };
-
--  HoganJsUtils.prototype._getTemplate = function(templateKey, config) {
-+  HoganJsUtils.prototype._getTemplate = function(templateKey) {
-     var template;
-
--    if (!config.noCache) {
-+    if (!this.config.noCache) {
-       template = this._readFromCache(templateKey);
-     }
-
-@@ -53,6 +53,7 @@
-
-     try {
-       if (fs.readFileSync) {
-+        var templatesPath = path.resolve(__dirname, 'templates');
-         var templatePath = path.join(templatesPath, templateKey);
-         var templateContent = fs.readFileSync(templatePath + '.mustache', 'utf8');
-         template = hogan.compile(templateContent);
-@@ -66,12 +67,16 @@
-   };
-
-   HoganJsUtils.prototype._readFromCache = function(templateKey) {
--    return hoganTemplates[templateKey];
-+    return extraTemplates[templateKey] || hoganTemplates[templateKey];
-   };
-
-   HoganJsUtils.prototype._templateKey = function(namespace, view) {
-     return namespace + '-' + view;
-   };
-
--  module.exports.HoganJsUtils = new HoganJsUtils();
-+  HoganJsUtils.prototype.compile = function(templateStr) {
-+    return hogan.compile(templateStr);
-+  };
-+
-+  module.exports.HoganJsUtils = HoganJsUtils;
- })();
-diff --git a/src/html-printer.js b/src/html-printer.js
-index 585d5b66..13f83047 100644
---- a/src/html-printer.js
-+++ b/src/html-printer.js
-@@ -8,6 +8,7 @@
- (function() {
-   var LineByLinePrinter = require('./line-by-line-printer.js').LineByLinePrinter;
-   var SideBySidePrinter = require('./side-by-side-printer.js').SideBySidePrinter;
-+  var FileListPrinter = require('./file-list-printer.js').FileListPrinter;
-
-   function HtmlPrinter() {
-   }
-@@ -22,5 +23,10 @@
-     return sideBySidePrinter.generateSideBySideJsonHtml(diffFiles);
-   };
-
-+  HtmlPrinter.prototype.generateFileListSummary = function(diffJson, config) {
-+    var fileListPrinter = new FileListPrinter(config);
-+    return fileListPrinter.generateFileList(diffJson);
-+  };
-+
-   module.exports.HtmlPrinter = new HtmlPrinter();
- })();
-diff --git a/src/line-by-line-printer.js b/src/line-by-line-printer.js
-index b07eb53c..d230bedd 100644
---- a/src/line-by-line-printer.js
-+++ b/src/line-by-line-printer.js
-@@ -11,7 +11,8 @@
-   var utils = require('./utils.js').Utils;
-   var Rematch = require('./rematch.js').Rematch;
-
--  var hoganUtils = require('./hoganjs-utils.js').HoganJsUtils;
-+  var hoganUtils;
-+
-   var genericTemplatesPath = 'generic';
-   var baseTemplatesPath = 'line-by-line';
-   var iconsBaseTemplatesPath = 'icon';
-@@ -19,6 +20,9 @@
-
-   function LineByLinePrinter(config) {
-     this.config = config;
-+
-+    var HoganJsUtils = require('./hoganjs-utils.js').HoganJsUtils;
-+    hoganUtils = new HoganJsUtils(config);
-   }
-
-   LineByLinePrinter.prototype.makeFileDiffHtml = function(file, diffs) {
-diff --git a/src/side-by-side-printer.js b/src/side-by-side-printer.js
-index bbf1dc8d..5e3033b3 100644
---- a/src/side-by-side-printer.js
-+++ b/src/side-by-side-printer.js
-@@ -11,7 +11,8 @@
-   var utils = require('./utils.js').Utils;
-   var Rematch = require('./rematch.js').Rematch;
-
--  var hoganUtils = require('./hoganjs-utils.js').HoganJsUtils;
-+  var hoganUtils;
-+
-   var genericTemplatesPath = 'generic';
-   var baseTemplatesPath = 'side-by-side';
-   var iconsBaseTemplatesPath = 'icon';
-@@ -26,6 +27,9 @@
-
-   function SideBySidePrinter(config) {
-     this.config = config;
-+
-+    var HoganJsUtils = require('./hoganjs-utils.js').HoganJsUtils;
-+    hoganUtils = new HoganJsUtils(config);
-   }
-
-   SideBySidePrinter.prototype.makeDiffHtml = function(file, diffs) {
-diff --git a/test/file-list-printer-tests.js b/test/file-list-printer-tests.js
-index a502a46f..60ea3208 100644
---- a/test/file-list-printer-tests.js
-+++ b/test/file-list-printer-tests.js
-@@ -1,6 +1,6 @@
- var assert = require('assert');
-
--var fileListPrinter = require('../src/file-list-printer.js').FileListPrinter;
-+var fileListPrinter = new (require('../src/file-list-printer.js').FileListPrinter)();
-
- describe('FileListPrinter', function() {
-   describe('generateFileList', function() {
-diff --git a/test/hogan-cache-tests.js b/test/hogan-cache-tests.js
-index 190bf6f8..3bb754ac 100644
---- a/test/hogan-cache-tests.js
-+++ b/test/hogan-cache-tests.js
-@@ -1,6 +1,6 @@
- var assert = require('assert');
-
--var HoganJsUtils = require('../src/hoganjs-utils.js').HoganJsUtils;
-+var HoganJsUtils = new (require('../src/hoganjs-utils.js').HoganJsUtils)();
- var diffParser = require('../src/diff-parser.js').DiffParser;
-
- describe('HoganJsUtils', function() {
-@@ -21,16 +21,28 @@ describe('HoganJsUtils', function() {
-       });
-       assert.equal(emptyDiffHtml, result);
-     });
-+
-     it('should render view without cache', function() {
-       var result = HoganJsUtils.render('generic', 'empty-diff', {
-         contentClass: 'd2h-code-line',
-         diffParser: diffParser
-       }, {noCache: true});
--      assert.equal(emptyDiffHtml + '\n', result);
-+      assert.equal(emptyDiffHtml, result);
-     });
-+
-     it('should return null if template is missing', function() {
--      var result = HoganJsUtils.render('generic', 'missing-template', {}, {noCache: true});
-+      var hoganUtils = new (require('../src/hoganjs-utils.js').HoganJsUtils)({noCache: true});
-+      var result = hoganUtils.render('generic', 'missing-template', {});
-       assert.equal(null, result);
-     });
-+
-+    it('should allow templates to be overridden', function() {
-+      var emptyDiffTemplate = HoganJsUtils.compile('&lt;p&gt;&lt;/p&gt;');
-+
-+      var config = {templates: {'generic-empty-diff': emptyDiffTemplate}};
-+      var hoganUtils = new (require('../src/hoganjs-utils.js').HoganJsUtils)(config);
-+      var result = hoganUtils.render('generic', 'empty-diff', {myName: 'Rodrigo Fernandes'});
-+      assert.equal('&lt;p&gt;Rodrigo Fernandes&lt;/p&gt;', result);
-+    });
-   });
- });
-diff --git a/test/line-by-line-tests.js b/test/line-by-line-tests.js
-index 1cd92073..8869b3df 100644
---- a/test/line-by-line-tests.js
-+++ b/test/line-by-line-tests.js
-@@ -14,7 +14,7 @@ describe('LineByLinePrinter', function() {
-         '            File without changes\n' +
-         '        &lt;/div&gt;\n' +
-         '    &lt;/td&gt;\n' +
--        '&lt;/tr&gt;\n';
-+        '&lt;/tr&gt;';
-
-       assert.equal(expected, fileHtml);
-     });
-@@ -422,7 +422,6 @@ describe('LineByLinePrinter', function() {
-         '        &lt;/div&gt;\n' +
-         '    &lt;/td&gt;\n' +
-         '&lt;/tr&gt;\n' +
--        '\n' +
-         '                &lt;/tbody&gt;\n' +
-         '            &lt;/table&gt;\n' +
-         '        &lt;/div&gt;\n' +
-diff --git a/test/side-by-side-printer-tests.js b/test/side-by-side-printer-tests.js
-index 76625f8e..771daaa5 100644
---- a/test/side-by-side-printer-tests.js
-+++ b/test/side-by-side-printer-tests.js
-@@ -14,7 +14,7 @@ describe('SideBySidePrinter', function() {
-         '            File without changes\n' +
-         '        &lt;/div&gt;\n' +
-         '    &lt;/td&gt;\n' +
--        '&lt;/tr&gt;\n';
-+        '&lt;/tr&gt;';
-
-       assert.equal(expectedRight, fileHtml.right);
-       assert.equal(expectedLeft, fileHtml.left);
-@@ -324,7 +324,6 @@ describe('SideBySidePrinter', function() {
-         '        &lt;/div&gt;\n' +
-         '    &lt;/td&gt;\n' +
-         '&lt;/tr&gt;\n' +
--        '\n' +
-         '                    &lt;/tbody&gt;\n' +
-         '                &lt;/table&gt;\n' +
-         '            &lt;/div&gt;\n' +
-
-From f3cadb96677d0eb82fc2752dc3ffbf35ca9b5bdb Mon Sep 17 00:00:00 2001
-From: Rodrigo Fernandes &lt;rtfrodrigo@gmail.com&gt;
-Date: Sat, 15 Oct 2016 13:21:22 +0100
-Subject: [PATCH 2/2] Allow uncompiled templates
-
----
- README.md                 |  3 +++
- src/hoganjs-utils.js      |  7 +++++++
- test/hogan-cache-tests.js | 24 +++++++++++++++++++++++-
- 3 files changed, 33 insertions(+), 1 deletion(-)
-
-diff --git a/README.md b/README.md
-index 132c8a28..46909f25 100644
---- a/README.md
-+++ b/README.md
-@@ -98,6 +98,9 @@ The HTML output accepts a Javascript object with configuration. Possible options
-   - `synchronisedScroll`: scroll both panes in side-by-side mode: `true` or `false`, default is `false`
-   - `matchWordsThreshold`: similarity threshold for word matching, default is 0.25
-   - `matchingMaxComparisons`: perform at most this much comparisons for line matching a block of changes, default is `2500`
-+  - `templates`: object with previously compiled templates to replace parts of the html
-+  - `rawTemplates`: object with raw not compiled templates to replace parts of the html
-+  &gt; For more information regarding the possible templates look into [src/templates](https://github.com/rtfpessoa/diff2html/tree/master/src/templates)
-
- ## Diff2HtmlUI Helper
-
-diff --git a/src/hoganjs-utils.js b/src/hoganjs-utils.js
-index 0dda08d7..b2e9c275 100644
---- a/src/hoganjs-utils.js
-+++ b/src/hoganjs-utils.js
-@@ -17,6 +17,13 @@
-   function HoganJsUtils(configuration) {
-     this.config = configuration || {};
-     extraTemplates = this.config.templates || {};
-+
-+    var rawTemplates = this.config.rawTemplates || {};
-+    for (var templateName in rawTemplates) {
-+      if (rawTemplates.hasOwnProperty(templateName)) {
-+        if (!extraTemplates[templateName]) extraTemplates[templateName] = this.compile(rawTemplates[templateName]);
-+      }
-+    }
-   }
-
-   HoganJsUtils.prototype.render = function(namespace, view, params) {
-diff --git a/test/hogan-cache-tests.js b/test/hogan-cache-tests.js
-index 3bb754ac..a34839c0 100644
---- a/test/hogan-cache-tests.js
-+++ b/test/hogan-cache-tests.js
-@@ -36,7 +36,7 @@ describe('HoganJsUtils', function() {
-       assert.equal(null, result);
-     });
-
--    it('should allow templates to be overridden', function() {
-+    it('should allow templates to be overridden with compiled templates', function() {
-       var emptyDiffTemplate = HoganJsUtils.compile('&lt;p&gt;&lt;/p&gt;');
-
-       var config = {templates: {'generic-empty-diff': emptyDiffTemplate}};
-@@ -44,5 +44,27 @@ describe('HoganJsUtils', function() {
-       var result = hoganUtils.render('generic', 'empty-diff', {myName: 'Rodrigo Fernandes'});
-       assert.equal('&lt;p&gt;Rodrigo Fernandes&lt;/p&gt;', result);
-     });
-+
-+    it('should allow templates to be overridden with uncompiled templates', function() {
-+      var emptyDiffTemplate = '&lt;p&gt;&lt;/p&gt;';
-+
-+      var config = {rawTemplates: {'generic-empty-diff': emptyDiffTemplate}};
-+      var hoganUtils = new (require('../src/hoganjs-utils.js').HoganJsUtils)(config);
-+      var result = hoganUtils.render('generic', 'empty-diff', {myName: 'Rodrigo Fernandes'});
-+      assert.equal('&lt;p&gt;Rodrigo Fernandes&lt;/p&gt;', result);
-+    });
-+
-+    it('should allow templates to be overridden giving priority to compiled templates', function() {
-+      var emptyDiffTemplate = HoganJsUtils.compile('&lt;p&gt;&lt;/p&gt;');
-+      var emptyDiffTemplateUncompiled = '&lt;p&gt;Not used!&lt;/p&gt;';
-+
-+      var config = {
-+        templates: {'generic-empty-diff': emptyDiffTemplate},
-+        rawTemplates: {'generic-empty-diff': emptyDiffTemplateUncompiled}
-+      };
-+      var hoganUtils = new (require('../src/hoganjs-utils.js').HoganJsUtils)(config);
-+      var result = hoganUtils.render('generic', 'empty-diff', {myName: 'Rodrigo Fernandes'});
-+      assert.equal('&lt;p&gt;Rodrigo Fernandes&lt;/p&gt;', result);
-+    });
-   });
- });
-</code></pre>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="code"/><summary type="html"><![CDATA[this is how you can display code diffs]]></summary></entry><entry><title type="html">a post with advanced image components</title><link href="https://pedrotajia.com/blog/2024/advanced-images/" rel="alternate" type="text/html" title="a post with advanced image components"/><published>2024-01-27T11:46:00+00:00</published><updated>2024-01-27T11:46:00+00:00</updated><id>https://pedrotajia.com/blog/2024/advanced-images</id><content type="html" xml:base="https://pedrotajia.com/blog/2024/advanced-images/"><![CDATA[<p>This is an example post with advanced image components.</p> <h2 id="image-slider">Image Slider</h2> <p>This is a simple image slider. It uses the <a href="https://swiperjs.com/">Swiper</a> library. Check the <a href="https://swiperjs.com/demos">examples page</a> for more information of what you can achieve with it.</p> <swiper-container keyboard="true" navigation="true" pagination="true" pagination-clickable="true" pagination-dynamic-bullets="true" rewind="true"> <swiper-slide> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/9-480.webp 480w,/assets/img/9-800.webp 800w,/assets/img/9-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/9.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </swiper-slide> <swiper-slide> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/7-480.webp 480w,/assets/img/7-800.webp 800w,/assets/img/7-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/7.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </swiper-slide> <swiper-slide> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/8-480.webp 480w,/assets/img/8-800.webp 800w,/assets/img/8-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/8.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </swiper-slide> <swiper-slide> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/10-480.webp 480w,/assets/img/10-800.webp 800w,/assets/img/10-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/10.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </swiper-slide> <swiper-slide> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/12-480.webp 480w,/assets/img/12-800.webp 800w,/assets/img/12-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/12.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </swiper-slide> </swiper-container> <h2 id="image-comparison-slider">Image Comparison Slider</h2> <p>This is a simple image comparison slider. It uses the <a href="https://img-comparison-slider.sneas.io/">img-comparison-slider</a> library. Check the <a href="https://img-comparison-slider.sneas.io/examples.html">examples page</a> for more information of what you can achieve with it.</p> <img-comparison-slider> <figure slot="first"> <picture> <source class="responsive-img-srcset" srcset="/assets/img/prof_pic-480.webp 480w,/assets/img/prof_pic-800.webp 800w,/assets/img/prof_pic-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/prof_pic.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="lazy" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> <figure slot="second"> <picture> <source class="responsive-img-srcset" srcset="/assets/img/prof_pic_color-480.webp 480w,/assets/img/prof_pic_color-800.webp 800w,/assets/img/prof_pic_color-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/prof_pic_color.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="lazy" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </img-comparison-slider>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="images"/><summary type="html"><![CDATA[this is what advanced image components could look like]]></summary></entry><entry><title type="html">a post with vega lite</title><link href="https://pedrotajia.com/blog/2024/vega-lite/" rel="alternate" type="text/html" title="a post with vega lite"/><published>2024-01-27T00:20:00+00:00</published><updated>2024-01-27T00:20:00+00:00</updated><id>https://pedrotajia.com/blog/2024/vega-lite</id><content type="html" xml:base="https://pedrotajia.com/blog/2024/vega-lite/"><![CDATA[<p>This is an example post with some <a href="https://vega.github.io/vega-lite/">vega lite</a> code.</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">vega_lite
-</span><span class="sb">{
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "A dot plot showing each movie in the database, and the difference from the average movie rating. The display is sorted by year to visualize everything in sequential order. The graph is for all Movies before 2019.",
-  "data": {
-    "url": "https://raw.githubusercontent.com/vega/vega/main/docs/data/movies.json"
-  },
-  "transform": [
-    {"filter": "datum['IMDB Rating'] != null"},
-    {"filter": {"timeUnit": "year", "field": "Release Date", "range": [null, 2019]}},
-    {
-      "joinaggregate": [{
-        "op": "mean",
-        "field": "IMDB Rating",
-        "as": "AverageRating"
-      }]
-    },
-    {
-      "calculate": "datum['IMDB Rating'] - datum.AverageRating",
-      "as": "RatingDelta"
-    }
-  ],
-  "mark": "point",
-  "encoding": {
-    "x": {
-      "field": "Release Date",
-      "type": "temporal"
-    },
-    "y": {
-      "field": "RatingDelta",
-      "type": "quantitative",
-      "title": "Rating Delta"
-    },
-    "color": {
-      "field": "RatingDelta",
-      "type": "quantitative",
-      "scale": {"domainMid": 0},
-      "title": "Rating Delta"
-    }
-  }
-}</span>
-<span class="p">```</span>
-</code></pre></div></div> <p>Which generates:</p> <pre><code class="language-vega_lite">{
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "A dot plot showing each movie in the database, and the difference from the average movie rating. The display is sorted by year to visualize everything in sequential order. The graph is for all Movies before 2019.",
-  "data": {
-    "url": "https://raw.githubusercontent.com/vega/vega/main/docs/data/movies.json"
-  },
-  "transform": [
-    {"filter": "datum['IMDB Rating'] != null"},
-    {"filter": {"timeUnit": "year", "field": "Release Date", "range": [null, 2019]}},
-    {
-      "joinaggregate": [{
-        "op": "mean",
-        "field": "IMDB Rating",
-        "as": "AverageRating"
-      }]
-    },
-    {
-      "calculate": "datum['IMDB Rating'] - datum.AverageRating",
-      "as": "RatingDelta"
-    }
-  ],
-  "mark": "point",
-  "encoding": {
-    "x": {
-      "field": "Release Date",
-      "type": "temporal"
-    },
-    "y": {
-      "field": "RatingDelta",
-      "type": "quantitative",
-      "title": "Rating Delta"
-    },
-    "color": {
-      "field": "RatingDelta",
-      "type": "quantitative",
-      "scale": {"domainMid": 0},
-      "title": "Rating Delta"
-    }
-  }
-}
-</code></pre> <p>This plot supports both light and dark themes.</p>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="charts"/><summary type="html"><![CDATA[this is what included vega lite code could look like]]></summary></entry></feed>
+</code></pre></div></div>]]></content><author><name></name></author><summary type="html"><![CDATA[We’re sharing updates across our Gemini family of models and a glimpse of Project Astra, our vision for the future of AI assistants.]]></summary></entry><entry><title type="html">Displaying External Posts on Your al-folio Blog</title><link href="https://pedrotajia.com/blog/2022/displaying-external-posts-on-your-al-folio-blog/" rel="alternate" type="text/html" title="Displaying External Posts on Your al-folio Blog"/><published>2022-04-23T23:20:09+00:00</published><updated>2022-04-23T23:20:09+00:00</updated><id>https://pedrotajia.com/blog/2022/displaying-external-posts-on-your-al-folio-blog</id><content type="html" xml:base="https://pedrotajia.com/blog/2022/displaying-external-posts-on-your-al-folio-blog/"><![CDATA[<h3>External Posts on Your al-folio Blog</h3> <p>If you prefer publishing blog posts on medium.com or other external sources, starting version v0.5.0, <a href="https://github.com/alshedivat/al-folio">al-folio</a> lets you to display your external posts in the blog feed of your website! 🎉🎉</p> <p>Configuring external sources of super simple. After upgrading to v0.5.0, just add the following section to your _config.yml:</p> <pre>external_sources:<br />  - name: medium.com  # name of the source (arbitrary string)<br />    rss_url: <a href="https://medium.com/@al-folio/feed">https://medium.com/@&lt;your-medium-username&gt;/feed</a></pre> <p>The example above adds your medium.com blog post feed as an external source. But you can add arbitrary RSS feeds as sources.</p> <p>Any questions or suggestions? 👉 Start <a href="https://github.com/alshedivat/al-folio/discussions">a discussion on GitHub</a>!</p> <p><img src="https://medium.com/_/stat?event=post.clientViewed&amp;referrerSource=full_rss&amp;postId=b60a1d241a0a" width="1" height="1" alt=""/></p>]]></content><author><name></name></author></entry></feed>
