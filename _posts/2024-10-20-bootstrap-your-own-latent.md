@@ -45,10 +45,16 @@ This is done by training the model to output vector representations that are clo
 
 **Example:**
 Imagine the task to create a model that discriminate between animals and non-animals. The inputs for the model will be an image of a dog, cat and a watermelon. The **anchor example $x^a$**(dog), **positive example $x^+$** (cat) and the **negative example $x^-$** (watermelon). The model which has a CNN denoted as $f_\theta$ (CNN is the one that gets the structure and meaning of the image) and a projection $g_\theta$ (a projection head is applied to map the representations of $f_\theta$ to its loss function). When the image of a dog and a cat is imputed to the model it should output similar vector representations
-![Example of similar example](/assets/bootstrap-your-own-latent/CL-Explication-positive.svg)
+<!-- ![Example of similar example](/assets/bootstrap-your-own-latent/CL-Explication-positive.svg) -->
+<p align="center">
+    <img src="/assets/bootstrap-your-own-latent/CL-Explication-positive.svg" style="width:60%;"/>
+</p>
 
 And vice-versa when the negative example is inputted to the model the vector representation is completely different and far from the representation of the anchor image.
-![Example of different example](/assets/bootstrap-your-own-latent/CL-Explication-negative.svg)
+<!-- ![Example of different example](/assets/bootstrap-your-own-latent/CL-Explication-negative.svg) -->
+<p align="center">
+    <img src="/assets/bootstrap-your-own-latent/CL-Explication-negative.svg" style="width:60%;"/>
+</p>
 
 The paper [A Simple Framework for Contrastive Learning of Visual Representations](https://arxiv.org/pdf/2002.05709)(SimCLR) is the foundation on implementing contrastive methods for self-supervised learning. In the paper SimCLR was introduced a loss called **NT-Xent** which was originally inspired on the **InfoNCE** just having $\tau$ temperature variable as a modification.
 
@@ -75,7 +81,7 @@ The model is trained by the online network to predict the target network represe
 
 <!-- ![First augmentation Example](/assets/bootstrap-your-own-latent/Augmentation_1.svg) -->
 <p align="center">
-    <img src="/assets/bootstrap-your-own-latent/Augmentation_1.svg" style="width:80%;"/>
+    <img src="/assets/bootstrap-your-own-latent/Augmentation_1.svg" style="width:60%;"/>
 </p>
 To generate this augmented views, we create 2 distortionated copies form an input image, by applying two sets of data augmentation operations. The transformation includes
 
@@ -116,13 +122,13 @@ _Credits: [Bootstrap your own latent: A new approach to self-supervised Learning
 ### Training
 
 BYOL is train to minimizes the similarity loss between $q_{\theta}(z_{\theta})$ and $sq(z_{\xi}^{'})$. The loss function is defined as:
-<span style="font-size: 1.2em;">
+<!-- <span style="font-size: 1.2em;"> -->
 
 $$
 \mathcal{L}_{\theta, \xi} \triangleq \left\| \overline{q_{\theta}(z_0)} - \overline{z'_{\xi}} \right\|_2^2 = 2 - 2 \cdot \frac{\langle q_{\theta}(z_0), z'_{\xi} \rangle}{\| q_{\theta}(z_0) \|_2 \cdot \| z'_{\xi} \|_2}
 $$
 
-</span>
+<!-- </span> -->
 
 $q_{\theta}(z_{\theta})$ and $z_{\xi}^{'}$ are normalized to be unit vectors,
 
@@ -152,13 +158,13 @@ $$
 
 by feeding $v'$ to the online network and $v$ to the target network.
 <br />
-<span style='font-size: 1.2em;'>
+<!-- <span style='font-size: 1.2em;'> -->
 
 $$
 \mathcal{L}^{BYOL}_{\theta, \xi} = \mathcal{L}_{\theta,\xi} + \tilde{\mathcal{L}}_{\theta,\xi}
 $$
 
-</span>
+<!-- </span> -->
 
 The symmetrization of the loss makes each network, online and target have the same data to learn from. Since both networks share the same data it ensures that will have an equal contribution to the total loss. This promotes more robust and generalized features, since the model captures a wider range of data variations.
 
@@ -168,7 +174,6 @@ The symmetrization of the loss makes each network, online and target have the sa
 </p>
 
 For each training step is performed a $optimatizer$ algorithm to minimize $\mathcal{L}^{BYOL}_{\theta, \xi}$ with respect only to $\theta$.
-<span>
 
 $$
 {\theta}\longleftarrow\text{optimizer}(\theta, \nabla_{\theta}{\tilde{\mathcal{L}}_{\theta,\xi}}, {\eta})
@@ -178,7 +183,6 @@ $$
 {\xi}\longleftarrow{\tau}{\xi}+(1-\tau){\theta}
 $$
 
-</span>
 > $\eta$ is the learning rate
 
 In the framework BYOL the [**LARS _optimizer_**](https://arxiv.org/pdf/1708.03888v3) is used update $\theta$, with a cosine decay learning rate schedule, more information on the [BYOL paper](https://arxiv.org/pdf/2006.07733). After the training, the encoder of the online network $f_{\theta}$ is used to produce representations.
