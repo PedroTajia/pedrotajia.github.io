@@ -86,8 +86,8 @@ bing_site_verification: # out your bing-site-verification ID (Bing Webmaster)
 # Blog
 # -----------------------------------------------------------------------------
 
-blog_name: al-folio # blog_name will be displayed in your blog page
-blog_description: a simple whitespace theme for academics
+blog_name: Exploring Artificial Intelligence # blog_name will be displayed in your blog page
+blog_description: This blog explores artificial intelligence, from core concepts to modern developments, focusing on how intelligent systems learn, reason, and interact with the world.
 permalink: /blog/:year/:title/
 lsi: false # produce an index for related posts
 
@@ -256,8 +256,8 @@ jekyll-archives:
   books:
     enabled: [year, tags, categories] # enables year, tag and category archives (remove if you need to disable one of them).
 
-display_tags: ["formatting", "images", "links", "math", "code", "blockquotes"] # these tags will be displayed on the front page of your blog
-display_categories: ["external-services"] # these categories will be displayed on the front page of your blog
+display_tags: [Explainable AI, Deep Learning, Self Supervised] # these tags will be displayed on the front page of your blog
+# display_categories: ["external-services"] # these categories will be displayed on the front page of your blog
 
 # -----------------------------------------------------------------------------
 # Jekyll Scholar

@@ -45,12 +45,14 @@ This is done by training the model to output vector representations that are clo
 
 **Example:**
 Imagine the task to create a model that discriminate between animals and non-animals. The inputs for the model will be an image of a dog, cat and a watermelon. The **anchor example $x^a$**(dog), **positive example $x^+$** (cat) and the **negative example $x^-$** (watermelon). The model which has a CNN denoted as $f_\theta$ (CNN is the one that gets the structure and meaning of the image) and a projection $g_\theta$ (a projection head is applied to map the representations of $f_\theta$ to its loss function). When the image of a dog and a cat is imputed to the model it should output similar vector representations
+
 <!-- ![Example of similar example](/assets/bootstrap-your-own-latent/CL-Explication-positive.svg) -->
 <p align="center">
     <img src="/assets/bootstrap-your-own-latent/CL-Explication-positive.svg" style="width:60%;"/>
 </p>
 
 And vice-versa when the negative example is inputted to the model the vector representation is completely different and far from the representation of the anchor image.
+
 <!-- ![Example of different example](/assets/bootstrap-your-own-latent/CL-Explication-negative.svg) -->
 <p align="center">
     <img src="/assets/bootstrap-your-own-latent/CL-Explication-negative.svg" style="width:60%;"/>
@@ -122,6 +124,7 @@ _Credits: [Bootstrap your own latent: A new approach to self-supervised Learning
 ### Training
 
 BYOL is train to minimizes the similarity loss between $q_{\theta}(z_{\theta})$ and $sq(z_{\xi}^{'})$. The loss function is defined as:
+
 <!-- <span style="font-size: 1.2em;"> -->
 
 $$
@@ -158,6 +161,7 @@ $$
 
 by feeding $v'$ to the online network and $v$ to the target network.
 <br />
+
 <!-- <span style='font-size: 1.2em;'> -->
 
 $$
