@@ -3,8 +3,12 @@ layout: post
 title: "Contrastive Deep Explanations"
 author: Pedro Tajia
 tags: [Explainable AI, Deep Learning]
-image: /assets/contrastive-deep-explanations/Preview.svg
+# image: /assets/contrastive-deep-explanations/Preview.svg
 ---
+<figure style="max-width:1000px; margin:auto;">
+  <img src="assets/contrastive-deep-explanations/Preview.svg" />
+
+</figure>
 
 <script
   type="text/javascript"
@@ -20,15 +24,26 @@ Note: I will interchangeably use model or a neural network.
 
 In this article, I will explain the paper [CDeepEx: Contrastive Deep Explanations](https://rlair.cs.ucr.edu/papers/docs/cdeepex.pdf), which introduces a method capable of answer the question of _Why did you not choose answer B over A_ and provided an overview of the concepts that a network learn.
 
-![Contrastive Example](/assets/contrastive-deep-explanations/Contrastive_example.svg)
-
+<!-- ![Contrastive Example](/assets/contrastive-deep-explanations/Contrastive_example.svg) -->
+<figure style="max-width:700px; margin:auto;">
+  <img src="/assets/contrastive-deep-explanations/Contrastive_example.svg" />
+  <!-- <figcaption>
+    Contrastive Example
+  </figcaption> -->
+</figure>
 **Figure 1**: This is an example of a classifier trained on the MNIST dataset. Its input is an image of a handwritten digit, for example the number **3** and the model predicts this number with a confidence of _72%_. The paper address the question of \*Why the classifier predicts the number **3** instead of the number **9\*** by showing how the image 3 can be transformed to make the classifier predict this new image as the number **9**.
 
 ## 2. CDeepEx: Contrastive Deep Explanations
 
 To archive contrastive explanation i.e., to answer _Why did you not choose answer B over A_, the proposed method uses a generative latent-space model. This involves using a Wasserstein Generative Adversarial Networks (WGAN) or Variational AutoEncoder (VAE). The models learn a latent-space of the data, where is captures the fundamental information that compose the data. The latent-space can be viewed as a bridge between the network and human understanding of the data. The idea is to use a WGAN or VAE to learn this latent-space for later than be used to generate images that can explain a model's reasoning process.
 
-![GAN-VAE](/assets/contrastive-deep-explanations/GAN-VAE.svg)
+<!-- ![GAN-VAE](/assets/contrastive-deep-explanations/GAN-VAE.svg) -->
+<figure style="max-width:700px; margin:auto;">
+  <img src="/assets/contrastive-deep-explanations/GAN-VAE.svg" />
+  <!-- <figcaption>
+    GAN-VAE
+  </figcaption> -->
+</figure>
 
 **Figure 2**: These are two generative models. (a) is a variational Autoencoder (VAE), where an image is inputted on the encoder, and using a **code**, it generates a latent representation where the input (image) is transformed into a lower- dimension that preserves the essential information of the input. The decoder uses this latent representation to reconstruct an image that is similar to the input. (b) Is a Wasserstein GAN (WGAN) where **random noise** is used to generate images that look similar from the data, and a discrimination is used to predict how real an image it is.
 
@@ -44,28 +59,56 @@ Thus, we can formulate the question of
 _Why did $D$ produce label $y_{true}$ and not label $y_{probe}$ for the input $\mathcal{I}$?\_.
 
 To generate explanation:
-![Algorithm_1-Algorithm_2](/assets/contrastive-deep-explanations/Generate_explanation.png)
+<!-- ![Algorithm_1-Algorithm_2](/assets/contrastive-deep-explanations/Generate_explanation.png) -->
+<figure style="max-width:700px; margin:auto;">
+  <img src="/assets/contrastive-deep-explanations/Generate_explanation.png" />
+  <!-- <figcaption>
+    Algorithm_1-Algorithm_2
+  </figcaption> -->
+</figure>
 
 In these algorithms, the first step is to train a generator $G$ that, given a latent representation of real values of size $k$, outputs an image of size $n$. After training the generator, we need to find a representation $z_0$ that, when inputted to $G$ generates an image similar to $\mathcal{I}$. Initially, $z_0$ is sampled from a normal distribution $\mathcal{N}(0,1)$ with mean 0 with variance of 1. We then iterate until the generated image $G(z)$ is close to $\mathcal{I}$. Inside the loop, $z_0$ is updated by gradient decent.
 
 After finding the correct latent representation $G(z_0)$ such that generates an image similar to $\mathcal{I}$, we get $\Delta_{z0}$ as the difference between $G$ and $\mathcal{I}$.
 
 To find $z_e$:
-![Getting_Ze](/assets/contrastive-deep-explanations/Getting_Ze.png)
-
+<!-- ![Getting_Ze](/assets/contrastive-deep-explanations/Getting_Ze.png) -->
+<figure style="max-width:700px; margin:auto;">
+  <img src="/assets/contrastive-deep-explanations/Getting_Ze.png" />
+  <!-- <figcaption>
+    Getting_Ze
+  </figcaption> -->
+</figure>
 After finding $z_e$ that minimizes L2 distance between $z$ and $z_0$, and that is in between the constraints, we compute the difference between $G(z_0) - G(z_e)$. This is done because we want to find a latent vector $z_e$ such that the resultant image has a similar style to the generated image from $z_0$, but is classified as our label of interest. By taking the difference between $G(z_0) - G(z_e)$, the overlapping parts are unchanged and parts that are different stands out.
 
-![proposed_method](/assets/contrastive-deep-explanations/Proposed_approach.svg)
+<!-- ![proposed_method](/assets/contrastive-deep-explanations/Proposed_approach.svg) -->
+<figure style="max-width:700px; margin:auto;">
+  <img src="/assets/contrastive-deep-explanations/Proposed_approach.svg" />
+  <!-- <figcaption>
+    proposed_method
+  </figcaption> -->
+</figure>
 **Figure 3**: An alternative way to the working the algorithm 1 and 2.
 
 ### 2.1. Another way to see it
 
 The suggested methods work well on the MNIST dataset, showing the transformation needed for _Image A_ classified as the _Number 8_ to be classified as the _Number 3_. In the experiment is show different pair of number and the transformation need to be classified into different class.
-![Figure2_mnist_experiment](/assets/contrastive-deep-explanations/Figure2_mnist_experiment.png)
-
+<!-- ![Figure2_mnist_experiment](/assets/contrastive-deep-explanations/Figure2_mnist_experiment.png) -->
+<figure style="max-width:700px; margin:auto;">
+  <img src="/assets/contrastive-deep-explanations/Figure2_mnist_experiment.png" />
+  <!-- <figcaption>
+    Getting_Ze
+  </figcaption> -->
+</figure>
 Instead of representing the transformation as red or blue for regions that should be added or removed, the transformations are represented as a timeline that shows the sequence of transformation needed to covert _Image 9_ to converted into _Image 3_.
 
-![New proposed_method](/assets/contrastive-deep-explanations/New_Approach.svg)
+<!-- ![New proposed_method](/assets/contrastive-deep-explanations/New_Approach.svg) -->
+<figure style="max-width:700px; margin:auto;">
+  <img src="/assets/contrastive-deep-explanations/New_Approach.svg" />
+  <!-- <figcaption>
+    Getting_Ze
+  </figcaption> -->
+</figure>
 **Figure 4**: The framework to view the problem differently. (a) Use a VAE (Decoder) or WGAN (Generator) to generate images. Start with an _image 9_ from the MNIST dataset and update the latent vector $z$ to be close to this image, obtaining $z_0$. (b) The updated latent vector $z_0$ generates an image classified as _class 9_. We update the latent vector $z_0$ to get $z_e$ which, when generated, is predicted by the classifier as the _class 3_. During the process to update $z_0$ from _Image 9_ to _Image 3_, we got these sequence of transformations.
 
 **Figure 4**: Part (a)
