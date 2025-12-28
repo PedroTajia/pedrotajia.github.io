@@ -1,14 +1,17 @@
 ---
 layout: post
-title: "Bootstrap Your Own Latent: Self-Supervised Learning Without 
-Contrastive Learning"
+title: "Bootstrap Your Own Latent: Self-Supervised Learning Without Contrastive Learning"
 author: Pedro Tajia
 tags: [Self Supervised, Deep Learning]
 image: /assets/bootstrap-your-own-latent/BYOL-Architecture.png
 ---
-<script type="text/javascript" async
-     src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-</script>
+
+<script
+  type="text/javascript"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+></script>
+
 
 # Introduction
 

@@ -5,9 +5,12 @@ author: Pedro Tajia
 tags: [Explainable AI, Deep Learning]
 image: /assets/contrastive-deep-explanations/Preview.svg
 ---
-<script type="text/javascript" async
-     src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-</script>
+
+<script
+  type="text/javascript"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+></script>
 
 ## 1. Introduction 
 As the creation of large deep learning models has advanced, researchers have become curious about what happens inside these models. Even though many people use these models in their daily basis like grammar checking, self-driving cars, weather prediction, or more specialized areas such as cancer detection or predicting a protein's 3D structure from its amino acid sequence, etc., nobody really knows how these models work internally. In cases where deep learning is used on medicine or self-driving cars, it is particularly important to know the reasoning behind the model’s decisions—for example, understanding why did not the model chose prediction **B** over the prediction **A**. 
