@@ -3,7 +3,7 @@ layout: post
 title: "Bootstrap Your Own Latent: Self-Supervised Learning Without Contrastive Learning"
 author: Pedro Tajia
 tags: [Self Supervised, Deep Learning]
-image: /assets/bootstrap-your-own-latent/BYOL-Architecture.png
+# image: /assets/bootstrap-your-own-latent/BYOL-Architecture.png
 ---
 
 <script
@@ -11,6 +11,10 @@ image: /assets/bootstrap-your-own-latent/BYOL-Architecture.png
   async
   src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
 ></script>
+
+<p align="center">
+    <img src="/assets/bootstrap-your-own-latent/BYOL-Architecture.png" style="width:80%;"/>
+</p>
 
 # Introduction
 
@@ -69,8 +73,10 @@ In order to understand how **BYOL** archive self-supervised learning without con
 BYOL have two neural networks, named as _online_ and _target_ networks that are able to interact to each other.
 The model is trained by the online network to predict the target network representation with the same image using different augmented views.
 
-![First augmentation Example](/assets/bootstrap-your-own-latent/Augmentation_1.svg)
-
+<!-- ![First augmentation Example](/assets/bootstrap-your-own-latent/Augmentation_1.svg) -->
+<p align="center">
+    <img src="/assets/bootstrap-your-own-latent/Augmentation_1.svg" style="width:80%;"/>
+</p>
 To generate this augmented views, we create 2 distortionated copies form an input image, by applying two sets of data augmentation operations. The transformation includes
 
 > - random cropping: a random patch of the image is selected, with an area uniformly sampled between 8% and 100% of that of the original image, and an aspect ratio logarithmically sampled between 3/4 and 4/3. This patch is then resized to the target size of 224 × 224 using bicubic interpolation;
@@ -82,9 +88,12 @@ To generate this augmented views, we create 2 distortionated copies form an inpu
 
 _Credits: [Bootstrap your own latent: A new approach to self-supervised Learning](https://arxiv.org/pdf/2006.07733)_
 
-These augmentations double the examples, if we have a batch of 32 images, we end up with 64 images per batch.  
-![Second augmentation Example](/assets/bootstrap-your-own-latent/Augmentation_conbination.jpg)
+These augmentations double the examples, if we have a batch of 32 images, we end up with 64 images per batch.
 
+<!-- ![Second augmentation Example](/assets/bootstrap-your-own-latent/Augmentation_conbination.jpg) -->
+<p align="center">
+    <img src="/assets/bootstrap-your-own-latent/Augmentation_conbination.jpg" style="width:80%;"/>
+</p>
 Data augmentation is used to force the model to learn invariant representations which means that independently of the transformation imposed to an input the model will generate the same representations.
 
 The online network have parameters $\theta$ updated by back propagation and is made from three components: an encoder $f_{\theta}$, projector $g_{\theta}$ and predictor $q_{\theta}$. The target network have an encoder $f_{\xi}$ and projector $g_{\xi}$. The parameters $\xi$ of the target network are not updated by back propagation, but instead the model is updated by _Exponential Moving Average_ (EMA) of the online parameters $\theta$. The parameters of the target network can be seen a **smoothed version** of the online network.
@@ -97,7 +106,11 @@ The representation head uses a ResNet-50 for $f_{\theta}$ and $f_{\xi}$. The Res
 
 > The projection and predictions heads are _multi-layer perceptron_ (MLP)
 
-![Image of the architecture of BYOL, image from the original paper](/assets/bootstrap-your-own-latent/BYOL-Architecture.png)
+<!-- ![Image of the architecture of BYOL, image from the original paper](/assets/bootstrap-your-own-latent/BYOL-Architecture.png) -->
+<p align="center">
+    <img src="/assets/bootstrap-your-own-latent/BYOL-Architecture.png" style="width:80%;"/>
+</p>
+
 _Credits: [Bootstrap your own latent: A new approach to self-supervised Learning](https://arxiv.org/pdf/2006.07733)_
 
 ### Training
@@ -148,7 +161,11 @@ $$
 </span>
 
 The symmetrization of the loss makes each network, online and target have the same data to learn from. Since both networks share the same data it ensures that will have an equal contribution to the total loss. This promotes more robust and generalized features, since the model captures a wider range of data variations.
-![An illustration about symmetrization of the loss](/assets/bootstrap-your-own-latent/Symmetry_loss.svg)
+
+<!-- ![An illustration about symmetrization of the loss](/assets/bootstrap-your-own-latent/Symmetry_loss.svg) -->
+<p align="center">
+    <img src="/assets/bootstrap-your-own-latent/Symmetry_loss.svg" style="width:80%;"/>
+</p>
 
 For each training step is performed a $optimatizer$ algorithm to minimize $\mathcal{L}^{BYOL}_{\theta, \xi}$ with respect only to $\theta$.
 <span>
@@ -172,7 +189,11 @@ These are the two main reasons why BYOL do not collapse.
 
 In the paper [On the Importance of Asymmetry for Siamese Representation Learning](https://arxiv.org/abs/2204.00613) explained the importance of the **asymmetry designs** (BYOL) in self-supervised frameworks. The representations outputted by the model improves when the **source encoder** in this case the online encoder it updated via gradient decent and the **target encoder** is updated by the source encoder weights. The outputs of target act as a judge of the quality of the output source. Also in the paper was proven in some level that _keeping a relatively lower variance in target encodings than source can help representation learning_. BYOL archive this low variance by updating the weight of the target network using EMA.
 
-![Showing the importance of the variance between source and target encoders](/assets/bootstrap-your-own-latent/Asymmetry_for_siamese.png)
+<!-- ![Showing the importance of the variance between source and target encoders](/assets/bootstrap-your-own-latent/Asymmetry_for_siamese.png) -->
+<p align="center">
+    <img src="/assets/bootstrap-your-own-latent/Asymmetry_for_siamese.png" style="width:80%;"/>
+</p>
+
 _Credits: [On the Importance of Asymmetry for Siamese Representation Learning](https://arxiv.org/abs/2204.00613)_
 
 In the post [Understanding self-supervised and contrastive learning with "Bootstrap Your Own Latent" (BYOL)](https://imbue.com/research/2020-08-24-understanding-self-supervised-contrastive-learning/) is explained the importance of **Batch Normalization** in the prevention of _collapse_. They notice that if batch norm was not in the MLP the model will perform poorly. Batch norm standardize the activations in the network based on the batch's mean and variance, which can vary between batches. Since the online and target network have different parameters in the batch norm layer, the output representation of the online and target network will also differ. These slightly differences in the outputs force the model to generate rich representations. However, is also highlighted that is worth avoiding batch normalization and use other alternatives like **layer normalization** or **weight standardization with group normalization**.
@@ -180,24 +201,47 @@ In the post [Understanding self-supervised and contrastive learning with "Bootst
 ## Results
 
 The BYOL framework archive higher performance than the state-of-the-art contrastive methods in the ImageNet dataset.
-![Performance of BYOL on the ImageNet (linear evaluation)](/assets/bootstrap-your-own-latent/Performance-of-BYOL-on-ImageNet.png)
+
+<!-- ![Performance of BYOL on the ImageNet (linear evaluation)](/assets/bootstrap-your-own-latent/Performance-of-BYOL-on-ImageNet.png) -->
+<p align="center">
+    <img src="/assets/bootstrap-your-own-latent/Performance-of-BYOL-on-ImageNet.png" style="width:80%;"/>
+</p>
+
 _Credits: [Bootstrap your own latent: A new approach to self-supervised Learning](https://arxiv.org/pdf/2006.07733)_
 
 BYOL is evaluated in both **linear evaluation** and **fine-tuning evaluation**. The linear evaluation consists on training a multinomial logistic regression on top of the frozen representations outputted by the encoder $f_\theta$ (The encoder weights are not trained in this evaluation.).
-![An example of linear model](/assets/bootstrap-your-own-latent/Linear_evaluation.svg)
+
+<!-- ![An example of linear model](/assets/bootstrap-your-own-latent/Linear_evaluation.svg) -->
+<p align="center">
+    <img src="/assets/bootstrap-your-own-latent/Linear_evaluation.svg" style="width:80%;"/>
+</p>
 
 To fine-tune evaluation consist on initialize $f_\theta$ parameters with the pre-trained representation, and retrain the encoder alongside a classifier on labeled dataset.
-![An example of fine-tune a model](/assets/bootstrap-your-own-latent/Fine-tuning.svg)
+
+<!-- ![An example of fine-tune a model](/assets/bootstrap-your-own-latent/Fine-tuning.svg) -->
+<p align="center">
+    <img src="/assets/bootstrap-your-own-latent/Fine-tuning.svg" style="width:80%;"/>
+</p>
 
 > Note: For fine-tune there are many other types of architecture that can be used to fine tune this model.
 
 BYOL was pre-trained on ImageNet by 300 epochs. After pre-trained, the model is evaluated on many downstream tasks by using linear and fine-tune evaluations.
-![Table 3: Transfer learning results from ImageNet (IN) with the standard ResNet-50 architecture.](/assets/bootstrap-your-own-latent/Table_3_result.png)
+
+<!-- ![Table 3: Transfer learning results from ImageNet (IN) with the standard ResNet-50 architecture.](/assets/bootstrap-your-own-latent/Table_3_result.png) -->
+<p align="center">
+    <img src="/assets/bootstrap-your-own-latent/Table_3_result.png" style="width:80%;"/>
+</p>
+
 _Credits: [Bootstrap your own latent: A new approach to self-supervised Learning](https://arxiv.org/pdf/2006.07733)_
 This result show competitive results to the Supervised training of RestNet-50 in ImageNet and surpass the performance of contrastive learning models.
 
 In these tables shows the robustness of BYOL against batch size compared to SimCLR. Also show the robustness for data augmentations showing that is not that sensitive to the choice of image augmentation like SimCLR.
-![Figure 3: Decrease in top-1 accuracy (in % points) of BYOL and our own reproduction of SimCLR at 300 epochs, under linear evaluation on ImageNet.](/assets/bootstrap-your-own-latent/Figure_2.png)
+
+<!-- ![Figure 3: Decrease in top-1 accuracy (in % points) of BYOL and our own reproduction of SimCLR at 300 epochs, under linear evaluation on ImageNet.](/assets/bootstrap-your-own-latent/Figure_2.png) -->
+<p align="center">
+    <img src="/assets/bootstrap-your-own-latent/Figure_2.png" style="width:80%;"/>
+</p>
+
 _Credits: [Bootstrap your own latent: A new approach to self-supervised Learning](https://arxiv.org/pdf/2006.07733)_
 
 ## Remarks

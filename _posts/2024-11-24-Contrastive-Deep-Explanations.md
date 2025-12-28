@@ -13,7 +13,7 @@ tags: [Explainable AI, Deep Learning]
 ></script>
 
 <p align="center">
-    <img src="assets/contrastive-deep-explanations/Preview.svg" style="width:60%;"/>
+    <img src="/assets/contrastive-deep-explanations/Preview.svg" style="width:80%;"/>
 </p>
 
 ## 1. Introduction
@@ -26,7 +26,7 @@ In this article, I will explain the paper [CDeepEx: Contrastive Deep Explanation
 
 <!-- ![Contrastive Example](/assets/contrastive-deep-explanations/Contrastive_example.svg) -->
 <p align="center">
-    <img src="/assets/contrastive-deep-explanations/Contrastive_example.svg" style="width:60%;"/>
+    <img src="/assets/contrastive-deep-explanations/Contrastive_example.svg" style="width:80%;"/>
 </p>
   <!-- <figcaption>
     Contrastive Example
@@ -39,7 +39,7 @@ To archive contrastive explanation i.e., to answer _Why did you not choose answe
 
 <!-- ![GAN-VAE](/assets/contrastive-deep-explanations/GAN-VAE.svg) -->
 <p align="center">
-    <img src="/assets/contrastive-deep-explanations/GAN-VAE.svg" style="width:60%;"/>
+    <img src="/assets/contrastive-deep-explanations/GAN-VAE.svg" style="width:80%;"/>
 </p>
 **Figure 2**: These are two generative models. (a) is a variational Autoencoder (VAE), where an image is inputted on the encoder, and using a **code**, it generates a latent representation where the input (image) is transformed into a lower- dimension that preserves the essential information of the input. The decoder uses this latent representation to reconstruct an image that is similar to the input. (b) Is a Wasserstein GAN (WGAN) where **random noise** is used to generate images that look similar from the data, and a discrimination is used to predict how real an image it is.
 
@@ -58,7 +58,7 @@ To generate explanation:
 
 <!-- ![Algorithm_1-Algorithm_2](/assets/contrastive-deep-explanations/Generate_explanation.png) -->
 <p align="center">
-    <img src="/assets/contrastive-deep-explanations/Generate_explanation.png" style="width:60%;"/>
+    <img src="/assets/contrastive-deep-explanations/Generate_explanation.png" style="width:80%;"/>
 </p>
   <!-- <figcaption>
     Algorithm_1-Algorithm_2
@@ -72,7 +72,7 @@ To find $z_e$:
 
 <!-- ![Getting_Ze](/assets/contrastive-deep-explanations/Getting_Ze.png) -->
 <p align="center">
-    <img src="/assets/contrastive-deep-explanations/Getting_Ze.png" style="width:60%;"/>
+    <img src="/assets/contrastive-deep-explanations/Getting_Ze.png" style="width:80%;"/>
 </p>    
   <!-- <figcaption>
     Getting_Ze
@@ -81,7 +81,7 @@ After finding $z_e$ that minimizes L2 distance between $z$ and $z_0$, and that i
 
 <!-- ![proposed_method](/assets/contrastive-deep-explanations/Proposed_approach.svg) -->
 <p align="center">
-    <img src="/assets/contrastive-deep-explanations/Proposed_approach.svg" style="width:60%;"/>
+    <img src="/assets/contrastive-deep-explanations/Proposed_approach.svg" style="width:80%;"/>
 </p>
   <!-- <figcaption>
     proposed_method
@@ -94,7 +94,7 @@ The suggested methods work well on the MNIST dataset, showing the transformation
 
 <!-- ![Figure2_mnist_experiment](/assets/contrastive-deep-explanations/Figure2_mnist_experiment.png) -->
 <p align="center">
-    <img src="/assets/contrastive-deep-explanations/Figure2_mnist_experiment.png" style="width:60%;"/>
+    <img src="/assets/contrastive-deep-explanations/Figure2_mnist_experiment.png" style="width:80%;"/>
 </p> 
   <!-- <figcaption>
     Getting_Ze
@@ -103,7 +103,7 @@ Instead of representing the transformation as red or blue for regions that shoul
 
 <!-- ![New proposed_method](/assets/contrastive-deep-explanations/New_Approach.svg) -->
 <p align="center">
-    <img src="/assets/contrastive-deep-explanations/New_Approach.svg" style="width:60%;"/>
+    <img src="/assets/contrastive-deep-explanations/New_Approach.svg" style="width:80%;"/>
 </p>
   <!-- <figcaption>
     Getting_Ze
