@@ -122,13 +122,21 @@ disqus_shortname: al-folio # put your disqus shortname
 # External sources.
 # If you have blog posts published on medium.com or other external sources,
 # you can display them in your blog by adding a link to the RSS feed.
-# external_sources:
-#   - name: medium.com
-#     rss_url: https://medium.com/@al-folio/feed
-#   - name: Google Blog
-#     posts:
-#       - url: https://blog.google/technology/ai/google-gemini-update-flash-ai-assistant-io-2024/
-#         published_date: 2024-05-14
+external_sources:
+  # - name: medium.com
+  #   rss_url: https://medium.com/@al-folio/feed
+  - name: "AI Can Learn From Their Dreams: World Models"
+    posts:
+      - url: https://medium.com/@humansforai/ai-can-learn-from-their-dreams-world-models-3018fb21602b
+        published_date: 2025-05-21
+  - name: AI & ML in Autonomous Driving
+    posts:
+      - url: https://medium.com/@humansforai/ai-ml-in-autonomous-driving-3fbb992dcfc4
+        published_date: 2025-05-09
+  - name: "Self-Supervised Learning: What is it?"
+    posts:
+      - url: https://medium.com/@humansforai/self-supervised-learning-what-is-it-5d00fa1c8b8e
+        published_date: 2025-01-29
 
 # -----------------------------------------------------------------------------
 # Newsletter
