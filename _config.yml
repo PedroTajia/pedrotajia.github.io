@@ -126,23 +126,23 @@ external_sources:
   - name: "AI Can Learn From Their Dreams: World Models"
     posts:
       # - title: "AI Can Learn From Their Dreams: World Models"
-      url: https://medium.com/@humansforai/ai-can-learn-from-their-dreams-world-models-3018fb21602b
-      published_date: 2025-05-21
-      # tags: [Deep Learning, World Models]
+      - url: https://medium.com/@humansforai/ai-can-learn-from-their-dreams-world-models-3018fb21602b
+        published_date: 2025-05-21
+        tags: [Deep Learning, World Models]
 
   - name: "AI & ML in Autonomous Driving"
     posts:
       # - title: "AI & ML in Autonomous Driving"
-      url: https://medium.com/@humansforai/ai-ml-in-autonomous-driving-3fbb992dcfc4
-      published_date: 2025-05-09
-      # tags: [Deep Learning, World Models, Autonomous Driving]
+      - url: https://medium.com/@humansforai/ai-ml-in-autonomous-driving-3fbb992dcfc4
+        published_date: 2025-05-09
+        tags: [Deep Learning, World Models, Autonomous Driving]
 
   - name: "Self-Supervised Learning: What is it?"
     posts:
       # - title: "Self-Supervised Learning: What is it?"
-      url: https://medium.com/@humansforai/self-supervised-learning-what-is-it-5d00fa1c8b8e
-      published_date: 2025-01-29
-      # tags: [Deep Learning, Self Supervised]
+      - url: https://medium.com/@humansforai/self-supervised-learning-what-is-it-5d00fa1c8b8e
+        published_date: 2025-01-29
+        tags: [Deep Learning, Self Supervised]
 
 # -----------------------------------------------------------------------------
 # Newsletter
