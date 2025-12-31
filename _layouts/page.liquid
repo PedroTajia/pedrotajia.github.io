@@ -18,11 +18,15 @@ layout: default
     {{ content }}
   </article>
 
-  {% if page.related_publications %}
-    <h2>References</h2>
-    <div class="publications">
-      {% bibliography --cited_in_order %}
-    </div>
+  {% if page.references %}
+    <h2>{{ page.references_title | default: 'References' }}</h2>
+    <ul>
+      {% for ref in page.references %}
+        <li>
+          <a href="{{ ref.url }}" target="_blank" rel="noopener">{{ ref.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
   {% endif %}
 
   {% if site.giscus and page.giscus_comments %}

@@ -6,6 +6,13 @@ img: assets/img/sketch_dv2.png
 importance: 1
 category: work
 related_publications: true
+references:
+  - title: "Mastering Atari with Discrete World Models"
+    url: "https://arxiv.org/abs/2010.02193"
+  - title: "Mastering Diverse Domains through World Models"
+    url: "https://arxiv.org/abs/2301.04104"
+  - title: "Planning to Explore via Self-Supervised World Models"
+    url: "https://arxiv.org/abs/2005.05960"
 ---
 
 **MyDreamerV2** is a PyTorch reimplementation of _DreamerV2_ that focuses on understanding and extending world-model–based reinforcement learning. The project includes a faithful reproduction of the original DreamerV2 pipeline, an explicit implementation of **Plan2Explore** for intrinsic motivation, and selected architectural and training improvements inspired by **DreamerV3**.
