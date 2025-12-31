@@ -109,20 +109,6 @@ pagination:
       {% assign postlist = site.posts %}
     {% endif %}
 
-    {% assign wanted = "ai-can-learn-from-their-dreams-world-models|ai-ml-in-autonomous-driving|self-supervised-learning-what-is-it" | split: "|" %}
-    {% assign filtered = "" | split: "" %}
-
-    {% for post in postlist %}
-      {% if post.external_source %}
-        {% for key in wanted %}
-          {% if post.url contains key %}
-            {% assign filtered = filtered | push: post %}
-          {% endif %}
-        {% endfor %}
-      {% endif %}
-    {% endfor %}
-    {% assign postlist = filtered %}
-
     {% for post in postlist %}
 
     {% if post.external_source == blank %}
