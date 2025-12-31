@@ -106,7 +106,7 @@ ninja.data = [{
               window.location.href = "/books/the_godfather/";
             },},{id: "projects-mydreamerv2",
           title: 'MyDreamerv2',
-          description: "An reimplementation of the paper &quot;Mastering Atari with Discrete World Models&quot;",
+          description: "A reimplementation and extension of DreamerV2 with exploration via Plan2Explore and selected improvements from DreamerV3",
           section: "Projects",handler: () => {
               window.location.href = "/projects/MyDreamerv2/";
             },},{
