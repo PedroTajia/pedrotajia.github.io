@@ -108,7 +108,7 @@ ninja.data = [{
           title: 'MyDreamerv2',
           description: "An reimplementation of the paper &quot;Mastering Atari with Discrete World Models&quot;",
           section: "Projects",handler: () => {
-              window.location.href = "/projects/1_project/";
+              window.location.href = "/projects/MyDreamerv2/";
             },},{
         id: 'social-cv',
         title: 'CV',
