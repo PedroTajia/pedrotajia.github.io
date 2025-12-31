@@ -44,114 +44,37 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/teaching/";
           },
-        },{id: "post-ai-can-learn-from-their-dreams-world-models",
+        },{id: "post-just-a-moment",
         
-          title: 'AI Can Learn From Their Dreams: World Models <svg width="1.2rem" height="1.2rem" top=".5rem" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+          title: 'Just a moment... <svg width="1.2rem" height="1.2rem" top=".5rem" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
         
         description: "",
         section: "Posts",
         handler: () => {
           
-            window.open("https://medium.com/@humansforai/ai-can-learn-from-their-dreams-world-models-3018fb21602b?source=rss-6ad9409218f------2", "_blank");
+            window.open("https://medium.com/@humansforai/ai-can-learn-from-their-dreams-world-models-3018fb21602b", "_blank");
           
         },
-      },{id: "post-ai-amp-ml-in-autonomous-driving",
+      },{id: "post-just-a-moment",
         
-          title: 'AI &amp; ML in Autonomous Driving <svg width="1.2rem" height="1.2rem" top=".5rem" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+          title: 'Just a moment... <svg width="1.2rem" height="1.2rem" top=".5rem" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
         
         description: "",
         section: "Posts",
         handler: () => {
           
-            window.open("https://medium.com/@humansforai/ai-ml-in-autonomous-driving-3fbb992dcfc4?source=rss-6ad9409218f------2", "_blank");
+            window.open("https://medium.com/@humansforai/ai-ml-in-autonomous-driving-3fbb992dcfc4", "_blank");
           
         },
-      },{id: "post-byte-sized-ai-2",
+      },{id: "post-just-a-moment",
         
-          title: 'Byte-Sized AI 2 <svg width="1.2rem" height="1.2rem" top=".5rem" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
-        
-        description: "",
-        section: "Posts",
-        handler: () => {
-          
-            window.open("https://medium.com/@humansforai/byte-sized-ai-e1fc5500ea4a?source=rss-6ad9409218f------2", "_blank");
-          
-        },
-      },{id: "post-byte-sized-ai",
-        
-          title: 'Byte-Sized AI <svg width="1.2rem" height="1.2rem" top=".5rem" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+          title: 'Just a moment... <svg width="1.2rem" height="1.2rem" top=".5rem" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
         
         description: "",
         section: "Posts",
         handler: () => {
           
-            window.open("https://medium.com/@humansforai/byte-sized-ai-f5fdf838d5f8?source=rss-6ad9409218f------2", "_blank");
-          
-        },
-      },{id: "post-ai-plagiarism-detection",
-        
-          title: 'AI Plagiarism Detection <svg width="1.2rem" height="1.2rem" top=".5rem" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
-        
-        description: "",
-        section: "Posts",
-        handler: () => {
-          
-            window.open("https://medium.com/@humansforai/ai-plagiarism-detection-fc7f50c41c8c?source=rss-6ad9409218f------2", "_blank");
-          
-        },
-      },{id: "post-the-black-box-problem",
-        
-          title: 'The Black Box Problem <svg width="1.2rem" height="1.2rem" top=".5rem" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
-        
-        description: "",
-        section: "Posts",
-        handler: () => {
-          
-            window.open("https://medium.com/@humansforai/the-black-box-problem-c40d3c6f26fe?source=rss-6ad9409218f------2", "_blank");
-          
-        },
-      },{id: "post-male-is-to-architect-female-is-to-interior-decorator-word-embedding-gender-bias",
-        
-          title: 'Male is to Architect, Female is to Interior Decorator: Word Embedding Gender Bias... <svg width="1.2rem" height="1.2rem" top=".5rem" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
-        
-        description: "",
-        section: "Posts",
-        handler: () => {
-          
-            window.open("https://medium.com/@humansforai/male-is-to-architect-female-is-to-interior-decorator-word-embedding-gender-bias-01b775062413?source=rss-6ad9409218f------2", "_blank");
-          
-        },
-      },{id: "post-training-generative-ai-is-it-copyright-infringement",
-        
-          title: 'Training Generative AI: Is it Copyright Infringement? <svg width="1.2rem" height="1.2rem" top=".5rem" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
-        
-        description: "",
-        section: "Posts",
-        handler: () => {
-          
-            window.open("https://medium.com/@humansforai/training-generative-ai-is-it-copyright-infringement-0ea5c2ad46f7?source=rss-6ad9409218f------2", "_blank");
-          
-        },
-      },{id: "post-natural-language-processing-simplified",
-        
-          title: 'Natural Language Processing Simplified <svg width="1.2rem" height="1.2rem" top=".5rem" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
-        
-        description: "",
-        section: "Posts",
-        handler: () => {
-          
-            window.open("https://medium.com/@humansforai/natural-language-processing-simplified-49a7fe6c4dff?source=rss-6ad9409218f------2", "_blank");
-          
-        },
-      },{id: "post-self-supervised-learning-what-is-it",
-        
-          title: 'Self-Supervised Learning: What is it? <svg width="1.2rem" height="1.2rem" top=".5rem" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
-        
-        description: "",
-        section: "Posts",
-        handler: () => {
-          
-            window.open("https://medium.com/@humansforai/self-supervised-learning-what-is-it-5d00fa1c8b8e?source=rss-6ad9409218f------2", "_blank");
+            window.open("https://medium.com/@humansforai/self-supervised-learning-what-is-it-5d00fa1c8b8e", "_blank");
           
         },
       },{id: "post-contrastive-deep-explanations",
