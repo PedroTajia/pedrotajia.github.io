@@ -1,200 +1,171 @@
 {
   "basics": {
-    "name": "Albert Einstein",
-    "label": "Scientist",
+    "name": "Pedro Tajia",
+    "label": "Data Science Undergraduate",
     "image": "",
-    "email": "albert@einstein.de",
-    "phone": "(912) 123-4567",
-    "url": "https://alshedivat.github.io/al-folio/",
-    "summary": "A German-born theoretical physicist, widely ranked among the greatest and most influential scientists of all time",
-    "location": {
-      "address": "2712 Broadway St",
-      "postalCode": "CA 94115",
-      "city": "San Francisco",
-      "countryCode": "US",
-      "region": "California"
-    },
+    "email": "amavizcapedro@gmail.com",
+    "phone": "",
+    "url": "https://pedrotajia.com",
+    "summary": "Data Science undergraduate building machine learning systems and reinforcement learning projects.",
+
     "profiles": [
       {
-        "network": "Twitter",
-        "username": "AlbertEinstein",
-        "url": "https://twitter.com/AlbertEinstein"
+        "network": "LinkedIn",
+        "username": "pedro tajia",
+        "url": "linkedin.com/in/pedro tajia"
+      },
+      {
+        "network": "GitHub",
+        "username": "PedroTajia",
+        "url": "https://github.com/PedroTajia"
+      },
+      {
+        "network": "Website",
+        "username": "pedrotajia.com",
+        "url": "https://pedrotajia.com"
       }
     ]
   },
   "work": [
     {
-      "name": "Institute for Advanced Study, Princeton University",
-      "position": "Professor of Theoretical Physics",
-      "url": "https://example.com",
-      "startDate": "1933-01-01",
-      "endDate": "1955-01-01",
-      "summary": "Teaching at Palmer Physical Laboratory (now 302 Frist Campus Center). While not a professor at Princeton, I associated with the physics professors and continued to give lectures on campus.",
-      "highlights": ["Relativity"]
-    }
-  ],
-  "volunteer": [
+      "name": "New Hampshire Ball Bearings",
+      "position": "Manufacturing Engineering Intern",
+      "url": "",
+      "startDate": "2025-06",
+      "endDate": "2025-08",
+      "summary": "",
+      "highlights": [
+        "Reviewed and updated 300+ machine setup sheets for turning operations, incorporating current tooling, blueprint-based dimensions/tolerances, and material-specific parameters.",
+        "Optimized feeds, speeds, and tool selections to improve production efficiency, reducing cycle times by 5%–30% per part while maintaining quality specifications.",
+        "Collaborated with manufacturing engineers, line leads, and machine operators to resolve non-standard cases, validate changes, and standardize setup documentation across production lines."
+      ]
+    },
     {
-      "organization": "People's Climate March",
-      "location": "Zurich, Switzerland",
-      "position": "Lead Organizer",
-      "url": "https://example.com",
-      "startDate": "2014-04-01",
-      "endDate": "2015-07-01",
-      "summary": "Lead organizer for the New York City branch of the People's Climate March, the largest climate march in history.",
-      "highlights": ["Awarded 'Climate Hero' award by Greenpeace for my efforts organizing the march.", "Men of the year 2014 by Time magazine"]
+      "name": "AI Student Collective",
+      "position": "Machine Learning Engineer",
+      "url": "",
+      "startDate": "2024-10",
+      "endDate": "2025-01",
+      "summary": "",
+      "highlights": [
+        "Created an AI-powered e-commerce tool that generated optimized descriptions across 200+ products.",
+        "Engineered text and price/meta features and solved severe class imbalance (900k rows; 12k positives) using hard-negative undersampling; validated with stratified splits.",
+        "Built a Streamlit app for interactive inference with prompting, side-by-side diffs, and guardrails for factual and brand compliance."
+      ]
+    },
+    {
+      "name": "New Hampshire Ball Bearings",
+      "position": "Manufacturing Intern",
+      "url": "",
+      "startDate": "2024-06",
+      "endDate": "2024-08",
+      "summary": "",
+      "highlights": [
+        "Authored 3 illustrated operator manuals for retainer-line machinery in 3 months, tripling historical documentation output.",
+        "Collaborated directly with machine operators, line leads, and the manufacturing manager to capture tacit process knowledge and validate procedures.",
+        "Standardized machine operation, tool change, and part-inspection workflows using visual documentation, reducing process variance and ambiguity on the production line."
+      ]
     }
   ],
+  "volunteer": [],
   "education": [
     {
-      "institution": "University of Zurich, Zurich, Switzerland",
-      "location": "Zurich, Switzerland",
-      "url": "https://www.uzh.ch/",
-      "area": "Software Development",
-      "studyType": "PhD",
-      "startDate": "1905-01-01",
-      "endDate": "1905-01-01",
-      "score": "10",
-      "courses": ["Theory of Relativity"]
+      "institution": "University of California, Riverside",
+      "location": "Riverside, CA",
+      "url": "",
+      "area": "Data Science",
+      "studyType": "Bachelor",
+      "startDate": "",
+      "endDate": "Expected 2028",
+      "score": "",
+      "courses": []
     }
   ],
-  "awards": [
-    {
-      "title": "Nobel Prize in Physics",
-      "date": "1921-11-01",
-      "awarder": "Royal Swedish Academy of Sciences",
-      "url": "https://www.nobelprize.org/prizes/physics/1921/einstein/biographical/",
-      "summary": "The Nobel Prizes are five separate prizes that, according to Alfred Nobel's will of 1895, are awarded to 'those who, during the preceding year, have conferred the greatest benefit to humankind.'"
-    }
-  ],
+  "awards": [],
   "certificates": [
     {
-      "name": "Machine Learning",
-      "date": "2018-01-01",
-      "issuer": "Stanford University",
-      "url": "https://example.com",
-      "icon": "fa-solid fa-location-dot"
+      "name": "Deep Learning Specialization",
+      "date": "",
+      "issuer": "",
+      "url": "",
+      "icon": "fa-solid fa-certificate"
     },
     {
-      "name": "Quantum Computing",
-      "date": "2018-01-01",
-      "issuer": "Stanford University",
-      "url": "https://example.com",
-      "icon": "fa-solid fa-tag"
-    },
-    {
-      "name": "Quantum Information",
-      "date": "2018-01-01",
-      "issuer": "Stanford University",
-      "url": "https://example.com",
-      "icon": "fa-solid fa-envelope"
-    },
-    {
-      "name": "Quantum Cryptography",
-      "date": "2018-01-01",
-      "issuer": "Stanford University",
-      "url": "https://example.com",
-      "icon": "fa-solid fa-hashtag"
-    },
-    {
-      "name": "Quantum Communication",
-      "date": "2018-01-01",
-      "issuer": "Stanford University",
-      "url": "https://example.com",
-      "icon": "fa-solid fa-calendar"
-    },
-    {
-      "name": "Quantum Teleportation",
-      "date": "2018-01-01",
-      "issuer": "Stanford University",
-      "url": "https://example.com",
-      "icon": "fa-solid fa-clipboard-check"
+      "name": "Machine Learning Specialization",
+      "date": "",
+      "issuer": "",
+      "url": "",
+      "icon": "fa-solid fa-certificate"
     }
   ],
-  "publications": [
-    {
-      "name": "Zur Elektrody/namik bewegter Körper",
-      "publisher": "Annalen der Physik",
-      "releaseDate": "1905-06-30",
-      "url": "https://en.wikisource.org/wiki/Translation:On_the_Electrodynamics_of_Moving_Bodies",
-      "summary": "It concerned an interpretation of the Michelson–Morley experiment and the properties of light and time. Special relativity incorporates the principle that the speed of light is the same for all inertial observers regardless of the state of motion of the source."
-    },
-    {
-      "name": "Über einen die Erzeugung und Verwandlung des Lichtes betreffenden heuristischen Gesichtspunkt",
-      "publisher": "Annalen der Physik",
-      "releaseDate": "1905-03-18",
-      "url": "https://de.wikisource.org/wiki/Über_einen_die_Erzeugung_und_Verwandlung_des_Lichtes_betreffenden_heuristischen_Gesichtspunkt",
-      "summary": "In the second paper, he applied the quantum theory to light to explain the photoelectric effect. In particular, he used the idea of light quanta (photons) to explain experimental results, but stressed the importance of the experimental results. The importance of his work on the photoelectric effect earned him the Nobel Prize in Physics in 1921."
-    },
-    {
-      "name": "Die Grundlage der allgemeinen Relativitätstheorie",
-      "publisher": "Annalen der Physik",
-      "releaseDate": "1916-03-20",
-      "url": "https://de.wikisource.org/wiki/Die_Grundlage_der_allgemeinen_Relativitätstheorie",
-      "summary": "The publication of the theory of general relativity made him internationally famous. He was professor of physics at the universities of Zurich (1909–1911) and Prague (1911–1912), before he returned to ETH Zurich (1912–1914)."
-    }
-  ],
+  "publications": [],
   "skills": [
     {
-      "name": "Physics",
-      "level": "Master",
-      "icon": "fa-solid fa-hashtag",
-      "keywords": [
-        "Quantum Mechanics",
-        "Quantum Computing",
-        "Quantum Information",
-        "Quantum Cryptography",
-        "Quantum Communication",
-        "Quantum Teleportation"
-      ]
-    }
-  ],
-  "languages": [
-    {
-      "language": "German",
-      "fluency": "Native speaker",
-      "icon": ""
+      "name": "Programming Languages",
+      "level": "",
+      "icon": "fa-solid fa-code",
+      "keywords": ["Python", "C/C++", "R"]
     },
     {
-      "language": "English",
-      "fluency": "Fluent",
-      "icon": ""
-    }
-  ],
-  "interests": [
+      "name": "AI & ML Frameworks",
+      "level": "",
+      "icon": "fa-solid fa-brain",
+      "keywords": ["TensorFlow", "PyTorch", "Keras", "Scikit-learn", "Hugging Face", "RoboSuite", "LightGBM", "Gymnasium"]
+    },
     {
-      "name": "Physics",
-      "icon": "fa-solid fa-tag",
-      "keywords": [
-        "Quantum Mechanics",
-        "Quantum Computing",
-        "Quantum Information",
-        "Quantum Cryptography",
-        "Quantum Communication",
-        "Quantum Teleportation"
-      ]
+      "name": "Developer Tools",
+      "level": "",
+      "icon": "fa-solid fa-screwdriver-wrench",
+      "keywords": ["Git", "Visual Studio Code", "PyCharm"]
+    },
+    {
+      "name": "Data Tools",
+      "level": "",
+      "icon": "fa-solid fa-chart-line",
+      "keywords": ["Pandas", "NumPy", "Matplotlib"]
     }
   ],
+  "languages": [],
+  "interests": [],
   "references": [
     {
-      "name": "Professor John Doe",
-      "icon": "fa-solid fa-laptop",
-      "reference": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam condimentum, diam quis convallis euismod, arcu mi ullamcorper lorem, a vestibulum nunc magna at sem. Sed in risus ac felis varius blandit. D"
-    },
-    {
-      "name": "Professor John Doe",
-      "icon": "fa-solid fa-thumbtack",
-      "reference": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam condimentum, diam quis convallis euismod, arcu mi ullamcorper lorem, a vestibulum nunc magna at sem. Sed in risus ac felis varius blandit. D"
+      "name": "References",
+      "icon": "fa-solid fa-user",
+      "reference": "Available upon request."
     }
   ],
   "projects": [
     {
-      "name": "Quantum Computing",
-      "summary": "Quantum computing is the use of quantum-mechanical phenomena such as superposition and entanglement to perform computation. Computers that perform quantum computations are known as quantum computers.",
-      "highlights": ["Quantum Teleportation", "Quantum Cryptography"],
-      "startDate": "2018-01-01",
-      "endDate": "2018-01-01",
-      "url": "https://example.com"
+      "name": "MyDreamerV2",
+      "summary": "Dreamer-style reinforcement learning agent in PyTorch using an RSSM world model and actor–critic imagination rollouts.",
+      "highlights": [
+        "Reached 70% success after 280k environment steps.",
+        "Added Plan2Explore-style exploration bonus and enabled training on Apple Silicon via MPS.",
+        "Implemented episodic replay buffer and improved stability with gradient clipping, EMA target networks, and checkpoints."
+      ],
+      "startDate": "2025-08",
+      "endDate": "2025-11",
+      "url": ""
+    },
+    {
+      "name": "E-commerce Description Optimizer (AISC)",
+      "summary": "Inference app and model pipeline for scoring product listings and generating improved descriptions.",
+      "highlights": [
+        "Optimized descriptions across 200+ products.",
+        "Handled severe class imbalance (900k rows; 12k positives) with hard-negative undersampling.",
+        "Streamlit interface with prompting, diffs, and compliance guardrails."
+      ],
+      "startDate": "2024-10",
+      "endDate": "2025-01",
+      "url": ""
+    },
+    {
+      "name": "Technical Blog",
+      "summary": "Step-by-step posts explaining AI/ML papers with diagrams, examples, and references.",
+      "highlights": ["Published on personal blog.", "Published articles on Medium with Humans For AI."],
+      "startDate": "2024-10",
+      "endDate": "",
+      "url": "https://pedrotajia.com"
     }
   ]
 }
