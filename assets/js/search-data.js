@@ -128,7 +128,7 @@ ninja.data = [{
         title: 'LinkedIn',
         section: 'Socials',
         handler: () => {
-          window.open("https://www.linkedin.com/in/https://www.linkedin.com/in/pedro-tajia-amavizca-282913280/", "_blank");
+          window.open("https://www.linkedin.com/in/pedro-tajia-amavizca-282913280", "_blank");
         },
       },{
       id: 'light-theme',
