@@ -85,14 +85,14 @@
   "certificates": [
     {
       "name": "Deep Learning Specialization",
-      "date": "",
+      "date": "2023-10-31",
       "issuer": "",
-      "url": "",
+      "url": "https://coursera.org/share/d424ffb1fa6c9e3f82ff7ba10cff151f",
       "icon": "fa-solid fa-certificate"
     },
     {
       "name": "Machine Learning Specialization",
-      "date": "",
+      "date": "2023-07-18",
       "issuer": "",
       "url": "",
       "icon": "fa-solid fa-certificate"
@@ -148,7 +148,7 @@
       "url": ""
     },
     {
-      "name": "E-commerce Description Optimizer (AISC)",
+      "name": "SaleSense",
       "summary": "Inference app and model pipeline for scoring product listings and generating improved descriptions.",
       "highlights": [
         "Optimized descriptions across 200+ products.",
@@ -157,15 +157,28 @@
       ],
       "startDate": "2024-10",
       "endDate": "2025-01",
+      "url": "https://github.com/PedroTajia/AISC_SaleSense"
+    },
+
+    {
+      "name": "IntelliView",
+      "summary": "A real-time interview coaching tool that analyzes facial emotions and speaking dynamics to generate a feedback timeline and post-interview report.",
+      "highlights": [
+        "Built a real-time interview coaching tool that detects facial emotions and speaking dynamics, then generates a timeline and an interview report with feedback.",
+        "Trained a custom YOLO model for face/region detection and integrated it with a PyTorch emotion classifier (75% test accuracy)"
+      ],
+      "startDate": "2024-10",
+      "endDate": "2025-01",
       "url": ""
     },
+
     {
       "name": "Technical Blog",
       "summary": "Step-by-step posts explaining AI/ML papers with diagrams, examples, and references.",
       "highlights": ["Published on personal blog.", "Published articles on Medium with Humans For AI."],
       "startDate": "2024-10",
       "endDate": "",
-      "url": "https://pedrotajia.com"
+      "url": "https://pedrotajia.com/blog/"
     }
   ]
 }
