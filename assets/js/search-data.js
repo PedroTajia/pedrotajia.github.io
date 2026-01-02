@@ -96,6 +96,13 @@ ninja.data = [{
           section: "Projects",handler: () => {
               window.location.href = "/projects/MyDreamerv2/";
             },},{
+        id: 'social-cv',
+        title: 'CV',
+        section: 'Socials',
+        handler: () => {
+          window.open("/assets/pdf/Pedro_s_Resume.pdf", "_blank");
+        },
+      },{
         id: 'social-email',
         title: 'email',
         section: 'Socials',
