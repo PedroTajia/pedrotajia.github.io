@@ -13,6 +13,18 @@ references:
     url: "https://arxiv.org/abs/2301.04104"
   - title: "Planning to Explore via Self-Supervised World Models"
     url: "https://arxiv.org/abs/2005.05960"
+  - title: "NM512/dreamerv3-torch"
+    url: "https://github.com/NM512/dreamerv3-torch"
+  - title: "RajGhugare19/dreamerv2"
+    url: "https://github.com/RajGhugare19/dreamerv2"
+  - title: "danijar/dreamerv3"
+    url: "https://github.com/danijar/dreamerv3"
+  - title: "danijar/dreamerv2"
+    url: "https://github.com/danijar/dreamerv2"
+  - title: "plan2explore"
+    url: "https://github.com/ramanans1/plan2explore"
+  - title: "plan2explore-pytorch"
+    url: "https://github.com/yusukeurakami/plan2explore-pytorch"
 ---
 
 **MyDreamerV2** is a PyTorch reimplementation of _DreamerV2_ that focuses on understanding and extending world-model–based reinforcement learning. The project includes a faithful reproduction of the original DreamerV2 pipeline, an explicit implementation of **Plan2Explore** for intrinsic motivation, and selected architectural and training improvements inspired by **DreamerV3**.
@@ -44,7 +56,6 @@ Episode return over training, showing a stable asymptotic improvement as the age
 Beyond reproducing the baseline DreamerV2 results, this implementation emphasizes **exploration through uncertainty**. Plan2Explore is implemented on top of the learned latent dynamics, encouraging the agent to seek trajectories where the world model is uncertain rather than relying solely on extrinsic reward.
 
 <div class="row justify-content-sm-center">
-  <div class="col-sm-4 mt-3 mt-md-0">
     {% include figure.liquid path="assets/img/dv3.png" title="DreamerV2 architecture" class="img-fluid rounded z-depth-1" %}
   </div>
   <div class="col-sm-6 mt-3 mt-md-0">
