@@ -50,7 +50,7 @@ Distribution of “sold” status and the initial baseline attempt.
 To train and validate models more reliably, we downsampled the negative class to create a more balanced working set.
 
 <div class="row">
-  <div class="col-sm mt-3 mt-md-0" style="max-width: 500px;">
+  <div class="col-sm mt-3 mt-md-0" style="max-width: 350px;">
     {% include figure.liquid loading="eager" path="assets/img/salesense_downsampling.png" title="Downsampling strategy" class="img-fluid rounded z-depth-1" %}
   </div>
 </div>
