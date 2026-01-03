@@ -17,16 +17,6 @@ references:
 
 **SaleSense** helps sellers to improve second-hand products by scoring the description and generating a new better description. It’s built to be fast, simple, and practical for real resale workflows.
 
-<div class="row">
-  <div class="col-sm mt-3 mt-md-0">
-    {% include figure.liquid loading="eager" path="assets/img/salesense_ui.png" title="SaleSense UI" class="img-fluid rounded z-depth-1" %}
-  </div>
-</div>
-
-<div class="caption">
-SaleSense interface (replace this with your best screenshot/GIF of the input → output flow).
-</div>
-
 ## Problem
 
 Most resale platforms depend heavily on listing quality, but many users don’t know what details to include or how to write descriptions that sell. SaleSense makes that improvement automatic: score → feedback → improved description.

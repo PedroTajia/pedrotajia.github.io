@@ -44,11 +44,7 @@ It analyzes **your facial expressions** (computer vision) and **your voice** (sp
    pipeline diagram 
 </div>
 
-## Whisper (speech-to-text)
-
-We used **OpenAI Whisper**, an open-source Transformer trained on **680,000 hours** of multilingual audio that can transcribe and translate speech, and provides fine-grained timestamps.
-
-## LLM report agent
+## report
 
 The report generator follows a simple agent workflow: import transcript → clean/timestamp → extract candidate info → draft template → LLM refines → assemble report → export (TXT/MD/HTML).
 
@@ -60,7 +56,7 @@ The report generator follows a simple agent workflow: import transcript → clea
 
 ## Engineering iteration (what I learned)
 
-Early on, we tried training a **single YOLO model** on both face detection + facial expression datasets, but ran into issues like **catastrophic forgetting** and dataset mismatch. We fixed this by moving to a **two-model YOLO setup** (one for face detection, one for emotion).
+Early on, we tried training a **single YOLO model** on both face detection + facial expression datasets, but ran into issues like **catastrophic forgetting** and dataset mismatch.
 
 <div class="row justify-content-sm-center">
   <div class="col-sm-10 mt-3 mt-md-0" style="max-width: 500px;">
@@ -69,6 +65,17 @@ Early on, we tried training a **single YOLO model** on both face detection + fac
 </div>
 <div class="caption">
   This is my first iteration on creating a single yolo model that classify and detect images given two different datasets 
+</div>
+
+We fixed this by moving to a **two-model YOLO setup** (one for face detection, one for emotion).
+
+<div class="row justify-content-sm-center">
+  <div class="col-sm-10 mt-3 mt-md-0" style="max-width: 500px;">
+    {% include figure.liquid path="assets/img/final_iteration.png" title="fix problem" class="img-fluid rounded z-depth-1" %}
+  </div>
+</div>
+<div class="caption">
+  This is my final iteration of a YOLO-based system that performs classification and detection using two different datasets. It runs two separate YOLO models and concatenates their outputs to produce a single final prediction.
 </div>
 
 We also iterated on the LLM strategy to reduce cost and latency, moving toward a fast on-device setup with a small model + keyword search and tight prompting (final phase mentions ~20s end-to-end and laptop-friendly deployment).
