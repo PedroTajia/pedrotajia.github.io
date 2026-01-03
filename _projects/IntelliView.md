@@ -36,8 +36,8 @@ It analyzes **your facial expressions** (computer vision) and **your voice** (sp
 4. LLM generates a report from transcript + emotion log
 
 <div class="row justify-content-sm-center">
-  <div class="col-sm-10 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/intelliview_viz.jpg" title="Pipeline: video/audio → emotion + transcript → LLM report" class="img-fluid rounded z-depth-1" %}
+  <div class="col-sm-10 mt-3 mt-md-0" style="max-width: 500px;">
+    {% include figure.liquid path="assets/img/intelliview_viz.png" title="Pipeline: video/audio → emotion + transcript → LLM report" class="img-fluid rounded z-depth-1" %}
   </div>
 </div>
 <div class="caption">
@@ -63,7 +63,7 @@ The report generator follows a simple agent workflow: import transcript → clea
 Early on, we tried training a **single YOLO model** on both face detection + facial expression datasets, but ran into issues like **catastrophic forgetting** and dataset mismatch. We fixed this by moving to a **two-model YOLO setup** (one for face detection, one for emotion).
 
 <div class="row justify-content-sm-center">
-  <div class="col-sm-10 mt-3 mt-md-0">
+  <div class="col-sm-10 mt-3 mt-md-0" style="max-width: 500px;">
     {% include figure.liquid path="assets/img/first_iteration.png" title="catastrophic forgetting" class="img-fluid rounded z-depth-1" %}
   </div>
 </div>
