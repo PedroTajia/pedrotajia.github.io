@@ -95,6 +95,11 @@ ninja.data = [{
           description: "A reimplementation and extension of DreamerV2 with exploration via Plan2Explore and selected improvements from DreamerV3",
           section: "Projects",handler: () => {
               window.location.href = "/projects/MyDreamerv2/";
+            },},{id: "projects-salesense",
+          title: 'SaleSense',
+          description: "A tool that scores resale listings and generates clear, higher-converting product descriptions.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/SaleSense/";
             },},{
         id: 'social-email',
         title: 'email',
