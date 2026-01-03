@@ -90,6 +90,11 @@ ninja.data = [{
           description: "",
           section: "Books",handler: () => {
               window.location.href = "/books/the_godfather/";
+            },},{id: "projects-intelliview",
+          title: 'IntelliView',
+          description: "An AI interview assistant that reads facial expression + voice, then generates a personalized feedback report.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/IntelliView/";
             },},{id: "projects-mydreamerv2",
           title: 'MyDreamerv2',
           description: "A reimplementation and extension of DreamerV2 with exploration via Plan2Explore and selected improvements from DreamerV3",
