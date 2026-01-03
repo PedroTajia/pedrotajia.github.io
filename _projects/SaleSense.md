@@ -11,11 +11,11 @@ references:
     url: "https://github.com/PedroTajia/AISC_SaleSense"
   - title: "Streamlit"
     url: "https://streamlit.io/"
-  - title: "Tailwind CSS"
-    url: "https://tailwindcss.com/"
+  - title: "Slides used to present"
+    url: "/assets/pdf/AISC Project Demo.pdf"
 ---
 
-**SaleSense** helps everyday sellers improve second-hand clothing listings by scoring the description and generating actionable rewrite suggestions. It’s built to be fast, simple, and practical for real resale workflows.
+**SaleSense** helps sellers to improve second-hand products by scoring the description and generating a new better description. It’s built to be fast, simple, and practical for real resale workflows.
 
 <div class="row">
   <div class="col-sm mt-3 mt-md-0">
@@ -33,7 +33,7 @@ Most resale platforms depend heavily on listing quality, but many users don’t 
 
 ## Dataset imbalance
 
-The dataset was extremely imbalanced (sold vs. not sold), which made a naive binary classifier approach unreliable.
+The dataset was extremely imbalanced (sold vs. not sold), which made the classifier approach unreliable.
 
 <div class="row">
   <div class="col-sm mt-3 mt-md-0" style="max-width: 500px;">
@@ -47,7 +47,7 @@ Distribution of “sold” status and the initial baseline attempt.
 
 ## Making the dataset workable
 
-To train and validate models more reliably, we downsampled the negative class to create a more balanced working set.
+To train and validate models more reliably, we down sampled the negative class to create a more balanced working set.
 
 <div class="row">
   <div class="col-sm mt-3 mt-md-0" style="max-width: 350px;">
@@ -61,7 +61,7 @@ Downsampling strategy used to reduce imbalance and stabilize training/evaluation
 
 ## LLM feedback loop
 
-For rewriting and feedback, we used an LLM-driven feedback loop to generate clearer, more complete descriptions and concrete suggestions.
+For rewriting and feedback, we use an LLM-driven feedback loop to produce clearer and more complete descriptions. A LightGBM classifier scores the inputed description and provides a target signal, guiding the LLM to iteratively rewrite the text to maximize the predicted “sellability” score.
 
 <div class="row">
   <div class="col-sm mt-3 mt-md-0" style="max-width: 700px;">

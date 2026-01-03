@@ -40,7 +40,7 @@ references:
 
 <div class="caption">
 Left: a visualization of latent states learned by the Recurrent State-Space Model (RSSM), illustrating how the world model compresses observations into a compact predictive representation.  
-Right: the corresponding environment used for training, from which the observations are collected.
+Right: the environment used for training.
 </div>
 
 <div class="row">
@@ -50,10 +50,10 @@ Right: the corresponding environment used for training, from which the observati
 </div>
 
 <div class="caption">
-Episode return over training, showing a stable asymptotic improvement as the agent learns and plans within the learned world model.
+Episode return over training, showing a asymptotic improvement as the agent learns and plans within the learned world model.
 </div>
 
-Beyond reproducing the baseline DreamerV2 results, this implementation emphasizes **exploration through uncertainty**. Plan2Explore is implemented on top of the learned latent dynamics, encouraging the agent to seek trajectories where the world model is uncertain rather than relying solely on extrinsic reward.
+Beyond reproducing the baseline DreamerV2 results, this implementation emphasizes **exploration through uncertainty**. Plan2Explore is implemented on top of the learned latent dynamics, encouraging the agent to seek trajectories where the world model is uncertain.
 
 <div class="row justify-content-sm-center">
     {% include figure.liquid path="assets/img/dv3.png" title="DreamerV2 architecture" class="img-fluid rounded z-depth-1" %}
@@ -64,8 +64,8 @@ Beyond reproducing the baseline DreamerV2 results, this implementation emphasize
 </div>
 
 <div class="caption">
-Left: the DreamerV2 architecture, consisting of a learned world model (RSSM), an actor, and a critic trained entirely in latent space.  
-Right: the Plan2Explore module, which adds an intrinsic reward based on ensemble disagreement in latent dynamics to drive efficient exploration. While grounded in DreamerV2, parts of this implementation incorporate stability and training ideas inspired by DreamerV3.
+Left: DreamerV2 architecture, consisting of a learned world model (RSSM), actor, and critic trained entirely in latent space.  
+Right: the Plan2Explore module, which adds an intrinsic reward based on ensemble disagreement in latent dynamics to drive efficient exploration. 
 </div>
 
 For implementation details, design choices, and experimental results, see the full repository:  
