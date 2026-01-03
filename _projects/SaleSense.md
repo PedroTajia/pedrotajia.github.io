@@ -36,7 +36,7 @@ Most resale platforms depend heavily on listing quality, but many users don’t 
 The dataset was extremely imbalanced (sold vs. not sold), which made a naive binary classifier approach unreliable.
 
 <div class="row">
-  <div class="col-sm mt-3 mt-md-0" style="max-width: 200px;">
+  <div class="col-sm mt-3 mt-md-0" style="max-width: 500px;">
     {% include figure.liquid loading="eager" path="assets/img/salesense_imbalance.png" title="Class imbalance (sold vs. not sold)" class="img-fluid rounded z-depth-1" %}
   </div>
 </div>
@@ -50,7 +50,7 @@ Distribution of “sold” status and the initial baseline attempt.
 To train and validate models more reliably, we downsampled the negative class to create a more balanced working set.
 
 <div class="row">
-  <div class="col-sm mt-3 mt-md-0" style="max-width: 200px;">
+  <div class="col-sm mt-3 mt-md-0" style="max-width: 500px;">
     {% include figure.liquid loading="eager" path="assets/img/salesense_downsampling.png" title="Downsampling strategy" class="img-fluid rounded z-depth-1" %}
   </div>
 </div>
@@ -64,7 +64,7 @@ Downsampling strategy used to reduce imbalance and stabilize training/evaluation
 For rewriting and feedback, we used an LLM-driven feedback loop to generate clearer, more complete descriptions and concrete suggestions.
 
 <div class="row">
-  <div class="col-sm mt-3 mt-md-0" style="max-width: 200px;">
+  <div class="col-sm mt-3 mt-md-0" style="max-width: 700px;">
     {% include figure.liquid loading="eager" path="assets/img/salesense_llm_feedback_loop.png" title="LLM feedback loop" class="img-fluid rounded z-depth-1" %}
   </div>
 </div>
