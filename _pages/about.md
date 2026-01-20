@@ -31,7 +31,9 @@ My name is Pedro, and I’m an undergraduate Data Science student at the Univers
 
 Previously, I interned at [New Hampshire Ball Bearings](https://www.nhbb.com), where I worked with the manufacturing engineering team to create operation manuals for CNC machines and fine-tune machining parameters to improve efficiency, consistency, and product quality.
 
-I am also actively involved in research communities at UCR. I participate in [R-LAIR](https://rlair.cs.ucr.edu/meetings.html), where we discuss current research papers and present our own research ideas and interests. Recently, I was accepted into the [TASL](https://tasl.ucr.edu) research lab, where I plan to focus on model-based reinforcement learning and autonomous decision-making systems.
+I am also actively involved in research communities at UCR. I participate in [R-LAIR](https://rlair.cs.ucr.edu/meetings.html), where we discuss current research papers and present our own research ideas and interests. 
+
+<!-- Recently, I was accepted into the [TASL](https://tasl.ucr.edu) research lab, where I plan to focus on model-based reinforcement learning and autonomous decision-making systems. -->
 
 <!-- Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](http://reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
 
