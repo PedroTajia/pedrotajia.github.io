@@ -60,9 +60,7 @@ layout: default
 
   <article class="post-content">
     {% if page.toc and page.toc.beginning %}
-      <div id="table-of-contents">
-   
-      </div>
+      <div id="table-of-contents"></div>
       <hr>
     {% endif %}
     <div id="markdown-content">
@@ -73,8 +71,6 @@ layout: default
   {% if page.citation %}
     {% include citation.liquid %}
   {% endif %}
-
- 
 
   {% if site.related_blog_posts and site.related_blog_posts.enabled %}
     {% if page.related_posts == null or page.related_posts %}
